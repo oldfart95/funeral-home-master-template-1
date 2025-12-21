@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compassionate Care Funeral Home | Professional Funeral & Cremation Services</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display (headings) + Inter (body) with Spanish support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Configuration Block - Easy Theme Swapping -->
+    <style>
+        :root {
+            /* Primary Color Theme - Easy to swap for different niches */
+            /* Deep Navy for Veterans: #1a365d */
+            /* Warm Gold/Earth for Guatemalan: #b8860b, #8b7355 */
+            /* Clean Teal for Generic: #0d9488 */
+            --color-primary: #1a365d; /* Deep Navy - Current */
+            --color-primary-dark: #0f2027;
+            --color-primary-light: #2d4a5f;
+            --color-accent: #c9a961; /* Warm Gold accent */
+            --color-accent-dark: #a0824d;
+            
+            /* Typography */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Spacing & Borders */
+            --border-subtle: 1px solid rgba(0, 0, 0, 0.1);
+            --spacing-section: 4rem;
+            --spacing-mobile: 2rem;
+        }
+        
+        /* Apply fonts globally */
+        body {
+            font-family: var(--font-body);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+        }
+        
+        /* High contrast text for accessibility */
+        .text-high-contrast {
+            color: #1a1a1a;
+        }
+        
+        /* Subtle borders */
+        .border-subtle {
+            border: var(--border-subtle);
+        }
+        
+        /* Language toggle styling */
+        .lang-toggle {
+            display: inline-flex;
+            gap: 0.25rem;
+            background: #f3f4f6;
+            padding: 0.25rem;
+            border-radius: 0.375rem;
+        }
+        
+        .lang-toggle button {
+            padding: 0.375rem 0.75rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .lang-toggle button.active {
+            background: white;
+            color: var(--color-primary);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* Hero form overlay */
+        .hero-form-overlay {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Trust bar icons */
+        .trust-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Service card hover effect */
+        .service-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        /* CTA button styling */
+        .cta-button {
+            background: var(--color-primary);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+        
+        .cta-button:hover {
+            background: var(--color-primary-dark);
+        }
+        
+        /* Testimonial spacing - community-centric */
+        .testimonial-card {
+            padding: 2rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            border: var(--border-subtle);
+        }
+    </style>
+    
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: 'var(--color-primary)',
+                            dark: 'var(--color-primary-dark)',
+                            light: 'var(--color-primary-light)',
+                        },
+                        accent: {
+                            DEFAULT: 'var(--color-accent)',
+                            dark: 'var(--color-accent-dark)',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['var(--font-heading)', 'serif'],
+                        body: ['var(--font-body)', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white">
+    
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white border-b border-subtle shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Branding -->
+                <div class="flex items-center">
+                    <h1 class="text-xl md:text-2xl font-heading font-bold text-primary" data-en="Compassionate Care" data-es="Cuidado Compasivo">Compassionate Care</h1>
+                </div>
+                
+                <!-- Right side: Language Toggle + Call Now -->
+                <div class="flex items-center gap-3 md:gap-4">
+                    <!-- Language Toggle -->
+                    <div class="lang-toggle">
+                        <button id="lang-en" class="active" onclick="switchLanguage('en')" aria-label="Switch to English">EN</button>
+                        <button id="lang-es" onclick="switchLanguage('es')" aria-label="Cambiar a Español">ES</button>
+                    </div>
+                    
+                    <!-- Call Now Button -->
+                    <a href="tel:+3303324401" class="cta-button text-sm md:text-base whitespace-nowrap" data-en="Call Now" data-es="Llame Ahora">Call Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section with Lead Form -->
+    <section class="relative min-h-[600px] md:min-h-[700px] flex items-center justify-center bg-gradient-to-br from-primary-dark via-primary to-primary-light">
+        <!-- Background Image Placeholder -->
+        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1920&q=80');"></div>
+        
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-12">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <!-- Hero Content -->
+                <div class="text-white space-y-6">
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold leading-tight" data-en="Compassionate Care When You Need It Most" data-es="Cuidado Compasivo Cuando Más Lo Necesita">Compassionate Care When You Need It Most</h2>
+                    <p class="text-lg md:text-xl text-white/90" data-en="Professional funeral and cremation services with dignity, respect, and understanding." data-es="Servicios profesionales de funeral y cremación con dignidad, respeto y comprensión.">Professional funeral and cremation services with dignity, respect, and understanding.</p>
+                </div>
+                
+                <!-- Immediate Assistance Lead Form -->
+                <div class="hero-form-overlay p-6 md:p-8 rounded-lg shadow-xl max-w-md mx-auto md:mx-0">
+                    <h3 class="text-2xl font-heading font-bold text-primary mb-4" data-en="Immediate Assistance" data-es="Asistencia Inmediata">Immediate Assistance</h3>
+                    <form id="lead-form" action="https://formspree.io/f/your-id" method="POST" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1" data-en="Full Name" data-es="Nombre Completo">Full Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="" data-placeholder-en="Enter your name" data-placeholder-es="Ingrese su nombre">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1" data-en="Phone Number" data-es="Número de Teléfono">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="" data-placeholder-en="(555) 123-4567" data-placeholder-es="(555) 123-4567">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1" data-en="Email Address" data-es="Dirección de Correo">Email Address</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="" data-placeholder-en="your@email.com" data-placeholder-es="su@correo.com">
+                        </div>
+                        <button type="submit" class="w-full cta-button text-center" data-en="Get Immediate Help" data-es="Obtener Ayuda Inmediata">Get Immediate Help</button>
+                    </form>
+                    <p class="text-xs text-gray-500 mt-4 text-center" data-en="We'll contact you within 24 hours" data-es="Nos pondremos en contacto dentro de 24 horas">We'll contact you within 24 hours</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Trust Bar -->
+    <section class="bg-gray-50 py-8 md:py-12 border-y border-subtle">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 items-center justify-items-center">
+                <!-- OFDA Member -->
+                <div class="trust-icon">
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm md:text-lg">OFDA</div>
+                    <span class="text-xs md:text-sm font-medium text-center text-gray-700" data-en="OFDA Member" data-es="Miembro de OFDA">OFDA Member</span>
+                </div>
+                
+                <!-- Veteran-Owned -->
+                <div class="trust-icon">
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-accent rounded-full flex items-center justify-center text-white font-bold text-sm md:text-lg">★</div>
+                    <span class="text-xs md:text-sm font-medium text-center text-gray-700" data-en="Veteran-Owned" data-es="Propiedad de Veterano">Veteran-Owned</span>
+                </div>
+                
+                <!-- VFW Affiliation -->
+                <div class="trust-icon">
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm md:text-lg">VFW</div>
+                    <span class="text-xs md:text-sm font-medium text-center text-gray-700" data-en="VFW Affiliated" data-es="Afiliado VFW">VFW Affiliated</span>
+                </div>
+                
+                <!-- American Legion -->
+                <div class="trust-icon">
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm md:text-lg">AL</div>
+                    <span class="text-xs md:text-sm font-medium text-center text-gray-700" data-en="American Legion" data-es="Legión Americana">American Legion</span>
+                </div>
+                
+                <!-- Cremation Expertise -->
+                <div class="trust-icon">
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-accent rounded-full flex items-center justify-center text-white font-bold text-sm md:text-lg">✚</div>
+                    <span class="text-xs md:text-sm font-medium text-center text-gray-700" data-en="Cremation Experts" data-es="Expertos en Cremación">Cremation Experts</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Grid -->
+    <section class="py-12 md:py-16 lg:py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-primary mb-4" data-en="Our Services" data-es="Nuestros Servicios">Our Services</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-en="Comprehensive funeral and cremation services tailored to your needs" data-es="Servicios completos de funeral y cremación adaptados a sus necesidades">Comprehensive funeral and cremation services tailored to your needs</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Cremation Services -->
+                <div class="service-card bg-white border-subtle rounded-lg p-6 md:p-8 shadow-sm">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold text-primary mb-3" data-en="Cremation Services" data-es="Servicios de Cremación">Cremation Services</h3>
+                    <p class="text-gray-600 mb-4" data-en="Professional cremation services with dignity and respect. We offer direct cremation, cremation with memorial services, and personalized options." data-es="Servicios profesionales de cremación con dignidad y respeto. Ofrecemos cremación directa, cremación con servicios conmemorativos y opciones personalizadas.">Professional cremation services with dignity and respect. We offer direct cremation, cremation with memorial services, and personalized options.</p>
+                    <a href="#contact" class="text-primary font-semibold hover:underline" data-en="Learn More" data-es="Más Información">Learn More →</a>
+                </div>
+                
+                <!-- Traditional Services -->
+                <div class="service-card bg-white border-subtle rounded-lg p-6 md:p-8 shadow-sm">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold text-primary mb-3" data-en="Traditional Services" data-es="Servicios Tradicionales">Traditional Services</h3>
+                    <p class="text-gray-600 mb-4" data-en="Full-service funeral arrangements including visitations, ceremonies, and burials. We honor all traditions and customs." data-es="Arreglos funerarios de servicio completo que incluyen visitas, ceremonias y entierros. Honramos todas las tradiciones y costumbres.">Full-service funeral arrangements including visitations, ceremonies, and burials. We honor all traditions and customs.</p>
+                    <a href="#contact" class="text-primary font-semibold hover:underline" data-en="Learn More" data-es="Más Información">Learn More →</a>
+                </div>
+                
+                <!-- Pre-Planning -->
+                <div class="service-card bg-white border-subtle rounded-lg p-6 md:p-8 shadow-sm">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold text-primary mb-3" data-en="Pre-Planning" data-es="Planificación Previa">Pre-Planning</h3>
+                    <p class="text-gray-600 mb-4" data-en="Plan ahead to ease the burden on your loved ones. Lock in costs and ensure your wishes are honored." data-es="Planifique con anticipación para aliviar la carga de sus seres queridos. Fije los costos y asegúrese de que se cumplan sus deseos.">Plan ahead to ease the burden on your loved ones. Lock in costs and ensure your wishes are honored.</p>
+                    <a href="#contact" class="text-primary font-semibold hover:underline" data-en="Learn More" data-es="Más Información">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section 1 (After Services) -->
+    <section class="bg-primary text-white py-12 md:py-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl md:text-3xl font-heading font-bold mb-4" data-en="Need Immediate Assistance?" data-es="¿Necesita Asistencia Inmediata?">Need Immediate Assistance?</h2>
+            <p class="text-lg mb-6 text-white/90" data-en="Our compassionate team is available 24/7 to guide you through this difficult time." data-es="Nuestro equipo compasivo está disponible las 24 horas para guiarlo durante este momento difícil.">Our compassionate team is available 24/7 to guide you through this difficult time.</p>
+            <a href="tel:+3303324401" class="inline-block bg-white text-primary px-8 py-3 rounded-md font-semibold text-lg hover:bg-gray-100 transition" data-en="Call (330) 332-4401" data-es="Llame al (330) 332-4401">Call (330) 332-4401</a>
+        </div>
+    </section>
+    
+    <!-- About/Values Section -->
+    <section class="py-12 md:py-16 lg:py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-primary mb-6 text-center" data-en="Our Commitment to You" data-es="Nuestro Compromiso con Usted">Our Commitment to You</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-heading font-semibold text-primary" data-en="Dignity & Respect" data-es="Dignidad y Respeto">Dignity & Respect</h3>
+                        <p class="text-gray-600" data-en="Every family deserves to be treated with the utmost dignity and respect during their time of need. We honor your traditions and values." data-es="Cada familia merece ser tratada con la máxima dignidad y respeto durante su momento de necesidad. Honramos sus tradiciones y valores.">Every family deserves to be treated with the utmost dignity and respect during their time of need. We honor your traditions and values.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-heading font-semibold text-primary" data-en="Community-Centered" data-es="Centrado en la Comunidad">Community-Centered</h3>
+                        <p class="text-gray-600" data-en="As a locally-owned funeral home, we understand the importance of community. We're here to serve our neighbors with compassion and understanding." data-es="Como funeraria de propiedad local, entendemos la importancia de la comunidad. Estamos aquí para servir a nuestros vecinos con compasión y comprensión.">As a locally-owned funeral home, we understand the importance of community. We're here to serve our neighbors with compassion and understanding.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-heading font-semibold text-primary" data-en="Transparent Pricing" data-es="Precios Transparentes">Transparent Pricing</h3>
+                        <p class="text-gray-600" data-en="No hidden fees, no surprises. We believe in honest, upfront pricing so you can make informed decisions during a difficult time." data-es="Sin tarifas ocultas, sin sorpresas. Creemos en precios honestos y directos para que pueda tomar decisiones informadas durante un momento difícil.">No hidden fees, no surprises. We believe in honest, upfront pricing so you can make informed decisions during a difficult time.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-heading font-semibold text-primary" data-en="Veteran Services" data-es="Servicios para Veteranos">Veteran Services</h3>
+                        <p class="text-gray-600" data-en="We proudly serve veterans and their families, working with VFW and American Legion to ensure all military honors are properly arranged." data-es="Servimos con orgullo a los veteranos y sus familias, trabajando con VFW y la Legión Americana para asegurar que todos los honores militares se organicen correctamente.">We proudly serve veterans and their families, working with VFW and American Legion to ensure all military honors are properly arranged.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section (Community-centric spacing) -->
+    <section class="py-12 md:py-16 lg:py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-heading font-bold text-primary mb-12 text-center" data-en="What Families Say" data-es="Lo Que Dicen Las Familias">What Families Say</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <div class="testimonial-card">
+                    <p class="text-gray-700 mb-4 italic" data-en="&quot;The staff was incredibly compassionate and helped us through every step. We couldn't have asked for better care during such a difficult time.&quot;" data-es="&quot;El personal fue increíblemente compasivo y nos ayudó en cada paso. No podríamos haber pedido mejor atención durante un momento tan difícil.&quot;">"The staff was incredibly compassionate and helped us through every step. We couldn't have asked for better care during such a difficult time."</p>
+                    <p class="font-semibold text-primary" data-en="— The Martinez Family" data-es="— La Familia Martínez">— The Martinez Family</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="text-gray-700 mb-4 italic" data-en="&quot;As a veteran, I appreciated their attention to detail with the military honors. Everything was handled with respect and precision.&quot;" data-es="&quot;Como veterano, aprecié su atención al detalle con los honores militares. Todo se manejó con respeto y precisión.&quot;">"As a veteran, I appreciated their attention to detail with the military honors. Everything was handled with respect and precision."</p>
+                    <p class="font-semibold text-primary" data-en="— John R., U.S. Army" data-es="— John R., Ejército de EE. UU.">— John R., U.S. Army</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="text-gray-700 mb-4 italic" data-en="&quot;The cremation process was explained clearly, and they made sure we understood all our options. Professional and caring throughout.&quot;" data-es="&quot;El proceso de cremación se explicó claramente y se aseguraron de que entendiéramos todas nuestras opciones. Profesionales y atentos en todo momento.&quot;">"The cremation process was explained clearly, and they made sure we understood all our options. Professional and caring throughout."</p>
+                    <p class="font-semibold text-primary" data-en="— Sarah & Michael T." data-es="— Sarah y Michael T.">— Sarah & Michael T.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section 2 (After Testimonials) -->
+    <section class="bg-primary text-white py-12 md:py-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl md:text-3xl font-heading font-bold mb-4" data-en="Ready to Begin?" data-es="¿Listo para Comenzar?">Ready to Begin?</h2>
+            <p class="text-lg mb-6 text-white/90" data-en="Contact us today to discuss your needs or schedule a consultation." data-es="Contáctenos hoy para discutir sus necesidades o programar una consulta.">Contact us today to discuss your needs or schedule a consultation.</p>
+            <a href="tel:+3303324401" class="inline-block bg-white text-primary px-8 py-3 rounded-md font-semibold text-lg hover:bg-gray-100 transition" data-en="Call (330) 332-4401" data-es="Llame al (330) 332-4401">Call (330) 332-4401</a>
+        </div>
+    </section>
+    
+    <!-- Contact/Footer Section -->
+    <footer id="contact" class="bg-gray-900 text-white py-12 md:py-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-heading font-bold mb-4" data-en="Contact Information" data-es="Información de Contacto">Contact Information</h3>
+                    <p class="mb-2" data-en="Available 24/7" data-es="Disponible 24/7">Available 24/7</p>
+                    <p class="mb-2"><a href="tel:+3303324401" class="hover:underline">(330) 332-4401</a></p>
+                    <p class="text-gray-400 text-sm" data-en="Operated by Arbaugh-Pearce-Greenisen & Sons Funeral and Cremation Services" data-es="Operado por Arbaugh-Pearce-Greenisen & Sons Funeral and Cremation Services">Operated by Arbaugh-Pearce-Greenisen & Sons Funeral and Cremation Services</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-heading font-bold mb-4" data-en="Quick Links" data-es="Enlaces Rápidos">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-gray-300 hover:text-white transition" data-en="Our Services" data-es="Nuestros Servicios">Our Services</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-white transition" data-en="About Us" data-es="Acerca de Nosotros">About Us</a></li>
+                        <li><a href="#testimonials" class="text-gray-300 hover:text-white transition" data-en="Testimonials" data-es="Testimonios">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-heading font-bold mb-4" data-en="Affiliations" data-es="Afiliaciones">Affiliations</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li data-en="OFDA Member" data-es="Miembro de OFDA">OFDA Member</li>
+                        <li data-en="VFW Affiliated" data-es="Afiliado VFW">VFW Affiliated</li>
+                        <li data-en="American Legion" data-es="Legión Americana">American Legion</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 Grunhaus Holdings Inc. <span data-en="All rights reserved." data-es="Todos los derechos reservados.">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Minimal JavaScript for Language Toggle -->
+    <script>
+        // Language Toggle Functionality
+        let currentLang = localStorage.getItem('preferredLang') || 'en';
+        
+        function switchLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('preferredLang', lang);
+            document.documentElement.lang = lang;
+            
+            // Update toggle buttons
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            document.getElementById('lang-es').classList.toggle('active', lang === 'es');
+            
+            // Update all elements with data-en and data-es attributes
+            document.querySelectorAll('[data-en], [data-es]').forEach(element => {
+                if (element.hasAttribute('data-' + lang)) {
+                    const text = element.getAttribute('data-' + lang);
+                    if (element.tagName === 'INPUT' && element.hasAttribute('data-placeholder-' + lang)) {
+                        element.placeholder = element.getAttribute('data-placeholder-' + lang);
+                    } else {
+                        element.textContent = text;
+                    }
+                }
+            });
+            
+            // Update input placeholders
+            document.querySelectorAll('[data-placeholder-en], [data-placeholder-es]').forEach(input => {
+                if (input.hasAttribute('data-placeholder-' + lang)) {
+                    input.placeholder = input.getAttribute('data-placeholder-' + lang);
+                }
+            });
+        }
+        
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            switchLanguage(currentLang);
+            
+            // Form submission handling
+            const leadForm = document.getElementById('lead-form');
+            if (leadForm) {
+                leadForm.addEventListener('submit', function(e) {
+                    // Formspree will handle the submission
+                    // You can add custom success handling here if needed
+                });
+            }
+        });
+    </script>
+</body>
+</html>
