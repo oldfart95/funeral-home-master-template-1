@@ -1,0 +1,27 @@
+---
+import siteDetails from '../config/siteDetails';
+---
+
+<nav class="sticky top-0 z-50 bg-primary text-white shadow-sm">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <!-- Branding -->
+      <div class="flex flex-col">
+        <h1 class="text-lg md:text-xl lg:text-2xl font-heading font-bold leading-tight">
+          {siteDetails.companyName}
+        </h1>
+      </div>
+      
+      <!-- Call Now Button -->
+      <div class="flex items-center gap-3 md:gap-4">
+        <a 
+          href={`tel:${siteDetails.phone.replace(/\D/g, '')}`} 
+          class="bg-accent text-white px-4 py-2 rounded-md font-semibold text-sm md:text-base whitespace-nowrap hover:bg-accent-dark transition"
+        >
+          Call Now
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
