@@ -1,10 +1,11 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import vercel from '@astrojs/vercel/serverless';
 
 // https://astro.build/config
 export default defineConfig({
-  // Use 'static' for GitHub Pages, 'server' for SSR deployments
-  output: process.env.ASTRO_OUTPUT === 'static' ? 'static' : 'server',
+  output: 'server', // Enable server-side rendering and API routes
+  adapter: vercel(),
   integrations: [
     tailwind({
       applyBaseStyles: true, // Enable Tailwind base styles
