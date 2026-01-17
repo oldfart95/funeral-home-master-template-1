@@ -1,10 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import siteDetails from '../config/siteDetails';
-import ServiceButtons from '../components/ServiceButtons.astro';
+import ServiceNav from '../components/ServiceNav.astro';
 ---
 
-<Layout title="Servicios para Veteranos - Planificar con Anticipación" pageType="veteran" language="es">
+<Layout title="Servicios de Cremación - Planificar con Anticipación" pageType="general" language="es">
   <!-- Hero Section -->
   <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-12 md:py-32 overflow-hidden">
     <!-- Background Image with Overlay -->
@@ -31,9 +31,146 @@ import ServiceButtons from '../components/ServiceButtons.astro';
     </div>
   </section>
 
-  <ServiceButtons />
+  <!-- Service Navigation -->
+  <ServiceNav />
 
-  <!-- Why Plan Ahead Section -->
+  <!-- Introductory Block -->
+  <section class="py-8 md:py-12 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-secondary p-6 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
+          <p class="text-base md:text-lg text-text leading-relaxed text-center">
+            Ofrecemos servicios completos de cremación y entierro. Ambas opciones están disponibles y son igualmente respetadas. Elija el servicio que se alinee con sus deseos, creencias y presupuesto. <strong>Muchas familias eligen igualmente entre entierro y cremación - ofrecemos servicios completos para ambas opciones.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cremation Options Section -->
+    <section class="py-10 md:py-24 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
+            Opciones de Cremación
+          </h2>
+          <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12 max-w-3xl mx-auto">
+            Hay diferentes formas de manejar la cremación. Puede elegir la que se ajuste a su vida y su presupuesto.
+          </p>
+          <div class="grid md:grid-cols-3 gap-4 md:gap-8">
+            <!-- Option 1: Direct Cremation -->
+            <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
+              <h3 class="text-lg md:text-2xl font-heading font-bold text-primary mb-3 md:mb-4">
+                1. La Opción Simple<br />
+                <span class="text-base md:text-lg font-normal">(Cremación Directa)</span>
+              </h3>
+              <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
+                Esta es la opción más básica. Es para personas que quieren algo simple y privado.
+              </p>
+              <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>La funeraria recoge a su ser querido.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>Tiene lugar la cremación.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>No hay funeral público ni visita.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>La familia recibe las cenizas para enterrar, esparcir o guardar en casa.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Option 2: Memorial Option -->
+            <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
+              <h3 class="text-lg md:text-2xl font-heading font-bold text-primary mb-3 md:mb-4">
+                2. La Opción Conmemorativa<br />
+                <span class="text-base md:text-lg font-normal">(Viaje del Recuerdo)</span>
+              </h3>
+              <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
+                Esta opción permite que amigos y familiares se despidan juntos.
+              </p>
+              <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>Incluye un tiempo para que familiares y amigos visiten.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>Incluye un servicio conmemorativo para compartir recuerdos.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>Ocurre la cremación y las cenizas se devuelven a la familia.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Option 3: Full Service Option -->
+            <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
+              <h3 class="text-lg md:text-2xl font-heading font-bold text-primary mb-3 md:mb-4">
+                3. La Opción de Servicio Completo<br />
+                <span class="text-base md:text-lg font-normal">(Viaje de la Vida)</span>
+              </h3>
+              <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
+                Esto es como un funeral tradicional, pero termina con cremación en lugar de entierro.
+              </p>
+              <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>Su cuerpo está preparado para que familiares y amigos puedan visitar y despedirse.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>Se usa un "ataúd de alquiler" especial para el servicio.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>Después de que termine el servicio funerario, tiene lugar la cremación.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Common Questions About Cremation -->
+    <section class="py-10 md:py-24 bg-secondary">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-12 text-center">
+            Preguntas Comunes Sobre la Cremación
+          </h2>
+          <div class="space-y-4 md:space-y-6">
+            <div class="bg-white p-4 md:p-6 rounded-lg">
+              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
+                ¿Mi familia puede verme antes de que sea cremado?
+              </h3>
+              <p class="text-sm md:text-base text-text leading-relaxed">
+                Sí, en la mayoría de los casos. Si su familia quiere verlo una última vez, la funeraria puede prepararlo para una vista privada. Esto generalmente necesita suceder dentro de unos días.
+              </p>
+            </div>
+            <div class="bg-white p-4 md:p-6 rounded-lg">
+              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
+                ¿Necesito comprar una urna?
+              </h3>
+              <p class="text-sm md:text-base text-text leading-relaxed">
+                Puede elegir entre muchos tipos diferentes de urnas. Algunas están hechas de madera, metal u otros materiales. Puede elegir una que se ajuste a su estilo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- Shared Content: Why Plan Ahead -->
   <section class="py-10 md:py-24 bg-secondary">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
@@ -70,41 +207,15 @@ import ServiceButtons from '../components/ServiceButtons.astro';
     </div>
   </section>
 
-  <!-- Veteran-Specific Content Section -->
+  <!-- Shared Content: Common Questions -->
   <section class="py-10 md:py-24 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
-          Servicios para Veteranos
-        </h2>
-        <div class="bg-secondary p-5 md:p-8 rounded-lg shadow-sm">
-          <p class="text-sm md:text-base text-text leading-relaxed mb-6">
-            <!-- Content will be provided -->
-            Honramos a nuestros veteranos y sus familias con servicios especializados y asistencia de beneficios.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Common Questions Section -->
-  <section class="py-10 md:py-24 bg-secondary">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-12 text-center">
-          Preguntas Comunes Sobre los Servicios para Veteranos
+          Preguntas Comunes
         </h2>
         <div class="space-y-4 md:space-y-6">
-          <div class="bg-white p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              ¿Qué beneficios están disponibles para los veteranos?
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              <!-- Content will be provided -->
-              Los veteranos y sus familias pueden ser elegibles para varios beneficios, incluyendo asignaciones de entierro, lápidas y servicios de cementerio.
-            </p>
-          </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg">
+          <div class="bg-secondary p-4 md:p-6 rounded-lg">
             <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
               ¿Puedo pagar todo antes de morir?
             </h3>
@@ -112,7 +223,7 @@ import ServiceButtons from '../components/ServiceButtons.astro';
               Sí. Puede poner dinero en una cuenta segura (una póliza de seguro de vida, con la cual le ayudamos). Esto es algo muy cariñoso de hacer porque quita el estrés de su familia más tarde.
             </p>
           </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg">
+          <div class="bg-secondary p-4 md:p-6 rounded-lg">
             <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
               ¿Qué pasa si muero mientras estoy viajando?
             </h3>
@@ -120,7 +231,7 @@ import ServiceButtons from '../components/ServiceButtons.astro';
               Si está lejos de casa cuando fallece, su familia solo necesita llamar a la funeraria. Ellos hablarán con las autoridades locales y lo traerán de vuelta a casa.
             </p>
           </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg">
+          <div class="bg-secondary p-4 md:p-6 rounded-lg">
             <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
               ¿Hay mucho papeleo?
             </h3>
@@ -133,143 +244,17 @@ import ServiceButtons from '../components/ServiceButtons.astro';
     </div>
   </section>
 
-  <!-- Cremation Options Section -->
-  <section class="py-10 md:py-24 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
-          Opciones de Cremación
-        </h2>
-        <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12 max-w-3xl mx-auto">
-          Hay diferentes formas de manejar la cremación. Puede elegir la que se ajuste a su vida y su presupuesto.
-        </p>
-        <div class="grid md:grid-cols-3 gap-4 md:gap-8">
-          <!-- Option 1: Direct Cremation -->
-          <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
-            <h3 class="text-lg md:text-2xl font-heading font-bold text-primary mb-3 md:mb-4">
-              1. La Opción Simple<br />
-              <span class="text-base md:text-lg font-normal">(Cremación Directa)</span>
-            </h3>
-            <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
-              Esta es la opción más básica. Es para personas que quieren algo simple y privado.
-            </p>
-            <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>La funeraria recoge a su ser querido.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>Tiene lugar la cremación.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>No hay funeral público ni visita.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>La familia recibe las cenizas para enterrar, esparcir o guardar en casa.</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Option 2: Memorial Option -->
-          <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
-            <h3 class="text-lg md:text-2xl font-heading font-bold text-primary mb-3 md:mb-4">
-              2. La Opción Conmemorativa<br />
-              <span class="text-base md:text-lg font-normal">(Viaje del Recuerdo)</span>
-            </h3>
-            <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
-              Esta opción permite que amigos y familiares se despidan juntos.
-            </p>
-            <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>Incluye un tiempo para que familiares y amigos visiten.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>Incluye un servicio conmemorativo para compartir recuerdos.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>Ocurre la cremación y las cenizas se devuelven a la familia.</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Option 3: Full Service Option -->
-          <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
-            <h3 class="text-lg md:text-2xl font-heading font-bold text-primary mb-3 md:mb-4">
-              3. La Opción de Servicio Completo<br />
-              <span class="text-base md:text-lg font-normal">(Viaje de la Vida)</span>
-            </h3>
-            <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
-              Esto es como un funeral tradicional, pero termina con cremación en lugar de entierro.
-            </p>
-            <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>Su cuerpo está preparado para que familiares y amigos puedan visitar y despedirse.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>Se usa un "ataúd de alquiler" especial para el servicio.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>Después de que termine el servicio funerario, tiene lugar la cremación.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Burial Options Section -->
+  <!-- Cemetery/Headstone Help Section -->
   <section class="py-10 md:py-24 bg-secondary">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
-          Opciones de Entierro
-        </h2>
-        <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12">
-          Si prefiere el entierro en lugar de la cremación, también hay opciones asequibles para eso.
-        </p>
-        <div class="grid md:grid-cols-2 gap-4 md:gap-6">
-          <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              Despedida Tradicional
-            </h3>
-            <p class="text-sm md:text-base text-text">
-              Incluye preparar el cuerpo, una visita, un servicio funerario y un viaje al cementerio.
-            </p>
-          </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              Despedida Simple
-            </h3>
-            <p class="text-sm md:text-base text-text">
-              Similar a la tradicional, pero con un tiempo de visita más corto.
-            </p>
-          </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              Servicio en el Cementerio
-            </h3>
-            <p class="text-sm md:text-base text-text">
-              Un servicio realizado directamente en el cementerio.
-            </p>
-          </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              Entierro Inmediato
-            </h3>
-            <p class="text-sm md:text-base text-text">
-              Entierro sin servicio público ni visita.
-            </p>
-          </div>
+        <div class="bg-white p-5 md:p-12 rounded-lg shadow-sm border-t-4 border-accent">
+          <h2 class="text-xl md:text-3xl font-heading font-bold text-primary mb-4 md:mb-6">
+            Si no tenemos una parcela de cementerio o una lápida, ¿puede ayudarnos a elegir una?
+          </h2>
+          <p class="text-sm md:text-lg text-text leading-relaxed">
+            Sí, absolutamente. Estamos aquí para guiarlo a través de estas decisiones. Mantenemos un directorio completo de cementerios locales y sus precios para ayudarlo a encontrar un lugar de descanso pacífico que sea adecuado para su familia. También podemos conectarlo con expertos locales de confianza para ayudarlo a diseñar una hermosa lápida o marcador. No tiene que tomar estas decisiones solo; nos aseguraremos de que tenga todas las opciones que necesita.
+          </p>
         </div>
       </div>
     </div>

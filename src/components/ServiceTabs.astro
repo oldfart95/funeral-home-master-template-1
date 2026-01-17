@@ -1,0 +1,92 @@
+---
+interface Props {
+  activeTab: 'cremation' | 'burial';
+  language?: 'en' | 'es';
+}
+
+const { activeTab, language = 'en' } = Astro.props;
+
+const isEnglish = language === 'en';
+const cremationLabel = isEnglish ? 'Cremation' : 'Cremación';
+const burialLabel = isEnglish ? 'Burial' : 'Entierro';
+---
+
+<div class="service-tabs-container mb-8">
+  <div class="flex border-b-2 border-gray-200">
+    <button
+      id="tab-cremation"
+      class="tab-button flex-1 px-6 py-4 text-lg font-semibold transition-all duration-200"
+      data-tab="cremation"
+      class:list={[
+        activeTab === 'cremation' 
+          ? 'bg-primary text-white border-b-4 border-accent' 
+          : 'bg-secondary text-primary hover:bg-gray-100'
+      ]}
+    >
+      {cremationLabel}
+    </button>
+    <button
+      id="tab-burial"
+      class="tab-button flex-1 px-6 py-4 text-lg font-semibold transition-all duration-200"
+      data-tab="burial"
+      class:list={[
+        activeTab === 'burial' 
+          ? 'bg-primary text-white border-b-4 border-accent' 
+          : 'bg-secondary text-primary hover:bg-gray-100'
+      ]}
+    >
+      {burialLabel}
+    </button>
+  </div>
+</div>
+
+<script>
+  // Tab switching functionality
+  function initTabs() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const cremationContent = document.getElementById('cremation-content');
+    const burialContent = document.getElementById('burial-content');
+    
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tab = button.getAttribute('data-tab');
+        
+        // Update button states
+        tabButtons.forEach(btn => {
+          if (btn.getAttribute('data-tab') === tab) {
+            btn.classList.remove('bg-secondary', 'text-primary');
+            btn.classList.add('bg-primary', 'text-white', 'border-b-4', 'border-accent');
+          } else {
+            btn.classList.remove('bg-primary', 'text-white', 'border-b-4', 'border-accent');
+            btn.classList.add('bg-secondary', 'text-primary');
+          }
+        });
+        
+        // Show/hide content
+        if (tab === 'cremation' && cremationContent) {
+          cremationContent.classList.remove('hidden');
+          if (burialContent) burialContent.classList.add('hidden');
+        } else if (tab === 'burial' && burialContent) {
+          burialContent.classList.remove('hidden');
+          if (cremationContent) cremationContent.classList.add('hidden');
+        }
+      });
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTabs);
+  } else {
+    initTabs();
+  }
+</script>
+
+<style>
+  .tab-button {
+    border-bottom: 2px solid transparent;
+  }
+  
+  .tab-button:hover {
+    opacity: 0.9;
+  }
+</style>

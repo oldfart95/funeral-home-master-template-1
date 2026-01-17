@@ -1,0 +1,121 @@
+---
+// Detect current page type and language from URL
+const pathname = Astro.url.pathname;
+const isSpanish = pathname.includes('-es') || pathname === '/es';
+const isCatholic = pathname.includes('catholic');
+const isVeteran = pathname.includes('veteran');
+const currentPageType = isVeteran ? 'veteran' : isCatholic ? 'catholic' : 'general';
+const language = isSpanish ? 'es' : 'en';
+
+// Determine URLs based on page type and language
+function getCremationUrl(): string {
+  if (isCatholic) {
+    return isSpanish ? '/catholic-cremation-es' : '/catholic-cremation';
+  } else if (isVeteran) {
+    return isSpanish ? '/veteran-cremation-es' : '/veteran-cremation';
+  } else {
+    return isSpanish ? '/cremation-es' : '/cremation';
+  }
+}
+
+function getBurialUrl(): string {
+  if (isCatholic) {
+    return isSpanish ? '/catholic-burial-es' : '/catholic-burial';
+  } else if (isVeteran) {
+    return isSpanish ? '/veteran-burial-es' : '/veteran-burial';
+  } else {
+    return isSpanish ? '/burial-es' : '/burial';
+  }
+}
+
+const cremationUrl = getCremationUrl();
+const burialUrl = getBurialUrl();
+
+// Text content for both languages
+const introText = {
+  en: 'We offer both cremation and burial services - choose the option that best fits your needs and beliefs.',
+  es: 'Ofrecemos servicios de cremación y entierro - elija la opción que mejor se adapte a sus necesidades y creencias.'
+};
+
+const cremationButtonText = {
+  general: { en: 'Learn About Cremation', es: 'Conozca Sobre la Cremación' },
+  catholic: { en: 'Learn About Catholic Cremation', es: 'Conozca Sobre la Cremación Católica' },
+  veteran: { en: 'Learn About Veteran Cremation', es: 'Conozca Sobre la Cremación para Veteranos' }
+};
+
+const burialButtonText = {
+  general: { en: 'Learn About Burial', es: 'Conozca Sobre el Entierro' },
+  catholic: { en: 'Learn About Catholic Burial', es: 'Conozca Sobre el Entierro Católico' },
+  veteran: { en: 'Learn About Veteran Burial', es: 'Conozca Sobre el Entierro para Veteranos' }
+};
+---
+
+<!-- Services Introduction Section -->
+<section class="py-10 md:py-24 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto text-center">
+      <p 
+        class="text-lg md:text-xl text-text leading-relaxed mb-8 md:mb-12"
+        data-lang-en={introText.en}
+        data-lang-es={introText.es}
+      >
+        {introText[language]}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center">
+        <a
+          href={cremationUrl}
+          class="w-full sm:w-auto bg-accent text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-accent-dark transition shadow-sm text-center"
+          data-lang-en={cremationButtonText[currentPageType].en}
+          data-lang-es={cremationButtonText[currentPageType].es}
+        >
+          {cremationButtonText[currentPageType][language]}
+        </a>
+        <a
+          href={burialUrl}
+          class="w-full sm:w-auto bg-primary text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-primary-dark transition shadow-sm text-center"
+          data-lang-en={burialButtonText[currentPageType].en}
+          data-lang-es={burialButtonText[currentPageType].es}
+        >
+          {burialButtonText[currentPageType][language]}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Language detection and text switching for service buttons
+  // This ensures buttons are correctly displayed based on URL language
+  // Runs after DOM is ready to prevent any rendering hiccups
+  (function() {
+    function updateServiceButtons() {
+      const isSpanish = window.location.pathname.includes('-es') || window.location.pathname === '/es';
+      
+      if (isSpanish) {
+        // Update all service button elements with Spanish text
+        document.querySelectorAll('section.py-10 a[data-lang-es]').forEach(el => {
+          const esText = el.getAttribute('data-lang-es');
+          if (esText) {
+            el.textContent = esText;
+          }
+        });
+        
+        // Update intro text
+        document.querySelectorAll('section.py-10 p[data-lang-es]').forEach(el => {
+          const esText = el.getAttribute('data-lang-es');
+          if (esText) {
+            el.textContent = esText;
+          }
+        });
+      }
+    }
+    
+    // Ensure DOM is ready before updating
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateServiceButtons);
+    } else {
+      // DOM already loaded, run immediately
+      updateServiceButtons();
+    }
+  })();
+</script>

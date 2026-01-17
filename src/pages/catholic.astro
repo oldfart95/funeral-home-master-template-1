@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import siteDetails from '../config/siteDetails';
+import ServiceButtons from '../components/ServiceButtons.astro';
 ---
 
 <Layout title="Catholic Services - Planning Ahead" pageType="catholic" language="en">
@@ -20,7 +21,7 @@ import siteDetails from '../config/siteDetails';
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 md:mb-6 drop-shadow-lg">
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
           Planning Ahead for Peace of Mind and Faith
         </h1>
         <p class="text-lg md:text-2xl text-white/95 leading-relaxed drop-shadow-md">
@@ -29,6 +30,8 @@ import siteDetails from '../config/siteDetails';
       </div>
     </div>
   </section>
+
+  <ServiceButtons />
 
   <!-- Planning Ahead Intro -->
   <section class="py-10 md:py-24 bg-secondary">

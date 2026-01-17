@@ -1,9 +1,62 @@
 ---
 import siteDetails from '../config/siteDetails';
+
+// Detect current page type and language from URL
+const pathname = Astro.url.pathname;
+const isSpanish = pathname.includes('-es') || pathname === '/es';
+const isCatholic = pathname.includes('catholic');
+const isVeteran = pathname.includes('veteran');
+const currentPageType = isVeteran ? 'veteran' : isCatholic ? 'catholic' : 'general';
+
+// Determine base paths for navigation
+const basePath = isSpanish ? '' : '';
+const generalPath = isSpanish ? '/' : '/';
+const catholicPath = isSpanish ? '/catholic-es' : '/catholic';
+const veteranPath = isSpanish ? '/veteran-es' : '/veteran';
+
+// Get alternate language URL
+function getAlternateLanguageUrl(): string {
+  const routeMap: Record<string, { en: string; es: string }> = {
+    '/': { en: '/', es: '/es' },
+    '/es': { en: '/', es: '/es' },
+    '/catholic': { en: '/catholic', es: '/catholic-es' },
+    '/catholic-es': { en: '/catholic', es: '/catholic-es' },
+    '/veteran': { en: '/veteran', es: '/veteran-es' },
+    '/veteran-es': { en: '/veteran', es: '/veteran-es' },
+    '/cremation': { en: '/cremation', es: '/cremation-es' },
+    '/cremation-es': { en: '/cremation', es: '/cremation-es' },
+    '/burial': { en: '/burial', es: '/burial-es' },
+    '/burial-es': { en: '/burial', es: '/burial-es' },
+    '/catholic-cremation': { en: '/catholic-cremation', es: '/catholic-cremation-es' },
+    '/catholic-cremation-es': { en: '/catholic-cremation', es: '/catholic-cremation-es' },
+    '/catholic-burial': { en: '/catholic-burial', es: '/catholic-burial-es' },
+    '/catholic-burial-es': { en: '/catholic-burial', es: '/catholic-burial-es' },
+    '/veteran-cremation': { en: '/veteran-cremation', es: '/veteran-cremation-es' },
+    '/veteran-cremation-es': { en: '/veteran-cremation', es: '/veteran-cremation-es' },
+    '/veteran-burial': { en: '/veteran-burial', es: '/veteran-burial-es' },
+    '/veteran-burial-es': { en: '/veteran-burial', es: '/veteran-burial-es' },
+  };
+  
+  if (routeMap[pathname]) {
+    return isSpanish ? routeMap[pathname].en : routeMap[pathname].es;
+  }
+  
+  // Fallback: try to convert by adding/removing -es suffix
+  if (isSpanish) {
+    return pathname.replace(/-es$/, '');
+  } else {
+    return `${pathname}-es`;
+  }
+}
+
+const alternateLanguageUrl = getAlternateLanguageUrl();
+const alternateLanguageLabel = isSpanish ? 'EN' : 'ES';
+const callNowButtonText = isSpanish ? 'Llame Ahora' : 'Call Now';
 ---
 
 <nav class="sticky top-0 z-50 bg-primary text-white shadow-lg">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Top Bar: Branding and Call Button -->
     <div class="flex items-center justify-between h-16 md:h-20">
       <!-- Branding -->
       <div class="flex flex-col">
@@ -12,16 +65,118 @@ import siteDetails from '../config/siteDetails';
         </h1>
       </div>
       
-      <!-- Call Now Button -->
-      <div class="flex items-center gap-3 md:gap-6 ml-4 md:ml-6">
+      <!-- Call Now Button and Language Toggle -->
+      <div class="flex items-center gap-2 md:gap-3 ml-4 md:ml-6">
+        <!-- Language Toggle -->
+        <a 
+          href={alternateLanguageUrl}
+          class="bg-white/10 hover:bg-white/20 text-white px-4 md:px-5 py-2.5 md:py-3 rounded-md font-semibold text-sm md:text-base whitespace-nowrap transition-all duration-200 border border-white/30 hover:border-white/50"
+          title={isSpanish ? 'Switch to English' : 'Cambiar a Español'}
+        >
+          {alternateLanguageLabel}
+        </a>
+        <!-- Call Now Button -->
         <a 
           href={`tel:${siteDetails.phone.replace(/\D/g, '')}`} 
           class="bg-accent hover:bg-accent-dark text-white px-6 md:px-8 py-2.5 md:py-3 rounded-md font-semibold text-sm md:text-base whitespace-nowrap transition-all duration-200 shadow-md hover:shadow-lg"
+          data-lang-en="Call Now"
+          data-lang-es="Llame Ahora"
         >
-          Call Now
+          {callNowButtonText}
+        </a>
+      </div>
+    </div>
+    
+    <!-- Page Type Navigation Bar -->
+    <div class="border-t border-primary-light/30">
+      <div class="flex items-center justify-center gap-1 md:gap-2 h-12 md:h-14">
+        <a
+          href={generalPath}
+          class={`px-4 md:px-6 py-2 md:py-3 font-semibold text-sm md:text-base transition-all duration-200 ${
+            currentPageType === 'general'
+              ? 'bg-accent text-white border-b-2 border-white'
+              : 'text-white/80 hover:text-white hover:bg-primary-light/20'
+          }`}
+        >
+          <span data-lang-en="General">General</span>
+          <span data-lang-es="General" class="hidden">General</span>
+        </a>
+        <a
+          href={catholicPath}
+          class={`px-4 md:px-6 py-2 md:py-3 font-semibold text-sm md:text-base transition-all duration-200 ${
+            currentPageType === 'catholic'
+              ? 'bg-accent text-white border-b-2 border-white'
+              : 'text-white/80 hover:text-white hover:bg-primary-light/20'
+          }`}
+        >
+          <span data-lang-en="Catholic">Catholic</span>
+          <span data-lang-es="Católico" class="hidden">Católico</span>
+        </a>
+        <a
+          href={veteranPath}
+          class={`px-4 md:px-6 py-2 md:py-3 font-semibold text-sm md:text-base transition-all duration-200 ${
+            currentPageType === 'veteran'
+              ? 'bg-accent text-white border-b-2 border-white'
+              : 'text-white/80 hover:text-white hover:bg-primary-light/20'
+          }`}
+        >
+          <span data-lang-en="Veteran">Veteran</span>
+          <span data-lang-es="Veterano" class="hidden">Veterano</span>
         </a>
       </div>
     </div>
   </div>
 </nav>
+
+<script>
+  // Language detection and text switching
+  // Ensure this runs after DOM is ready to prevent any rendering issues
+  (function() {
+    function updateLanguage() {
+      const isSpanish = window.location.pathname.includes('-es') || window.location.pathname === '/es';
+      
+      if (isSpanish) {
+        // Update all elements with Spanish text
+        document.querySelectorAll('[data-lang-es]').forEach(el => {
+          const esText = el.getAttribute('data-lang-es');
+          if (esText) {
+            el.textContent = esText;
+            el.classList.remove('hidden');
+          }
+        });
+        
+        // Hide English-only elements (but keep elements that have both attributes visible)
+        document.querySelectorAll('[data-lang-en]').forEach(el => {
+          // Don't hide elements that also have data-lang-es (they're meant to be shown with translated text)
+          // Also ensure Call Now button is never hidden
+          if (!el.hasAttribute('data-lang-es') && !el.href?.includes('tel:')) {
+            el.classList.add('hidden');
+          } else {
+            // Explicitly ensure Call Now button and other dual-attribute elements are visible
+            el.classList.remove('hidden');
+          }
+        });
+      }
+      
+      // Explicit safeguard: ensure Call Now button is always visible
+      const callNowButton = document.querySelector('a[href^="tel:"]');
+      if (callNowButton) {
+        callNowButton.classList.remove('hidden');
+        callNowButton.style.display = '';
+        callNowButton.style.visibility = '';
+      }
+    }
+    
+    // Run immediately if DOM is already loaded, otherwise wait
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateLanguage);
+    } else {
+      // DOM already loaded, run immediately
+      updateLanguage();
+    }
+    
+    // Also run after a short delay to catch any late-rendering issues
+    setTimeout(updateLanguage, 100);
+  })();
+</script>
 

@@ -1,0 +1,73 @@
+---
+// Detect current service type and page context
+const pathname = Astro.url.pathname;
+const isSpanish = pathname.includes('-es') || pathname === '/es';
+const isCatholic = pathname.includes('catholic');
+const isVeteran = pathname.includes('veteran');
+const isCremation = pathname.includes('cremation');
+const isBurial = pathname.includes('burial');
+const currentService = isCremation ? 'cremation' : isBurial ? 'burial' : null;
+
+// Determine base paths for navigation
+let cremationPath = isSpanish ? '/cremation-es' : '/cremation';
+let burialPath = isSpanish ? '/burial-es' : '/burial';
+
+if (isCatholic) {
+  cremationPath = isSpanish ? '/catholic-cremation-es' : '/catholic-cremation';
+  burialPath = isSpanish ? '/catholic-burial-es' : '/catholic-burial';
+} else if (isVeteran) {
+  cremationPath = isSpanish ? '/veteran-cremation-es' : '/veteran-cremation';
+  burialPath = isSpanish ? '/veteran-burial-es' : '/veteran-burial';
+}
+---
+
+<section class="py-4 md:py-6 bg-secondary border-b-2 border-gray-200">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center justify-center gap-1 md:gap-2">
+        <a
+          href={cremationPath}
+          class={`px-6 md:px-8 py-3 md:py-4 font-semibold text-base md:text-lg transition-all duration-200 rounded-t-lg ${
+            currentService === 'cremation'
+              ? 'bg-primary text-white border-b-4 border-accent shadow-md'
+              : 'bg-white text-primary hover:bg-gray-50 border-b-2 border-transparent hover:border-accent'
+          }`}
+        >
+          <span data-lang-en="Cremation">Cremation</span>
+          <span data-lang-es="Cremación" class="hidden">Cremación</span>
+        </a>
+        <a
+          href={burialPath}
+          class={`px-6 md:px-8 py-3 md:py-4 font-semibold text-base md:text-lg transition-all duration-200 rounded-t-lg ${
+            currentService === 'burial'
+              ? 'bg-primary text-white border-b-4 border-accent shadow-md'
+              : 'bg-white text-primary hover:bg-gray-50 border-b-2 border-transparent hover:border-accent'
+          }`}
+        >
+          <span data-lang-en="Burial">Burial</span>
+          <span data-lang-es="Entierro" class="hidden">Entierro</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Language detection and text switching
+  (function() {
+    const isSpanish = window.location.pathname.includes('-es') || window.location.pathname === '/es';
+    
+    if (isSpanish) {
+      document.querySelectorAll('[data-lang-es]').forEach(el => {
+        const esText = el.getAttribute('data-lang-es');
+        if (esText) {
+          el.textContent = esText;
+          el.classList.remove('hidden');
+        }
+      });
+      document.querySelectorAll('[data-lang-en]').forEach(el => {
+        el.classList.add('hidden');
+      });
+    }
+  })();
+</script>

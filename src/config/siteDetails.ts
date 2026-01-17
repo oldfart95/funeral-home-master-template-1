@@ -67,7 +67,7 @@ const siteDetails: SiteDetails = {
     // Add social media links when available
   },
   marketingModal: {
-    enabled: true,
+    enabled: false,
     title: "Welcome",
     bodyText: "Help us personalize your experience",
     ctaLink: "#contact",

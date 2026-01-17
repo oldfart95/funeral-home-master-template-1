@@ -1,10 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import siteDetails from '../config/siteDetails';
-import ServiceButtons from '../components/ServiceButtons.astro';
+import ServiceNav from '../components/ServiceNav.astro';
 ---
 
-<Layout title="Veteran Services - Planning Ahead" pageType="veteran" language="en">
+<Layout title="Cremation Services - Planning Ahead" pageType="general" language="en">
   <!-- Hero Section -->
   <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-12 md:py-32 overflow-hidden">
     <!-- Background Image with Overlay -->
@@ -31,9 +31,146 @@ import ServiceButtons from '../components/ServiceButtons.astro';
     </div>
   </section>
 
-  <ServiceButtons />
+  <!-- Service Navigation -->
+  <ServiceNav />
 
-  <!-- Why Plan Ahead Section -->
+  <!-- Introductory Block -->
+  <section class="py-8 md:py-12 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-secondary p-6 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
+          <p class="text-base md:text-lg text-text leading-relaxed text-center">
+            We offer comprehensive cremation and burial services. Both options are available and equally respected. Choose the service that aligns with your wishes, beliefs, and budget. <strong>Many families choose equally between burial and cremation - we offer comprehensive services for both options.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cremation Options Section -->
+    <section class="py-10 md:py-24 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
+            Cremation Options
+          </h2>
+          <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12 max-w-3xl mx-auto">
+            There are different ways to handle cremation. You can choose the one that fits your life and your budget.
+          </p>
+          <div class="grid md:grid-cols-3 gap-4 md:gap-8">
+            <!-- Option 1: Direct Cremation -->
+            <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
+              <h3 class="text-lg md:text-2xl font-heading font-bold text-primary mb-3 md:mb-4">
+                1. The Simple Option<br />
+                <span class="text-base md:text-lg font-normal">(Direct Cremation)</span>
+              </h3>
+              <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
+                This is the most basic choice. It is for people who want something simple and private.
+              </p>
+              <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>The funeral home picks up your loved one.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>The cremation takes place.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>There is no public funeral or visitation.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>The family receives the ashes to bury, scatter, or keep at home.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Option 2: Memorial Option -->
+            <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
+              <h3 class="text-lg md:text-2xl font-heading font-bold text-primary mb-3 md:mb-4">
+                2. The Memorial Option<br />
+                <span class="text-base md:text-lg font-normal">(Journey of Remembrance)</span>
+              </h3>
+              <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
+                This option allows friends and family to say goodbye together.
+              </p>
+              <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>Includes a time for family and friends to visit.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>Includes a memorial service to share memories.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>The cremation happens, and the ashes are returned to the family.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Option 3: Full Service Option -->
+            <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
+              <h3 class="text-lg md:text-2xl font-heading font-bold text-primary mb-3 md:mb-4">
+                3. The Full Service Option<br />
+                <span class="text-base md:text-lg font-normal">(Journey of Life)</span>
+              </h3>
+              <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
+                This is like a traditional funeral, but it ends with cremation instead of burial.
+              </p>
+              <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>Your body is prepared so family and friends can visit and say goodbye.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>A special "rental casket" is used for the service.</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-accent mr-2">•</span>
+                  <span>After the funeral service is over, the cremation takes place.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Common Questions About Cremation -->
+    <section class="py-10 md:py-24 bg-secondary">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-12 text-center">
+            Common Questions About Cremation
+          </h2>
+          <div class="space-y-4 md:space-y-6">
+            <div class="bg-white p-4 md:p-6 rounded-lg">
+              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
+                Can my family see me before I am cremated?
+              </h3>
+              <p class="text-sm md:text-base text-text leading-relaxed">
+                Yes, in most cases. If your family wants to see you one last time, the funeral home can prepare you for a private viewing. This usually needs to happen within a few days.
+              </p>
+            </div>
+            <div class="bg-white p-4 md:p-6 rounded-lg">
+              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
+                Do I need to buy an urn?
+              </h3>
+              <p class="text-sm md:text-base text-text leading-relaxed">
+                You can choose from many different types of urns. Some are made of wood, metal, or other materials. You can pick one that fits your style.
+              </p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shared Content: Why Plan Ahead -->
   <section class="py-10 md:py-24 bg-secondary">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
@@ -70,41 +207,15 @@ import ServiceButtons from '../components/ServiceButtons.astro';
     </div>
   </section>
 
-  <!-- Veteran-Specific Content Section -->
+  <!-- Shared Content: Common Questions -->
   <section class="py-10 md:py-24 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
-          Veteran Services
-        </h2>
-        <div class="bg-secondary p-5 md:p-8 rounded-lg shadow-sm">
-          <p class="text-sm md:text-base text-text leading-relaxed mb-6">
-            <!-- Content will be provided -->
-            We honor our veterans and their families with specialized services and benefits assistance.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Common Questions Section -->
-  <section class="py-10 md:py-24 bg-secondary">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-12 text-center">
-          Common Questions About Veteran Services
+          Common Questions
         </h2>
         <div class="space-y-4 md:space-y-6">
-          <div class="bg-white p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              What benefits are available for veterans?
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              <!-- Content will be provided -->
-              Veterans and their families may be eligible for various benefits including burial allowances, headstones, and cemetery services.
-            </p>
-          </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg">
+          <div class="bg-secondary p-4 md:p-6 rounded-lg">
             <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
               Can I pay for everything before I die?
             </h3>
@@ -112,7 +223,7 @@ import ServiceButtons from '../components/ServiceButtons.astro';
               Yes. You can put money into a safe account (a Life Insurance policy, which we help with). This is a very caring thing to do because it takes the stress off your family later.
             </p>
           </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg">
+          <div class="bg-secondary p-4 md:p-6 rounded-lg">
             <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
               What if I die while I am traveling?
             </h3>
@@ -120,7 +231,7 @@ import ServiceButtons from '../components/ServiceButtons.astro';
               If you are away from home when you pass away, your family just needs to call the funeral home. They will talk to the local authorities and bring you back home.
             </p>
           </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg">
+          <div class="bg-secondary p-4 md:p-6 rounded-lg">
             <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
               Is there a lot of paperwork?
             </h3>
@@ -133,143 +244,17 @@ import ServiceButtons from '../components/ServiceButtons.astro';
     </div>
   </section>
 
-  <!-- Cremation Options Section -->
-  <section class="py-10 md:py-24 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
-          Cremation Options
-        </h2>
-        <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12 max-w-3xl mx-auto">
-          There are different ways to handle cremation. You can choose the one that fits your life and your budget.
-        </p>
-        <div class="grid md:grid-cols-3 gap-4 md:gap-8">
-          <!-- Option 1: Direct Cremation -->
-          <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
-            <h3 class="text-lg md:text-2xl font-heading font-bold text-primary mb-3 md:mb-4">
-              1. The Simple Option<br />
-              <span class="text-base md:text-lg font-normal">(Direct Cremation)</span>
-            </h3>
-            <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
-              This is the most basic choice. It is for people who want something simple and private.
-            </p>
-            <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>The funeral home picks up your loved one.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>The cremation takes place.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>There is no public funeral or visitation.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>The family receives the ashes to bury, scatter, or keep at home.</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Option 2: Memorial Option -->
-          <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
-            <h3 class="text-lg md:text-2xl font-heading font-bold text-primary mb-3 md:mb-4">
-              2. The Memorial Option<br />
-              <span class="text-base md:text-lg font-normal">(Journey of Remembrance)</span>
-            </h3>
-            <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
-              This option allows friends and family to say goodbye together.
-            </p>
-            <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>Includes a time for family and friends to visit.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>Includes a memorial service to share memories.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>The cremation happens, and the ashes are returned to the family.</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Option 3: Full Service Option -->
-          <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
-            <h3 class="text-lg md:text-2xl font-heading font-bold text-primary mb-3 md:mb-4">
-              3. The Full Service Option<br />
-              <span class="text-base md:text-lg font-normal">(Journey of Life)</span>
-            </h3>
-            <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
-              This is like a traditional funeral, but it ends with cremation instead of burial.
-            </p>
-            <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>Your body is prepared so family and friends can visit and say goodbye.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>A special "rental casket" is used for the service.</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-accent mr-2">•</span>
-                <span>After the funeral service is over, the cremation takes place.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Burial Options Section -->
+  <!-- Cemetery/Headstone Help Section -->
   <section class="py-10 md:py-24 bg-secondary">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
-          Burial Options
-        </h2>
-        <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12">
-          If you prefer burial instead of cremation, there are affordable choices for that, too.
-        </p>
-        <div class="grid md:grid-cols-2 gap-4 md:gap-6">
-          <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              Traditional Farewell
-            </h3>
-            <p class="text-sm md:text-base text-text">
-              Includes getting the body ready, a visitation, a funeral service, and a ride to the cemetery.
-            </p>
-          </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              Simple Farewell
-            </h3>
-            <p class="text-sm md:text-base text-text">
-              Similar to the traditional one, but with a shorter visitation time.
-            </p>
-          </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              Graveside Service
-            </h3>
-            <p class="text-sm md:text-base text-text">
-              A service held right at the cemetery.
-            </p>
-          </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              Immediate Burial
-            </h3>
-            <p class="text-sm md:text-base text-text">
-              Burial with no public service or visitation.
-            </p>
-          </div>
+        <div class="bg-white p-5 md:p-12 rounded-lg shadow-sm border-t-4 border-accent">
+          <h2 class="text-xl md:text-3xl font-heading font-bold text-primary mb-4 md:mb-6">
+            If we do not have a cemetery plot or a headstone, can you help us choose one?
+          </h2>
+          <p class="text-sm md:text-lg text-text leading-relaxed">
+            Yes, absolutely. We are here to guide you through these decisions. We maintain a complete directory of local cemeteries and their prices to help you find a peaceful resting place that is right for your family. We can also connect you with trusted local experts to help you design a beautiful headstone or marker. You do not have to make these choices alone; we will ensure you have all the options you need.
+          </p>
         </div>
       </div>
     </div>
