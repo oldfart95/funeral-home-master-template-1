@@ -2,6 +2,25 @@
 import Layout from '../layouts/Layout.astro';
 import siteDetails from '../config/siteDetails';
 import ServiceNav from '../components/ServiceNav.astro';
+import Accordion from '../components/Accordion.astro';
+
+// Determine company name based on page type and language
+const pathname = Astro.url.pathname;
+const isSpanish = pathname.includes('-es') || pathname === '/es';
+const isCatholic = pathname.includes('catholic');
+const isVeteran = pathname.includes('veteran');
+
+function getCompanyName(): string {
+  if (isVeteran) {
+    return isSpanish ? 'Cuidado de Veteranos' : 'Veteran Care';
+  } else if (isCatholic) {
+    return isSpanish ? 'Cuidado Católico' : 'Catholic Care';
+  } else {
+    return isSpanish ? 'Cuidado Asequible' : 'Affordable Care';
+  }
+}
+
+const displayCompanyName = getCompanyName();
 ---
 
 <Layout title="Catholic Burial Services - Planning Ahead" pageType="catholic" language="en">
@@ -20,13 +39,23 @@ import ServiceNav from '../components/ServiceNav.astro';
     
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
-          Planning Ahead for Peace of Mind and Faith
-        </h1>
-        <p class="text-lg md:text-2xl text-white/95 leading-relaxed drop-shadow-md">
-          Thinking about the end of life can be hard. However, making plans now is one of the best gifts you can give to your family. It stops them from worrying about what you would have wanted. It also helps them avoid difficult choices during a sad time. For Catholics, planning ahead is also a way to show our faith. We believe that death is not the end. It is a change. We believe that we will be with God.
-        </p>
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12 min-h-[400px] md:min-h-[500px]">
+        <!-- Company Name - Left/Top -->
+        <div class="flex-1">
+          <h1 class="text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+            {displayCompanyName}
+          </h1>
+        </div>
+        
+        <!-- Hero Text - Center Right -->
+        <div class="flex-1 md:flex-none md:w-1/2 lg:w-2/5 text-right md:text-right">
+          <h2 class="text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+            Planning Ahead for Peace of Mind and Faith
+          </h2>
+          <p class="text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-justify md:text-right">
+            Thinking about the end of life can be hard. However, making plans now is one of the best gifts you can give to your family. Providing clarity and peace of mind for your family by documenting your preferences in advance. It also helps them avoid difficult choices during a sad time. For Catholics, planning ahead is also a way to show our faith. We believe that death is not the end. It is a change. We believe that we will be with God.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -133,35 +162,55 @@ import ServiceNav from '../components/ServiceNav.astro';
           <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12">
             The Catholic Church prefers burial of the body, as it follows the example of Jesus who was buried in a tomb. There are affordable choices for Catholic burial.
           </p>
-          <div class="grid md:grid-cols-2 gap-4 md:gap-6">
-            <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm">
-              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-                Traditional Farewell
-              </h3>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
+              <div class="flex items-center gap-2 mb-3">
+                <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <h3 class="text-lg md:text-xl font-heading font-semibold text-primary">
+                  Traditional Farewell
+                </h3>
+              </div>
               <p class="text-sm md:text-base text-text">
                 This includes getting the body ready, a visitation, a funeral Mass, and a ride to the cemetery.
               </p>
             </div>
-            <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm">
-              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-                Simple Farewell
-              </h3>
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
+              <div class="flex items-center gap-2 mb-3">
+                <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="text-lg md:text-xl font-heading font-semibold text-primary">
+                  Simple Farewell
+                </h3>
+              </div>
               <p class="text-sm md:text-base text-text">
                 This is like the traditional one, but the visitation time is shorter.
               </p>
             </div>
-            <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm">
-              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-                Graveside Service
-              </h3>
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
+              <div class="flex items-center gap-2 mb-3">
+                <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 002 2h2.945M15 11a3 3 0 11-6 0m6 0a3 3 0 10-6 0m6 0H9m3 0v1m0-1v-1m0 1H9m3 0h3M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="text-lg md:text-xl font-heading font-semibold text-primary">
+                  Graveside Service
+                </h3>
+              </div>
               <p class="text-sm md:text-base text-text">
                 This is a service held right at the cemetery.
               </p>
             </div>
-            <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm">
-              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-                Immediate Burial
-              </h3>
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
+              <div class="flex items-center gap-2 mb-3">
+                <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="text-lg md:text-xl font-heading font-semibold text-primary">
+                  Immediate Burial
+                </h3>
+              </div>
               <p class="text-sm md:text-base text-text">
                 This is burial with no public service or visitation.
               </p>
@@ -171,20 +220,20 @@ import ServiceNav from '../components/ServiceNav.astro';
       </div>
     </section>
 
-  <!-- Shared Content: Why Plan Ahead -->
+  <!-- Planning & FAQ Section -->
   <section class="py-10 md:py-24 bg-secondary">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
-          Why Should You Plan Ahead?
+          Planning & FAQ
         </h2>
-        <div class="grid md:grid-cols-3 gap-4 md:gap-8">
+        <div class="grid md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12">
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
             <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-3 md:mb-4">
               It Helps Your Family
             </h3>
             <p class="text-sm md:text-base text-text leading-relaxed">
-              Your family won't have to guess what you wanted. You write down your wishes for your service. You can say if you want to be buried or cremated. You can choose the songs and prayers for your Mass.
+              Providing clarity and peace of mind for your family by documenting your preferences in advance. Your family won't have to guess what you wanted. You can choose the songs and prayers for your Mass.
             </p>
           </div>
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -192,7 +241,7 @@ import ServiceNav from '../components/ServiceNav.astro';
               It Saves Money
             </h3>
             <p class="text-sm md:text-base text-text leading-relaxed">
-              You can pay for things now. This protects your family from rising costs in the future. The money is kept safe in a special account until it is needed.
+              Pre-funding options to lock in today's rates. This protects your family from rising costs in the future. The money is kept safe in a special account until it is needed.
             </p>
           </div>
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -204,66 +253,39 @@ import ServiceNav from '../components/ServiceNav.astro';
             </p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Shared Content: Common Questions -->
-  <section class="py-10 md:py-24 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-12 text-center">
-          Common Questions
-        </h2>
-        <div class="space-y-4 md:space-y-6">
-          <div class="bg-secondary p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              Can I pay for everything before I die?
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              Yes. You can put money into a safe account. This is a very caring thing to do because it takes the stress off your family later. We can help you set up a life insurance policy for this.
-            </p>
-          </div>
-          <div class="bg-secondary p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              What if I die while I am traveling?
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              If you are away from home when you pass away, your family just needs to call the funeral home. They will talk to the local authorities and bring you back home.
-            </p>
-          </div>
-          <div class="bg-secondary p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              Is there a lot of paperwork?
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              There can be, but the funeral home will help. They will guide your family through every step. They help notify Social Security and check for any Veteran benefits or insurance money.
-            </p>
-          </div>
-          <div class="bg-secondary p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              If we do not have a cemetery plot, can you help us choose one?
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              Yes, absolutely. We are here to guide you. We have a list of local Catholic cemeteries in Youngstown, Akron, Canton, and Cleveland. We can help you find a peaceful resting place. We can also help you find a headstone or marker.
-            </p>
-          </div>
-          <div class="bg-secondary p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              Does the Church allow "Green" or Natural Burial?
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              Yes. Some Catholic cemeteries offer natural burial. This means the body is buried in a simple way without strong chemicals. Ask us if this is available in your area.
-            </p>
-          </div>
-          <div class="bg-secondary p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              Can non-Catholics be buried in a Catholic cemetery?
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              Usually, yes. If you have a family member who is not Catholic, they can often be buried with you. The Church believes that families should stay together.
-            </p>
-          </div>
+        <div class="bg-white p-4 md:p-8 rounded-lg shadow-sm">
+          <h3 class="text-xl md:text-2xl font-heading font-bold text-primary mb-6 text-center">
+            Common Questions About Planning Ahead
+          </h3>
+          <Accordion 
+            language="en"
+            items={[
+              {
+                question: "Can I pay for everything before I die?",
+                answer: "Yes. You can put money into a safe account. This is a very caring thing to do because it takes the stress off your family later. We can help you set up a life insurance policy for this."
+              },
+              {
+                question: "What if I die while I am traveling?",
+                answer: "If you are away from home when you pass away, your family just needs to call the funeral home. They will talk to the local authorities and bring you back home."
+              },
+              {
+                question: "Is there a lot of paperwork?",
+                answer: "There can be, but the funeral home will help. They will guide your family through every step. They help notify Social Security and check for any Veteran benefits or insurance money."
+              },
+              {
+                question: "If we do not have a cemetery plot, can you help us choose one?",
+                answer: "Yes, absolutely. We are here to guide you. We have a list of local Catholic cemeteries in Youngstown, Akron, Canton, and Cleveland. We can help you find a peaceful resting place. We can also help you find a headstone or marker."
+              },
+              {
+                question: "Does the Church allow \"Green\" or Natural Burial?",
+                answer: "Yes. Some Catholic cemeteries offer natural burial. This means the body is buried in a simple way without strong chemicals. Ask us if this is available in your area."
+              },
+              {
+                question: "Can non-Catholics be buried in a Catholic cemetery?",
+                answer: "Usually, yes. If you have a family member who is not Catholic, they can often be buried with you. The Church believes that families should stay together."
+              }
+            ]}
+          />
         </div>
       </div>
     </div>
@@ -285,16 +307,28 @@ import ServiceNav from '../components/ServiceNav.astro';
     </div>
   </section>
 
-  <!-- Contact Form Section -->
+  <!-- Contact & Support Section -->
   <section id="contact" class="py-10 md:py-24 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
-          Get Started Today
+          Contact & Support
         </h2>
-        <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12">
-          Contact us to begin planning ahead for peace of mind.
+        <p class="text-base md:text-xl text-text text-center mb-6 md:mb-8">
+          Our compassionate team is here to guide you through every step.
         </p>
+        
+        <!-- Phone Number Badge -->
+        <div class="bg-primary text-white p-4 md:p-6 rounded-lg shadow-sm mb-6 md:mb-8 text-center">
+          <p class="text-sm md:text-base text-white/90 mb-2">Available 24/7</p>
+          <a
+            href={`tel:${siteDetails.phone.replace(/\D/g, '')}`}
+            class="text-2xl md:text-3xl font-bold text-white hover:text-accent transition-colors inline-block"
+          >
+            {siteDetails.phone}
+          </a>
+        </div>
+        
         <div class="bg-secondary p-5 md:p-12 rounded-lg shadow-sm">
           <form id="contact-form" class="space-y-4 md:space-y-6">
             <!-- Honeypot field for spam prevention -->
@@ -370,24 +404,6 @@ import ServiceNav from '../components/ServiceNav.astro';
           </form>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-10 md:py-20 bg-primary text-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-xl md:text-3xl font-heading font-bold mb-3 md:mb-4">
-        Ready to Start Planning?
-      </h2>
-      <p class="text-base md:text-lg mb-4 md:mb-6 text-white/90">
-        Our compassionate team is here to guide you through every step.
-      </p>
-      <a
-        href={`tel:${siteDetails.phone.replace(/\D/g, '')}`}
-        class="inline-block bg-accent text-white px-8 py-3 rounded-md font-semibold text-lg hover:bg-accent-dark transition shadow-sm"
-      >
-        Call {siteDetails.phone}
-      </a>
     </div>
   </section>
 

@@ -1,0 +1,113 @@
+---
+interface Props {
+  items: Array<{
+    question: string;
+    answer: string;
+  }>;
+  language?: 'en' | 'es';
+}
+
+const { items, language = 'en' } = Astro.props;
+---
+
+<div class="accordion-container space-y-4 md:space-y-6">
+  {items.map((item, index) => (
+    <div class="accordion-item bg-secondary rounded-lg overflow-hidden">
+      <button
+        class="accordion-button w-full text-left bg-secondary p-4 md:p-6 rounded-lg hover:bg-secondary/80 transition-colors"
+        data-accordion-index={index}
+        aria-expanded="false"
+        aria-controls={`accordion-content-${index}`}
+      >
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg md:text-xl font-heading font-semibold text-primary pr-4">
+            {item.question}
+          </h3>
+          <svg
+            class="accordion-icon w-6 h-6 text-accent flex-shrink-0 transition-transform duration-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </div>
+      </button>
+      <div
+        id={`accordion-content-${index}`}
+        class="accordion-content hidden px-4 md:px-6 pb-4 md:pb-6"
+      >
+        <p class="text-sm md:text-base text-text leading-relaxed">
+          {item.answer}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  function initAccordion() {
+    const buttons = document.querySelectorAll('.accordion-button');
+    
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const index = button.getAttribute('data-accordion-index');
+        const content = document.getElementById(`accordion-content-${index}`);
+        const icon = button.querySelector('.accordion-icon');
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        
+        if (isExpanded) {
+          // Close this item
+          content?.classList.add('hidden');
+          button.setAttribute('aria-expanded', 'false');
+          icon?.classList.remove('rotate-180');
+        } else {
+          // Close all other items
+          buttons.forEach(otherButton => {
+            const otherIndex = otherButton.getAttribute('data-accordion-index');
+            if (otherIndex !== index) {
+              const otherContent = document.getElementById(`accordion-content-${otherIndex}`);
+              const otherIcon = otherButton.querySelector('.accordion-icon');
+              otherContent?.classList.add('hidden');
+              otherButton.setAttribute('aria-expanded', 'false');
+              otherIcon?.classList.remove('rotate-180');
+            }
+          });
+          
+          // Open this item
+          content?.classList.remove('hidden');
+          button.setAttribute('aria-expanded', 'true');
+          icon?.classList.add('rotate-180');
+        }
+      });
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAccordion);
+  } else {
+    initAccordion();
+  }
+</script>
+
+<style>
+  .accordion-icon {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .accordion-content {
+    animation: slideDown 0.3s ease-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

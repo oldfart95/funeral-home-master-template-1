@@ -2,6 +2,25 @@
 import Layout from '../layouts/Layout.astro';
 import siteDetails from '../config/siteDetails';
 import ServiceNav from '../components/ServiceNav.astro';
+import Accordion from '../components/Accordion.astro';
+
+// Determine company name based on page type and language
+const pathname = Astro.url.pathname;
+const isSpanish = pathname.includes('-es') || pathname === '/es';
+const isCatholic = pathname.includes('catholic');
+const isVeteran = pathname.includes('veteran');
+
+function getCompanyName(): string {
+  if (isVeteran) {
+    return isSpanish ? 'Cuidado de Veteranos' : 'Veteran Care';
+  } else if (isCatholic) {
+    return isSpanish ? 'Cuidado Católico' : 'Catholic Care';
+  } else {
+    return isSpanish ? 'Cuidado Asequible' : 'Affordable Care';
+  }
+}
+
+const displayCompanyName = getCompanyName();
 ---
 
 <Layout title="Servicios de Entierro para Veteranos - Planificar con Anticipación" pageType="veteran" language="es">
@@ -20,13 +39,23 @@ import ServiceNav from '../components/ServiceNav.astro';
     
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
-          Planificar con Anticipación para la Tranquilidad
-        </h1>
-        <p class="text-lg md:text-2xl text-white/95 leading-relaxed drop-shadow-md">
-          Pensar en el final de la vida puede ser difícil. Sin embargo, hacer planes ahora es uno de los mejores regalos que puede darle a su familia. Evita que se preocupen por lo que usted habría querido. También les ayuda a evitar decisiones difíciles durante un momento triste.
-        </p>
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12 min-h-[400px] md:min-h-[500px]">
+        <!-- Company Name - Left/Top -->
+        <div class="flex-1">
+          <h1 class="text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+            {displayCompanyName}
+          </h1>
+        </div>
+        
+        <!-- Hero Text - Center Right -->
+        <div class="flex-1 md:flex-none md:w-1/2 lg:w-2/5 text-right md:text-right">
+          <h2 class="text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+            Planificar con Anticipación para la Tranquilidad
+          </h2>
+          <p class="text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-justify md:text-right">
+            Pensar en el final de la vida puede ser difícil. Sin embargo, hacer planes ahora es uno de los mejores regalos que puede darle a su familia. Proporcionando claridad y tranquilidad para su familia al documentar sus preferencias con anticipación. También les ayuda a evitar decisiones difíciles durante un momento triste.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -56,35 +85,55 @@ import ServiceNav from '../components/ServiceNav.astro';
           <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12">
             Si prefiere el entierro en lugar de la cremación, también hay opciones asequibles para eso.
           </p>
-          <div class="grid md:grid-cols-2 gap-4 md:gap-6">
-            <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm">
-              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-                Despedida Tradicional
-              </h3>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
+              <div class="flex items-center gap-2 mb-3">
+                <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <h3 class="text-lg md:text-xl font-heading font-semibold text-primary">
+                  Despedida Tradicional
+                </h3>
+              </div>
               <p class="text-sm md:text-base text-text">
                 Incluye preparar el cuerpo, una visita, un servicio funerario y un viaje al cementerio.
               </p>
             </div>
-            <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm">
-              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-                Despedida Simple
-              </h3>
+            <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
+              <div class="flex items-center gap-2 mb-3">
+                <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="text-lg md:text-xl font-heading font-semibold text-primary">
+                  Despedida Simple
+                </h3>
+              </div>
               <p class="text-sm md:text-base text-text">
                 Similar a la tradicional, pero con un tiempo de visita más corto.
               </p>
             </div>
-            <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm">
-              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-                Servicio en el Cementerio
-              </h3>
+            <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
+              <div class="flex items-center gap-2 mb-3">
+                <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 002 2h2.945M15 11a3 3 0 11-6 0m6 0a3 3 0 10-6 0m6 0H9m3 0v1m0-1v-1m0 1H9m3 0h3M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="text-lg md:text-xl font-heading font-semibold text-primary">
+                  Servicio en el Cementerio
+                </h3>
+              </div>
               <p class="text-sm md:text-base text-text">
                 Un servicio realizado directamente en el cementerio.
               </p>
             </div>
-            <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm">
-              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-                Entierro Inmediato
-              </h3>
+            <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
+              <div class="flex items-center gap-2 mb-3">
+                <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="text-lg md:text-xl font-heading font-semibold text-primary">
+                  Entierro Inmediato
+                </h3>
+              </div>
               <p class="text-sm md:text-base text-text">
                 Entierro sin servicio público ni visita.
               </p>
@@ -131,20 +180,20 @@ import ServiceNav from '../components/ServiceNav.astro';
       </div>
     </section>
 
-  <!-- Shared Content: Why Plan Ahead -->
+  <!-- Planning & FAQ Section -->
   <section class="py-10 md:py-24 bg-secondary">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
-          ¿Por Qué Debería Planificar con Anticipación?
+          Planificación y Preguntas Frecuentes
         </h2>
-        <div class="grid md:grid-cols-3 gap-4 md:gap-8">
+        <div class="grid md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12">
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
             <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-3 md:mb-4">
               Ayuda a Su Familia
             </h3>
             <p class="text-sm md:text-base text-text leading-relaxed">
-              Su familia no tendrá que adivinar lo que usted quería. Usted escribe sus deseos para su servicio, si desea ser enterrado o cremado, y otros detalles.
+              Proporcionando claridad y tranquilidad para su familia al documentar sus preferencias con anticipación. Su familia no tendrá que adivinar lo que usted quería. Usted escribe sus deseos para su servicio, si desea ser enterrado o cremado, y otros detalles.
             </p>
           </div>
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -152,7 +201,7 @@ import ServiceNav from '../components/ServiceNav.astro';
               Ahorra Dinero
             </h3>
             <p class="text-sm md:text-base text-text leading-relaxed">
-              Puede pagar las cosas ahora. Esto protege a su familia de los costos crecientes en el futuro. El dinero se mantiene seguro en una cuenta de fideicomiso especial o de seguro hasta que se necesite.
+              Opciones de prefinanciación para fijar las tarifas de hoy. Esto protege a su familia de los costos crecientes en el futuro. El dinero se mantiene seguro en una cuenta de fideicomiso especial o de seguro hasta que se necesite.
             </p>
           </div>
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -164,42 +213,31 @@ import ServiceNav from '../components/ServiceNav.astro';
             </p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Shared Content: Common Questions -->
-  <section class="py-10 md:py-24 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-12 text-center">
-          Preguntas Comunes
-        </h2>
-        <div class="space-y-4 md:space-y-6">
-          <div class="bg-secondary p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              ¿Puedo pagar todo antes de morir?
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              Sí. Puede poner dinero en una cuenta segura (una póliza de seguro de vida, con la cual le ayudamos). Esto es algo muy cariñoso de hacer porque quita el estrés de su familia más tarde.
-            </p>
-          </div>
-          <div class="bg-secondary p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              ¿Qué pasa si muero mientras estoy viajando?
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              Si está lejos de casa cuando fallece, su familia solo necesita llamar a la funeraria. Ellos hablarán con las autoridades locales y lo traerán de vuelta a casa.
-            </p>
-          </div>
-          <div class="bg-secondary p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-              ¿Hay mucho papeleo?
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              Puede haberlo, pero la funeraria ayudará. Guiarán a su familia a través de cada paso. Ayudan a notificar al Seguro Social y verificar cualquier beneficio de Veterano o dinero del seguro.
-            </p>
-          </div>
+        <div class="bg-white p-4 md:p-8 rounded-lg shadow-sm">
+          <h3 class="text-xl md:text-2xl font-heading font-bold text-primary mb-6 text-center">
+            Preguntas Comunes Sobre Planificar con Anticipación
+          </h3>
+          <Accordion 
+            language="es"
+            items={[
+              {
+                question: "¿Qué beneficios están disponibles para los veteranos?",
+                answer: "Los veteranos y sus familias pueden ser elegibles para varios beneficios, incluyendo asignaciones de entierro, lápidas y servicios de cementerio."
+              },
+              {
+                question: "¿Puedo pagar todo antes de morir?",
+                answer: "Sí. Puede poner dinero en una cuenta segura (una póliza de seguro de vida, con la cual le ayudamos). Esto es algo muy cariñoso de hacer porque quita el estrés de su familia más tarde."
+              },
+              {
+                question: "¿Qué pasa si muero mientras estoy viajando?",
+                answer: "Si está lejos de casa cuando fallece, su familia solo necesita llamar a la funeraria. Ellos hablarán con las autoridades locales y lo traerán de vuelta a casa."
+              },
+              {
+                question: "¿Hay mucho papeleo?",
+                answer: "Puede haberlo, pero la funeraria ayudará. Guiarán a su familia a través de cada paso. Ayudan a notificar al Seguro Social y verificar cualquier beneficio de Veterano o dinero del seguro."
+              }
+            ]}
+          />
         </div>
       </div>
     </div>
@@ -221,16 +259,28 @@ import ServiceNav from '../components/ServiceNav.astro';
     </div>
   </section>
 
-  <!-- Contact Form Section -->
+  <!-- Contact & Support Section -->
   <section id="contact" class="py-10 md:py-24 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
-          Comience Hoy
+          Contacto y Apoyo
         </h2>
-        <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12">
-          Contáctenos para comenzar a planificar con anticipación para la tranquilidad.
+        <p class="text-base md:text-xl text-text text-center mb-6 md:mb-8">
+          Nuestro equipo compasivo está aquí para guiarlo a través de cada paso.
         </p>
+        
+        <!-- Phone Number Badge -->
+        <div class="bg-primary text-white p-4 md:p-6 rounded-lg shadow-sm mb-6 md:mb-8 text-center">
+          <p class="text-sm md:text-base text-white/90 mb-2">Disponible 24/7</p>
+          <a
+            href={`tel:${siteDetails.phone.replace(/\D/g, '')}`}
+            class="text-2xl md:text-3xl font-bold text-white hover:text-accent transition-colors inline-block"
+          >
+            {siteDetails.phone}
+          </a>
+        </div>
+        
         <div class="bg-secondary p-5 md:p-12 rounded-lg shadow-sm">
           <form id="contact-form" class="space-y-4 md:space-y-6">
             <!-- Honeypot field for spam prevention -->
@@ -306,24 +356,6 @@ import ServiceNav from '../components/ServiceNav.astro';
           </form>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-10 md:py-20 bg-primary text-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-xl md:text-3xl font-heading font-bold mb-3 md:mb-4">
-        ¿Listo para Comenzar a Planificar?
-      </h2>
-      <p class="text-base md:text-lg mb-4 md:mb-6 text-white/90">
-        Nuestro equipo compasivo está aquí para guiarlo a través de cada paso.
-      </p>
-      <a
-        href={`tel:${siteDetails.phone.replace(/\D/g, '')}`}
-        class="inline-block bg-accent text-white px-8 py-3 rounded-md font-semibold text-lg hover:bg-accent-dark transition shadow-sm"
-      >
-        Llame {siteDetails.phone}
-      </a>
     </div>
   </section>
 

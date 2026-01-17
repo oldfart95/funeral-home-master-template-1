@@ -53,13 +53,18 @@ const logoAlt = pageType === 'catholic'
         <h3 class="text-xl font-heading font-bold mb-4 text-white">Quick Links</h3>
         <ul class="space-y-2">
           <li>
-            <a href="#contact" class="text-white/80 hover:text-accent transition-colors">
-              Contact Us
+            <a href={language === 'es' ? '/cremation-es' : '/cremation'} class="text-white/80 hover:text-accent transition-colors">
+              {language === 'es' ? 'Cremación' : 'Cremation'}
+            </a>
+          </li>
+          <li>
+            <a href={language === 'es' ? '/burial-es' : '/burial'} class="text-white/80 hover:text-accent transition-colors">
+              {language === 'es' ? 'Entierro' : 'Burial'}
             </a>
           </li>
           <li>
             <a href="#contact" class="text-white/80 hover:text-accent transition-colors">
-              Plan Ahead
+              {language === 'es' ? 'Contáctenos' : 'Contact Us'}
             </a>
           </li>
         </ul>
