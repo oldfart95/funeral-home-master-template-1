@@ -25,7 +25,7 @@ const displayCompanyName = getCompanyName();
 
 <Layout title="Veteran Cremation Services - Planning Ahead" pageType="veteran" language="en">
   <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-12 md:py-32 overflow-hidden">
+  <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-8 md:py-32 overflow-hidden">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
       <img 
@@ -39,24 +39,31 @@ const displayCompanyName = getCompanyName();
     
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12 min-h-[400px] md:min-h-[500px]">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-12 min-h-[300px] md:min-h-[500px] py-4 md:py-0">
         <!-- Company Name - Left/Top -->
-        <div class="flex-1">
-          <h1 class="text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+        <div class="flex-1 w-full md:w-auto">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
             {displayCompanyName}
           </h1>
         </div>
         
         <!-- Hero Text - Center Right -->
-        <div class="flex-1 md:flex-none md:w-1/2 lg:w-2/5 text-right md:text-right">
-          <h2 class="text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+        <div class="flex-1 w-full md:flex-none md:w-1/2 lg:w-2/5 text-left md:text-right mt-4 md:mt-0">
+          <h2 class="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-3 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
             Planning Ahead for Peace of Mind
           </h2>
-          <p class="text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-justify md:text-right">
-            Thinking about the end of life can be hard. However, making plans now is one of the best gifts you can give to your family. Providing clarity and peace of mind for your family by documenting your preferences in advance. It also helps them avoid difficult choices during a sad time.
+          <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-left md:text-right">
+            Thinking about the end of life can be hard. However, making plans now is one of the best gifts you can give to your family.
           </p>
         </div>
       </div>
+    </div>
+    
+    <!-- Attribution Footnote -->
+    <div class="absolute bottom-0 right-0 z-10 px-4 sm:px-6 lg:px-8 pb-3 md:pb-4">
+      <p class="text-xs sm:text-sm text-white/80 drop-shadow-md text-right">
+        Provided by Arbaugh-Pearce-Greenisen & Sons
+      </p>
     </div>
   </section>
 
@@ -66,7 +73,7 @@ const displayCompanyName = getCompanyName();
       <div class="max-w-4xl mx-auto">
         <div class="bg-secondary p-6 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
           <p class="text-base md:text-lg text-text leading-relaxed text-center">
-            We offer comprehensive cremation and burial services. Both options are available and equally respected. Choose the service that aligns with your wishes, beliefs, and budget. <strong>Many families choose equally between burial and cremation - we offer comprehensive services for both options.</strong>
+            We offer comprehensive cremation and burial services. Both options are available and equally respected. Choose the service that aligns with your wishes, beliefs, and budget. All arrangements align with your family's wishes.
           </p>
         </div>
       </div>
@@ -82,6 +89,9 @@ const displayCompanyName = getCompanyName();
           <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
             Cremation Options
           </h2>
+          <p class="text-base md:text-lg text-text text-center mb-6 md:mb-8 max-w-3xl mx-auto italic">
+            A modern approach to tradition, offering flexibility and personalized remembrance.
+          </p>
           <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12 max-w-3xl mx-auto">
             There are different ways to handle cremation. You can choose the one that fits your life and your budget.
           </p>
@@ -93,7 +103,7 @@ const displayCompanyName = getCompanyName();
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <h3 class="text-lg md:text-2xl font-heading font-bold text-primary">
-                  1. The Simple Option<br />
+                  The Simple Option<br />
                   <span class="text-base md:text-lg font-normal">(Direct Cremation)</span>
                 </h3>
               </div>
@@ -127,7 +137,7 @@ const displayCompanyName = getCompanyName();
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
                 <h3 class="text-lg md:text-2xl font-heading font-bold text-primary">
-                  2. The Memorial Option<br />
+                  The Memorial Option<br />
                   <span class="text-base md:text-lg font-normal">(Journey of Remembrance)</span>
                 </h3>
               </div>
@@ -157,7 +167,7 @@ const displayCompanyName = getCompanyName();
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                 </svg>
                 <h3 class="text-lg md:text-2xl font-heading font-bold text-primary">
-                  3. The Full Service Option<br />
+                  The Full Service Option<br />
                   <span class="text-base md:text-lg font-normal">(Journey of Life)</span>
                 </h3>
               </div>
@@ -201,12 +211,12 @@ const displayCompanyName = getCompanyName();
     </section>
 
 
-  <!-- Planning & FAQ Section -->
+  <!-- Questions About Planning Section -->
   <section class="py-10 md:py-24 bg-secondary">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
-          Planning & FAQ
+          Questions About Planning
         </h2>
         <div class="grid md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12">
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -214,7 +224,7 @@ const displayCompanyName = getCompanyName();
               It Helps Your Family
             </h3>
             <p class="text-sm md:text-base text-text leading-relaxed">
-              Providing clarity and peace of mind for your family by documenting your preferences in advance. Your family won't have to guess what you wanted.
+              It provides clarity and peace of mind for your family by documenting your preferences in advance. Your family won't have to guess what you wanted.
             </p>
           </div>
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -264,6 +274,10 @@ const displayCompanyName = getCompanyName();
               {
                 question: "Do I need to buy an urn?",
                 answer: "You can choose from many different types of urns. Some are made of wood, metal, or other materials. You can pick one that fits your style."
+              },
+              {
+                question: "If we do not have a cemetery plot or a headstone, can you help us choose one?",
+                answer: "Yes, absolutely. We are here to guide you through these decisions. We maintain a complete directory of local cemeteries and their prices to help you find a peaceful resting place that is right for your family. We can also connect you with trusted local experts to help you design a beautiful headstone or marker. You do not have to make these choices alone; we will ensure you have all the options you need."
               }
             ]}
           />
@@ -272,18 +286,13 @@ const displayCompanyName = getCompanyName();
     </div>
   </section>
 
-  <!-- Cemetery/Headstone Help Section -->
-  <section class="py-10 md:py-24 bg-secondary">
+  <!-- Ongoing Care Section -->
+  <section class="py-10 md:py-16 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <div class="bg-white p-5 md:p-12 rounded-lg shadow-sm border-t-4 border-accent">
-          <h2 class="text-xl md:text-3xl font-heading font-bold text-primary mb-4 md:mb-6">
-            If we do not have a cemetery plot or a headstone, can you help us choose one?
-          </h2>
-          <p class="text-sm md:text-lg text-text leading-relaxed">
-            Yes, absolutely. We are here to guide you through these decisions. We maintain a complete directory of local cemeteries and their prices to help you find a peaceful resting place that is right for your family. We can also connect you with trusted local experts to help you design a beautiful headstone or marker. You do not have to make these choices alone; we will ensure you have all the options you need.
-          </p>
-        </div>
+        <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center">
+          Our care does not end when the service concludes. We are here to assist with the practicalities of loss—from grief resources to assistance with documentation—ensuring you never have to navigate the path forward alone.
+        </p>
       </div>
     </div>
   </section>

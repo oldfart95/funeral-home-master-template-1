@@ -25,7 +25,7 @@ const displayCompanyName = getCompanyName();
 
 <Layout title="Servicios de Cremación Católica - Planificar con Anticipación" pageType="catholic" language="es">
   <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-12 md:py-32 overflow-hidden">
+  <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-8 md:py-32 overflow-hidden">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
       <img 
@@ -39,24 +39,31 @@ const displayCompanyName = getCompanyName();
     
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12 min-h-[400px] md:min-h-[500px]">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-12 min-h-[300px] md:min-h-[500px] py-4 md:py-0">
         <!-- Company Name - Left/Top -->
-        <div class="flex-1">
-          <h1 class="text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+        <div class="flex-1 w-full md:w-auto">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
             {displayCompanyName}
           </h1>
         </div>
         
         <!-- Hero Text - Center Right -->
-        <div class="flex-1 md:flex-none md:w-1/2 lg:w-2/5 text-right md:text-right">
-          <h2 class="text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+        <div class="flex-1 w-full md:flex-none md:w-1/2 lg:w-2/5 text-left md:text-right mt-4 md:mt-0">
+          <h2 class="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-3 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
             Planificar con Anticipación para la Tranquilidad y la Fe
           </h2>
-          <p class="text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-justify md:text-right">
-            Pensar en el final de la vida puede ser difícil. Sin embargo, hacer planes ahora es uno de los mejores regalos que puede darle a su familia. Proporcionando claridad y tranquilidad para su familia al documentar sus preferencias con anticipación. También les ayuda a evitar decisiones difíciles durante un momento triste. Para los católicos, planificar con anticipación también es una forma de mostrar nuestra fe. Creemos que la muerte no es el final. Es un cambio. Creemos que estaremos con Dios.
+          <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-left md:text-right">
+            Pensar en el final de la vida puede ser difícil. Sin embargo, hacer planes ahora es uno de los mejores regalos que puede darle a su familia. Para los católicos, planificar con anticipación también es una forma de mostrar nuestra fe. Creemos que la muerte no es el final. Es un cambio. Creemos que estaremos con Dios.
           </p>
         </div>
       </div>
+    </div>
+    
+    <!-- Attribution Footnote -->
+    <div class="absolute bottom-0 right-0 z-10 px-4 sm:px-6 lg:px-8 pb-3 md:pb-4">
+      <p class="text-xs sm:text-sm text-white/80 drop-shadow-md text-right">
+        Proporcionado por Arbaugh-Pearce-Greenisen & Sons
+      </p>
     </div>
   </section>
 
@@ -66,7 +73,7 @@ const displayCompanyName = getCompanyName();
       <div class="max-w-4xl mx-auto">
         <div class="bg-secondary p-6 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
           <p class="text-base md:text-lg text-text leading-relaxed text-center">
-            Ofrecemos servicios completos de cremación y entierro para familias católicas. Ambas opciones están disponibles y son plenamente respetadas dentro de las enseñanzas de la Iglesia Católica. <strong>Importante:</strong> La Iglesia Católica requiere que todos los restos, ya sean cremados o no, deben ser enterrados en tierra consagrada, como un cementerio católico. Este requisito sagrado honra la dignidad del cuerpo humano y refleja nuestra fe en la resurrección. Ofrecemos servicios completos tanto para cremación como para entierro, asegurando que todos los arreglos se alineen con las enseñanzas católicas y los deseos de su familia.
+            Ofrecemos servicios completos de cremación y entierro para familias católicas. Ambas opciones están disponibles y son plenamente respetadas dentro de las enseñanzas de la Iglesia Católica. <strong>Importante:</strong> La Iglesia Católica requiere que todos los restos, ya sean cremados o no, deben ser enterrados en tierra consagrada, como un cementerio católico. Este requisito sagrado honra la dignidad del cuerpo humano y refleja nuestra fe en la resurrección. Todos los arreglos se alinean con las enseñanzas católicas y los deseos de su familia.
           </p>
         </div>
       </div>
@@ -75,7 +82,7 @@ const displayCompanyName = getCompanyName();
 
   <!-- Service Navigation -->
   <ServiceNav />
-    <!-- The Catholic Church and Cremation -->
+  <!-- La Iglesia Católica y la Cremación -->
     <section class="py-10 md:py-24 bg-secondary">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto">
@@ -148,51 +155,6 @@ const displayCompanyName = getCompanyName();
       </div>
     </section>
 
-    <!-- Preguntas Frecuentes Sobre la Cremación -->
-    <section class="py-10 md:py-24 bg-white">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto">
-          <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-12 text-center">
-            Preguntas Frecuentes Sobre la Cremación
-          </h2>
-          <div class="space-y-4 md:space-y-6">
-            <div class="bg-secondary p-4 md:p-6 rounded-lg">
-              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-                ¿Por qué no puedo guardar las cenizas en casa?
-              </h3>
-              <p class="text-sm md:text-base text-text leading-relaxed">
-                La Iglesia cree que cada persona es parte de una gran familia llamada el "Cuerpo de Cristo". Al colocar los restos en un cementerio, nos aseguramos de que toda la comunidad—no solo su propia familia—pueda recordar y orar por usted durante muchos años por venir.
-              </p>
-            </div>
-            <div class="bg-secondary p-4 md:p-6 rounded-lg">
-              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-                ¿Por qué no se permite esparcir las cenizas?
-              </h3>
-              <p class="text-sm md:text-base text-text leading-relaxed">
-                Esparcir cenizas puede hacer que parezca que el alma de una persona simplemente se ha "desvanecido" o se ha fusionado con la naturaleza. La Iglesia enseña que somos personas únicas que seremos resucitadas por Dios algún día. Mantener las cenizas juntas en un lugar sagrado muestra que creemos que nuestros cuerpos son sagrados.
-              </p>
-            </div>
-            <div class="bg-secondary p-4 md:p-6 rounded-lg">
-              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-                ¿Puedo usar una pequeña parte de mi ser querido en un collar?
-              </h3>
-              <p class="text-sm md:text-base text-text leading-relaxed">
-                No. La Iglesia pide que todos los restos cremados permanezcan juntos. Así como no dividiríamos el cuerpo de una persona después de que fallezca, tratamos sus cenizas con el mismo respeto manteniéndolas en un solo lugar.
-              </p>
-            </div>
-            <div class="bg-secondary p-4 md:p-6 rounded-lg">
-              <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-2 md:mb-3">
-                ¿La Iglesia todavía prefiere un entierro tradicional?
-              </h3>
-              <p class="text-sm md:text-base text-text leading-relaxed">
-                Sí. Aunque la cremación está permitida, la Iglesia todavía prefiere el entierro del cuerpo. Esto sigue el ejemplo de Jesús, que fue colocado en una tumba después de que murió.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Catholic Funeral Options -->
     <section class="py-10 md:py-24 bg-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -200,6 +162,9 @@ const displayCompanyName = getCompanyName();
           <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
             Opciones de Funeral Católico con Cremación
           </h2>
+          <p class="text-base md:text-lg text-text text-center mb-6 md:mb-8 max-w-3xl mx-auto italic">
+            Un enfoque moderno a la tradición, ofreciendo flexibilidad y remembranza personalizada.
+          </p>
           <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12">
             Hay tres formas principales de tener un funeral católico con cremación. Puede elegir la que se ajuste a sus necesidades, pero la Iglesia tiene una opción favorita.
           </p>
@@ -211,7 +176,7 @@ const displayCompanyName = getCompanyName();
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                 </svg>
                 <h3 class="text-lg md:text-2xl font-heading font-bold text-primary">
-                  Opción 1: La Elección Tradicional<br />
+                  La Elección Tradicional<br />
                   <span class="text-base md:text-lg font-normal text-accent">(Preferida)</span>
                 </h3>
               </div>
@@ -233,7 +198,7 @@ const displayCompanyName = getCompanyName();
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
                 <h3 class="text-lg md:text-2xl font-heading font-bold text-primary">
-                  Opción 2: La Elección Conmemorativa
+                  La Elección Conmemorativa
                 </h3>
               </div>
               <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
@@ -253,7 +218,7 @@ const displayCompanyName = getCompanyName();
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <h3 class="text-lg md:text-2xl font-heading font-bold text-primary">
-                  Opción 3: La Elección Directa
+                  La Elección Directa
                 </h3>
               </div>
               <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
@@ -291,12 +256,12 @@ const displayCompanyName = getCompanyName();
       </div>
     </section>
 
-    <!-- Preguntas Comunes Sobre la Cremación -->
+    <!-- Preguntas Frecuentes Sobre la Cremación -->
     <section class="py-10 md:py-24 bg-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto">
           <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-12 text-center">
-            Preguntas Comunes Sobre la Cremación
+            Preguntas Frecuentes Sobre la Cremación
           </h2>
           <div class="space-y-4 md:space-y-6">
             <div class="bg-secondary p-4 md:p-6 rounded-lg">
@@ -319,12 +284,12 @@ const displayCompanyName = getCompanyName();
         </div>
       </div>
     </section>
-  <!-- Planning & FAQ Section -->
+  <!-- Questions About Planning Section -->
   <section class="py-10 md:py-24 bg-secondary">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
-          Planificación y Preguntas Frecuentes
+          Preguntas Sobre la Planificación
         </h2>
         <div class="grid md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12">
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -332,7 +297,7 @@ const displayCompanyName = getCompanyName();
               Ayuda a Su Familia
             </h3>
             <p class="text-sm md:text-base text-text leading-relaxed">
-              Proporcionando claridad y tranquilidad para su familia al documentar sus preferencias con anticipación. Su familia no tendrá que adivinar lo que usted quería. Puede elegir las canciones y oraciones para su Misa.
+              Proporciona claridad y tranquilidad para su familia al documentar sus preferencias con anticipación. Su familia no tendrá que adivinar lo que usted quería.
             </p>
           </div>
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -372,16 +337,8 @@ const displayCompanyName = getCompanyName();
                 answer: "Puede haberlo, pero la funeraria ayudará. Guiarán a su familia a través de cada paso. Ayudan a notificar al Seguro Social y verificar cualquier beneficio de Veterano o dinero del seguro."
               },
               {
-                question: "¿Mi familia puede verme antes de que sea cremado?",
-                answer: "Sí, en la mayoría de los casos. Si su familia quiere verlo una última vez, la funeraria puede prepararlo para una vista privada. Esto generalmente necesita suceder dentro de unos días. La Iglesia fomenta esto porque ayuda a su familia a despedirse."
-              },
-              {
-                question: "¿Necesito comprar una urna?",
-                answer: "Sí. Necesitará un contenedor para las cenizas. Esto se llama urna. Puede elegir entre muchos tipos diferentes. Algunas están hechas de madera, metal o piedra. La urna debe ser respetuosa y digna. No debe ser un juguete o un artículo de broma. Debe ser digna de contener a una persona santa."
-              },
-              {
-                question: "Si no tenemos una parcela de cementerio, ¿puede ayudarnos a elegir una?",
-                answer: "Sí, absolutamente. Estamos aquí para guiarlo. Tenemos una lista de cementerios católicos locales en Youngstown, Akron, Canton y Cleveland. Podemos ayudarlo a encontrar un lugar de descanso pacífico. También podemos ayudarlo a encontrar una lápida o marcador."
+                question: "Si no tenemos una parcela de cementerio o una lápida, ¿puede ayudarnos a elegir una?",
+                answer: "Sí, absolutamente. Estamos aquí para guiarlo a través de estas decisiones. Mantenemos un directorio completo de cementerios católicos locales y sus precios para ayudarlo a encontrar un lugar de descanso pacífico que sea adecuado para su familia. También podemos conectarlo con expertos locales de confianza para ayudarlo a diseñar una hermosa lápida o marcador. No tiene que tomar estas decisiones solo; nos aseguraremos de que tenga todas las opciones que necesita."
               },
               {
                 question: "¿La Iglesia permite el Entierro \"Verde\" o Natural?",
@@ -398,18 +355,13 @@ const displayCompanyName = getCompanyName();
     </div>
   </section>
 
-  <!-- Cemetery/Headstone Help Section -->
-  <section class="py-10 md:py-24 bg-secondary">
+  <!-- Ongoing Care Section -->
+  <section class="py-10 md:py-16 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <div class="bg-white p-5 md:p-12 rounded-lg shadow-sm border-t-4 border-accent">
-          <h2 class="text-xl md:text-3xl font-heading font-bold text-primary mb-4 md:mb-6">
-            Si no tenemos una parcela de cementerio o una lápida, ¿puede ayudarnos a elegir una?
-          </h2>
-          <p class="text-sm md:text-lg text-text leading-relaxed">
-            Sí, absolutamente. Estamos aquí para guiarlo a través de estas decisiones. Mantenemos un directorio completo de cementerios católicos locales y sus precios para ayudarlo a encontrar un lugar de descanso pacífico que sea adecuado para su familia. También podemos conectarlo con expertos locales de confianza para ayudarlo a diseñar una hermosa lápida o marcador. No tiene que tomar estas decisiones solo; nos aseguraremos de que tenga todas las opciones que necesita.
-          </p>
-        </div>
+        <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center">
+          Nuestro cuidado no termina cuando concluye el servicio. Estamos aquí para ayudar con las practicidades de la pérdida—desde recursos de duelo hasta asistencia con documentación—asegurando que nunca tenga que navegar el camino hacia adelante solo.
+        </p>
       </div>
     </div>
   </section>

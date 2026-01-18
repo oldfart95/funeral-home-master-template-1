@@ -41,13 +41,7 @@ class MockEmailTransporter implements EmailTransporter {
     text: string;
     html?: string;
   }): Promise<{ success: boolean; messageId?: string }> {
-    // Mock implementation - logs to console
-    console.log('📧 Mock Email Sent:', {
-      from: options.from,
-      to: options.to,
-      subject: options.subject,
-    });
-    
+    // Mock implementation
     // Simulate async operation
     await new Promise((resolve) => setTimeout(resolve, 100));
     
@@ -202,8 +196,6 @@ ${message}
     );
     
   } catch (error) {
-    console.error('Contact form error:', error);
-    
     return new Response(
       JSON.stringify({ 
         error: 'An error occurred while processing your request. Please try again later.' 

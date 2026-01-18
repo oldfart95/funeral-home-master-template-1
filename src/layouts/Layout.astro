@@ -2,7 +2,6 @@
 import siteDetails from '../config/siteDetails';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import MarketingModal from '../components/MarketingModal.astro';
 
 interface Props {
   title?: string;
@@ -81,6 +80,13 @@ function getAlternateUrls(): Array<{ lang: string; url: string }> {
 }
 
 const alternateUrls = getAlternateUrls();
+
+// Determine favicon based on page type
+const faviconPath = detectedPageType === 'veteran' 
+  ? '/images/VeteranLogo.webp'
+  : detectedPageType === 'catholic'
+  ? '/images/CatholicLogo.webp'
+  : '/images/AffCareLogo.webp';
 ---
 
 <!doctype html>
@@ -89,7 +95,8 @@ const alternateUrls = getAlternateUrls();
     <meta charset="UTF-8" />
     <meta name="description" content={pageDescription} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/webp" href={faviconPath} />
+    <link rel="apple-touch-icon" href={faviconPath} />
     <meta name="generator" content={Astro.generator} />
     
     <!-- SEO: hreflang tags for language alternates -->
@@ -124,15 +131,6 @@ const alternateUrls = getAlternateUrls();
       <slot />
     </main>
     <Footer pageType={detectedPageType} language={detectedLanguage} />
-    {siteDetails.marketingModal.enabled && (
-      <MarketingModal
-        title={siteDetails.marketingModal.title}
-        bodyText={siteDetails.marketingModal.bodyText}
-        ctaLink={siteDetails.marketingModal.ctaLink}
-        ctaText={siteDetails.marketingModal.ctaText}
-        showAfterDays={siteDetails.marketingModal.showAfterDays}
-      />
-    )}
     
     <style>
       /* Print styles - hide navigation and footer */

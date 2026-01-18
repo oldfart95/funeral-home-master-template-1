@@ -6,9 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     callButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Log to console for testing
-            console.log('Call button clicked - sending notification...');
-
             // Replace this URL with your formsubmit.co endpoint
             // We use 'no-cors' mode to just fire and forget without waiting for a complex response
             // The 'message' field tells you what happened
@@ -24,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     _subject: "URGENT: Call Button Clicked on Website",
                     message: "Someone clicked the 'Call Us' button on the website. Be ready for an incoming call."
                 })
-            }).catch(err => console.error("Tracking error:", err));
+            }).catch(() => {});
             
             // The phone dialer will open automatically because of href="tel:..."
         });

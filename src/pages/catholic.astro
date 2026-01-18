@@ -25,7 +25,7 @@ const displayCompanyName = getCompanyName();
 
 <Layout title="Catholic Services - Planning Ahead" pageType="catholic" language="en">
   <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-12 md:py-32 overflow-hidden">
+  <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-8 md:py-32 overflow-hidden">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
       <img 
@@ -39,118 +39,53 @@ const displayCompanyName = getCompanyName();
     
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12 min-h-[400px] md:min-h-[500px]">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-12 min-h-[300px] md:min-h-[500px] py-4 md:py-0">
         <!-- Company Name - Left/Top -->
-        <div class="flex-1">
-          <h1 class="text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+        <div class="flex-1 w-full md:w-auto">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
             {displayCompanyName}
           </h1>
         </div>
         
         <!-- Hero Text - Center Right -->
-        <div class="flex-1 md:flex-none md:w-1/2 lg:w-2/5 text-right md:text-right">
-          <h2 class="text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+        <div class="flex-1 w-full md:flex-none md:w-1/2 lg:w-2/5 text-left md:text-right mt-4 md:mt-0">
+          <h2 class="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-3 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
             Planning Ahead for Peace of Mind and Faith
           </h2>
-          <p class="text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-justify md:text-right">
-            Thinking about the end of life can be hard. However, making plans now is one of the best gifts you can give to your family. Providing clarity and peace of mind for your family by documenting your preferences in advance. It also helps them avoid difficult choices during a sad time. For Catholics, planning ahead is also a way to show our faith. We believe that death is not the end. It is a change. We believe that we will be with God.
+          <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-left md:text-right">
+            Thinking about the end of life can be hard. However, making plans now is one of the best gifts you can give to your family. For Catholics, planning ahead is also a way to show our faith. We believe that death is not the end. It is a change. We believe that we will be with God.
           </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Attribution Footnote -->
+    <div class="absolute bottom-0 right-0 z-10 px-4 sm:px-6 lg:px-8 pb-3 md:pb-4">
+      <p class="text-xs sm:text-sm text-white/80 drop-shadow-md text-right">
+        Provided by Arbaugh-Pearce-Greenisen & Sons
+      </p>
+    </div>
+  </section>
+
+  <!-- Our Story Section -->
+  <section class="py-10 md:py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center">
+          Our family has been a steady hand for our community for over 120 years. We believe that every life tells a unique story, and our role is to ensure that story is told with dignity, respect, and a meticulous attention to detail.
+        </p>
+        <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center mt-4 md:mt-6">
+          We understand the traditions and values that define our community. From the first call to the final farewell, we serve as more than just directors—we are neighbors caring for neighbors.
+        </p>
+        <!-- Decorative Line -->
+        <div class="flex justify-center mt-6 md:mt-8 mb-6 md:mb-8">
+          <div class="w-1/2 max-w-md h-1 bg-text/40"></div>
         </div>
       </div>
     </div>
   </section>
 
   <ServiceButtons />
-
-  <!-- Planning Ahead Intro -->
-  <section class="py-10 md:py-24 bg-secondary">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-4 md:mb-6 text-center">
-          Planning Ahead for Peace of Mind and Faith
-        </h2>
-        <div class="bg-white p-5 md:p-8 rounded-lg shadow-sm">
-          <p class="text-sm md:text-base text-text leading-relaxed mb-4">
-            Thinking about the end of life can be hard. However, making plans now is one of the best gifts you can give to your family. Providing clarity and peace of mind for your family by documenting your preferences in advance. It also helps them avoid difficult choices during a sad time. For Catholics, planning ahead is also a way to show our faith. We believe that death is not the end. It is a change. We believe that we will be with God.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- The Catholic Church and Cremation -->
-  <section class="py-10 md:py-24 bg-secondary">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
-          The Catholic Church and Cremation
-        </h2>
-        <div class="bg-white p-5 md:p-8 rounded-lg shadow-sm space-y-4">
-          <p class="text-sm md:text-base text-text leading-relaxed">
-            For a long time, the Catholic Church did not allow cremation. In 1963, the Church changed this rule. Now, Catholics are allowed to be cremated. However, the Church still prefers that the body be buried. This is because Jesus was buried in a tomb. We want to follow His example.
-          </p>
-          <p class="text-sm md:text-base text-text leading-relaxed">
-            Even though cremation is allowed, there are special rules we must follow. These rules show respect for the human body. Our bodies are holy. They are "temples of the Holy Spirit." We believe that one day, God will raise our bodies up again. Because of this, we must treat ashes with the same respect as a full body.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Important Rules for Catholic Cremation -->
-  <section class="py-10 md:py-24 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
-          Important Rules for Catholic Cremation
-        </h2>
-        <div class="bg-secondary p-5 md:p-8 rounded-lg shadow-sm">
-          <p class="text-sm md:text-base text-text leading-relaxed mb-6">
-            If you choose cremation, the Dioceses of Youngstown, Cleveland, and Pittsburgh all agree on these important rules:
-          </p>
-          <ol class="space-y-4 text-sm md:text-base text-text">
-            <li class="flex items-start">
-              <span class="font-bold text-primary mr-3">1.</span>
-              <span><strong>The Ashes Must Be Buried:</strong> You cannot keep the ashes on a shelf at home. You cannot keep them in a closet. The ashes must be buried in a grave or placed in a special wall called a columbarium. This should happen soon after the funeral.</span>
-            </li>
-            <li class="flex items-start">
-              <span class="font-bold text-primary mr-3">2.</span>
-              <span><strong>Sacred Ground:</strong> The Church wants us to be buried in a sacred place. A Catholic cemetery is the best place. This is holy ground. It ensures that you are not forgotten. It gives your family a place to visit and pray for you.</span>
-            </li>
-            <li class="flex items-start">
-              <span class="font-bold text-primary mr-3">3.</span>
-              <span><strong>No Scattering:</strong> You are not allowed to scatter ashes. You cannot scatter them in the wind, on the ground, or in the water.</span>
-            </li>
-            <li class="flex items-start">
-              <span class="font-bold text-primary mr-3">4.</span>
-              <span><strong>Do Not Divide the Ashes:</strong> All the ashes must stay together. You cannot split them up among different family members. You cannot put them into jewelry, like necklaces or rings. You cannot put them into art or other objects.</span>
-            </li>
-            <li class="flex items-start">
-              <span class="font-bold text-primary mr-3">5.</span>
-              <span><strong>Burial at Sea:</strong> Scattering ashes on top of the water is not allowed. However, you can bury the ashes at sea if they are in a heavy container that sinks. This acts like a burial in the ground.</span>
-            </li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Do We Follow These Rules -->
-  <section class="py-10 md:py-24 bg-secondary">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
-          Why Do We Follow These Rules?
-        </h2>
-        <div class="bg-white p-5 md:p-8 rounded-lg shadow-sm">
-          <p class="text-sm md:text-base text-text leading-relaxed">
-            These rules might seem strict, but they are there for a reason. They remind us that we belong to God. When we are buried in a cemetery, we are resting with other members of our Church family. We are waiting together for the day when Jesus returns. Keeping the ashes together shows that we are one whole person. We do not want to be scattered or separated. We want to rest in peace in a holy place.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Catholic Funeral Options -->
   <section class="py-10 md:py-24 bg-white">
@@ -229,96 +164,20 @@ const displayCompanyName = getCompanyName();
     </div>
   </section>
 
-  <!-- Planning & FAQ Section -->
-  <section class="py-10 md:py-24 bg-secondary">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
-          Planning & FAQ
-        </h2>
-        <div class="grid md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12">
-          <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-3 md:mb-4">
-              It Helps Your Family
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              Providing clarity and peace of mind for your family by documenting your preferences in advance. Your family won't have to guess what you wanted. You can choose the songs and prayers for your Mass.
-            </p>
-          </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-3 md:mb-4">
-              It Saves Money
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              Pre-funding options to lock in today's rates. This protects your family from rising costs in the future. The money is kept safe in a special account until it is needed.
-            </p>
-          </div>
-          <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
-            <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-3 md:mb-4">
-              It is Your Choice
-            </h3>
-            <p class="text-sm md:text-base text-text leading-relaxed">
-              You get to decide exactly how you want to be remembered. You can make sure your funeral follows the rules of the Catholic Church.
-            </p>
-          </div>
-        </div>
-        <div class="bg-white p-4 md:p-8 rounded-lg shadow-sm">
-          <h3 class="text-xl md:text-2xl font-heading font-bold text-primary mb-6 text-center">
-            Common Questions About Planning Ahead
-          </h3>
-          <Accordion 
-            language="en"
-            items={[
-              {
-                question: "Can I pay for everything before I die?",
-                answer: "Yes. You can put money into a safe account. This is a very caring thing to do because it takes the stress off your family later. We can help you set up a life insurance policy for this."
-              },
-              {
-                question: "What if I die while I am traveling?",
-                answer: "If you are away from home when you pass away, your family just needs to call the funeral home. They will talk to the local authorities and bring you back home."
-              },
-              {
-                question: "Is there a lot of paperwork?",
-                answer: "There can be, but the funeral home will help. They will guide your family through every step. They help notify Social Security and check for any Veteran benefits or insurance money."
-              },
-              {
-                question: "Can my family see me before I am cremated?",
-                answer: "Yes, in most cases. If your family wants to see you one last time, the funeral home can prepare you for a private viewing. This usually needs to happen within a few days. The Church encourages this because it helps your family say goodbye."
-              },
-              {
-                question: "Do I need to buy an urn?",
-                answer: "Yes. You will need a container for the ashes. This is called an urn. You can choose from many different types. Some are made of wood, metal, or stone. The urn should be respectful and dignified. It should not be a toy or a joke item. It should be worthy of holding a holy person."
-              },
-              {
-                question: "If we do not have a cemetery plot, can you help us choose one?",
-                answer: "Yes, absolutely. We are here to guide you. We have a list of local Catholic cemeteries in Youngstown, Akron, Canton, and Cleveland. We can help you find a peaceful resting place. We can also help you find a headstone or marker."
-              },
-              {
-                question: "Does the Church allow \"Green\" or Natural Burial?",
-                answer: "Yes. Some Catholic cemeteries offer natural burial. This means the body is buried in a simple way without strong chemicals. Ask us if this is available in your area."
-              },
-              {
-                question: "Can non-Catholics be buried in a Catholic cemetery?",
-                answer: "Usually, yes. If you have a family member who is not Catholic, they can often be buried with you. The Church believes that families should stay together."
-              }
-            ]}
-          />
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- General Burial Options -->
   <section class="py-10 md:py-24 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
+      <div class="max-w-7xl mx-auto">
         <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
           General Burial Options
         </h2>
+        <p class="text-base md:text-lg text-text text-center mb-6 md:mb-8 max-w-3xl mx-auto italic">
+          Honoring the timeless dignity of a final resting place with grace and reverence.
+        </p>
         <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12">
           If you decide you do not want cremation, there are affordable choices for regular burial too.
         </p>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
           <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
             <div class="flex items-center gap-2 mb-3">
               <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -328,8 +187,11 @@ const displayCompanyName = getCompanyName();
                 Traditional Farewell
               </h3>
             </div>
-            <p class="text-sm md:text-base text-text">
-              This includes getting the body ready, a visitation, a funeral Mass, and a ride to the cemetery.
+            <p class="text-[10px] md:text-xs font-semibold text-primary mb-2">
+              The Classic Tribute
+            </p>
+            <p class="text-xs md:text-sm text-text leading-relaxed">
+              This is a full service for families who want to follow time-honored traditions. It includes a visitation for friends to gather, a formal funeral service, and a procession to the cemetery. We handle every detail to ensure a respectful and complete goodbye.
             </p>
           </div>
           <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -341,8 +203,11 @@ const displayCompanyName = getCompanyName();
                 Simple Farewell
               </h3>
             </div>
-            <p class="text-sm md:text-base text-text">
-              This is like the traditional one, but the visitation time is shorter.
+            <p class="text-[10px] md:text-xs font-semibold text-primary mb-2">
+              A Focused Remembrance
+            </p>
+            <p class="text-xs md:text-sm text-text leading-relaxed">
+              This option offers a beautiful service in a shorter timeframe. It includes a time for family and friends to share memories followed by a meaningful ceremony. It is designed for those who want a professional and dignified day focused on the essentials of saying goodbye.
             </p>
           </div>
           <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -354,8 +219,11 @@ const displayCompanyName = getCompanyName();
                 Graveside Service
               </h3>
             </div>
-            <p class="text-sm md:text-base text-text">
-              This is a service held right at the cemetery.
+            <p class="text-[10px] md:text-xs font-semibold text-primary mb-2">
+              A Quiet Outdoor Tribute
+            </p>
+            <p class="text-xs md:text-sm text-text leading-relaxed">
+              This service takes place entirely at the cemetery. It is a calm and elegant way to honor your loved one under the open sky. We coordinate everything at the resting place, allowing you to focus on a quiet moment of reflection with those closest to you.
             </p>
           </div>
           <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -367,10 +235,86 @@ const displayCompanyName = getCompanyName();
                 Immediate Burial
               </h3>
             </div>
-            <p class="text-sm md:text-base text-text">
-              This is burial with no public service or visitation.
+            <p class="text-[10px] md:text-xs font-semibold text-primary mb-2">
+              A Simple, Private Path
+            </p>
+            <p class="text-xs md:text-sm text-text leading-relaxed">
+              This is our most straightforward burial choice. It is a modest option for families who do not wish to have a public ceremony. We provide professional care and transportation to ensure a private and dignified burial takes place promptly.
             </p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Catholic Church and Cremation -->
+  <section class="py-10 md:py-24 bg-secondary">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
+          The Catholic Church and Cremation
+        </h2>
+        <div class="bg-white p-5 md:p-8 rounded-lg shadow-sm space-y-4">
+          <p class="text-sm md:text-base text-text leading-relaxed">
+            For a long time, the Catholic Church did not allow cremation. In 1963, the Church changed this rule. Now, Catholics are allowed to be cremated. However, the Church still prefers that the body be buried. This is because Jesus was buried in a tomb. We want to follow His example.
+          </p>
+          <p class="text-sm md:text-base text-text leading-relaxed">
+            Even though cremation is allowed, there are special rules we must follow. These rules show respect for the human body. Our bodies are holy. They are "temples of the Holy Spirit." We believe that one day, God will raise our bodies up again. Because of this, we must treat ashes with the same respect as a full body.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Important Rules for Catholic Cremation -->
+  <section class="py-10 md:py-24 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
+          Important Rules for Catholic Cremation
+        </h2>
+        <div class="bg-secondary p-5 md:p-8 rounded-lg shadow-sm">
+          <p class="text-sm md:text-base text-text leading-relaxed mb-6">
+            If you choose cremation, the Dioceses of Youngstown, Cleveland, and Pittsburgh all agree on these important rules:
+          </p>
+          <ol class="space-y-4 text-sm md:text-base text-text">
+            <li class="flex items-start">
+              <span class="font-bold text-primary mr-3">1.</span>
+              <span><strong>The Ashes Must Be Buried:</strong> You cannot keep the ashes on a shelf at home. You cannot keep them in a closet. The ashes must be buried in a grave or placed in a special wall called a columbarium. This should happen soon after the funeral.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="font-bold text-primary mr-3">2.</span>
+              <span><strong>Sacred Ground:</strong> The Church wants us to be buried in a sacred place. A Catholic cemetery is the best place. This is holy ground. It ensures that you are not forgotten. It gives your family a place to visit and pray for you.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="font-bold text-primary mr-3">3.</span>
+              <span><strong>No Scattering:</strong> You are not allowed to scatter ashes. You cannot scatter them in the wind, on the ground, or in the water.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="font-bold text-primary mr-3">4.</span>
+              <span><strong>Do Not Divide the Ashes:</strong> All the ashes must stay together. You cannot split them up among different family members. You cannot put them into jewelry, like necklaces or rings. You cannot put them into art or other objects.</span>
+            </li>
+            <li class="flex items-start">
+              <span class="font-bold text-primary mr-3">5.</span>
+              <span><strong>Burial at Sea:</strong> Scattering ashes on top of the water is not allowed. However, you can bury the ashes at sea if they are in a heavy container that sinks. This acts like a burial in the ground.</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Do We Follow These Rules -->
+  <section class="py-10 md:py-24 bg-secondary">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
+          Why Do We Follow These Rules?
+        </h2>
+        <div class="bg-white p-5 md:p-8 rounded-lg shadow-sm">
+          <p class="text-sm md:text-base text-text leading-relaxed">
+            These rules might seem strict, but they are there for a reason. They remind us that we belong to God. When we are buried in a cemetery, we are resting with other members of our Church family. We are waiting together for the day when Jesus returns. Keeping the ashes together shows that we are one whole person. We do not want to be scattered or separated. We want to rest in peace in a holy place.
+          </p>
         </div>
       </div>
     </div>
@@ -413,6 +357,17 @@ const displayCompanyName = getCompanyName();
             Note: Individual parishes often have their own specific planning sheets for readings and music. Please check with your specific church for those details.
           </p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ongoing Care Section -->
+  <section class="py-10 md:py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center">
+          Our care does not end when the service concludes. We are here to assist with the practicalities of loss—from grief resources to assistance with documentation—ensuring you never have to navigate the path forward alone.
+        </p>
       </div>
     </div>
   </section>

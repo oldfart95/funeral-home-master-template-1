@@ -25,40 +25,46 @@ const logoAlt = pageType === 'catholic'
   : pageType === 'veteran'
   ? 'Veteran Services'
   : (language === 'es' ? 'Cuidado AFF' : 'AFF Care');
+
+// Generate cremation link based on pageType and language
+function getCremationLink(): string {
+  const base = pageType === 'catholic' 
+    ? '/catholic-cremation'
+    : pageType === 'veteran'
+    ? '/veteran-cremation'
+    : '/cremation';
+  
+  return language === 'es' ? `${base}-es` : base;
+}
+
+// Generate burial link based on pageType and language
+function getBurialLink(): string {
+  const base = pageType === 'catholic'
+    ? '/catholic-burial'
+    : pageType === 'veteran'
+    ? '/veteran-burial'
+    : '/burial';
+  
+  return language === 'es' ? `${base}-es` : base;
+}
+
+const cremationLink = getCremationLink();
+const burialLink = getBurialLink();
 ---
 
 <footer class="bg-primary text-white py-12 md:py-16 mt-auto">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid md:grid-cols-3 gap-8 mb-8">
-      <div>
-        <h3 class="text-xl font-heading font-bold mb-4 text-white">Contact Information</h3>
-        <p class="mb-2 text-white/90">Available 24/7</p>
-        <p class="mb-2">
-          <a href={`tel:${siteDetails.phone.replace(/\D/g, '')}`} class="text-white hover:text-accent transition text-lg font-semibold">
-            {siteDetails.phone}
-          </a>
-        </p>
-        {siteDetails.address.street && (
-          <p class="text-white/70 text-sm mt-2">
-            {siteDetails.address.street}<br />
-            {siteDetails.address.city}, {siteDetails.address.state} {siteDetails.address.zip}
-          </p>
-        )}
-        <p class="text-white/60 text-sm mt-4">
-          Operated by {siteDetails.companyName}
-        </p>
-      </div>
-      
+    <div class="mb-8">
       <div>
         <h3 class="text-xl font-heading font-bold mb-4 text-white">Quick Links</h3>
         <ul class="space-y-2">
           <li>
-            <a href={language === 'es' ? '/cremation-es' : '/cremation'} class="text-white/80 hover:text-accent transition-colors">
+            <a href={cremationLink} class="text-white/80 hover:text-accent transition-colors">
               {language === 'es' ? 'Cremación' : 'Cremation'}
             </a>
           </li>
           <li>
-            <a href={language === 'es' ? '/burial-es' : '/burial'} class="text-white/80 hover:text-accent transition-colors">
+            <a href={burialLink} class="text-white/80 hover:text-accent transition-colors">
               {language === 'es' ? 'Entierro' : 'Burial'}
             </a>
           </li>
@@ -68,52 +74,6 @@ const logoAlt = pageType === 'catholic'
             </a>
           </li>
         </ul>
-      </div>
-      
-      <div>
-        <h3 class="text-xl font-heading font-bold mb-4 text-white">Connect</h3>
-        {Object.keys(siteDetails.socialLinks).length > 0 ? (
-          <ul class="space-y-2 text-white/80">
-            {siteDetails.socialLinks.facebook && (
-              <li>
-                <a href={siteDetails.socialLinks.facebook} target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors">
-                  Facebook
-                </a>
-              </li>
-            )}
-            {siteDetails.socialLinks.twitter && (
-              <li>
-                <a href={siteDetails.socialLinks.twitter} target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors">
-                  Twitter
-                </a>
-              </li>
-            )}
-            {siteDetails.socialLinks.linkedin && (
-              <li>
-                <a href={siteDetails.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors">
-                  LinkedIn
-                </a>
-              </li>
-            )}
-            {siteDetails.socialLinks.instagram && (
-              <li>
-                <a href={siteDetails.socialLinks.instagram} target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors">
-                  Instagram
-                </a>
-              </li>
-            )}
-          </ul>
-        ) : (
-          <p class="text-white/60 text-sm">Follow us on social media</p>
-        )}
-        <!-- Logo - Desktop Only -->
-        <div class="hidden md:block mt-6">
-          <img 
-            src={logoPath} 
-            alt={logoAlt} 
-            class="h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
-          />
-        </div>
       </div>
     </div>
     

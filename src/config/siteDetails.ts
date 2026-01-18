@@ -27,15 +27,6 @@ export interface SocialLinks {
   instagram?: string;
 }
 
-export interface MarketingModal {
-  enabled: boolean;
-  title: string;
-  bodyText: string;
-  ctaLink: string;
-  ctaText: string;
-  showAfterDays: number; // Days before showing again
-}
-
 export interface SiteDetails {
   companyName: string;
   phone: string;
@@ -43,7 +34,6 @@ export interface SiteDetails {
   emailFrom: string;
   themeColors: ThemeColors;
   socialLinks: SocialLinks;
-  marketingModal: MarketingModal;
 }
 
 const siteDetails: SiteDetails = {
@@ -65,14 +55,6 @@ const siteDetails: SiteDetails = {
   },
   socialLinks: {
     // Add social media links when available
-  },
-  marketingModal: {
-    enabled: false,
-    title: "Welcome",
-    bodyText: "Help us personalize your experience",
-    ctaLink: "#contact",
-    ctaText: "Get Started",
-    showAfterDays: 7, // Show again after 7 days
   },
 };
 

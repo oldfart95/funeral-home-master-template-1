@@ -25,7 +25,7 @@ const displayCompanyName = getCompanyName();
 
 <Layout title="Catholic Burial Services - Planning Ahead" pageType="catholic" language="en">
   <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-12 md:py-32 overflow-hidden">
+  <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-8 md:py-32 overflow-hidden">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
       <img 
@@ -39,24 +39,31 @@ const displayCompanyName = getCompanyName();
     
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12 min-h-[400px] md:min-h-[500px]">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-12 min-h-[300px] md:min-h-[500px] py-4 md:py-0">
         <!-- Company Name - Left/Top -->
-        <div class="flex-1">
-          <h1 class="text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+        <div class="flex-1 w-full md:w-auto">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
             {displayCompanyName}
           </h1>
         </div>
         
         <!-- Hero Text - Center Right -->
-        <div class="flex-1 md:flex-none md:w-1/2 lg:w-2/5 text-right md:text-right">
-          <h2 class="text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+        <div class="flex-1 w-full md:flex-none md:w-1/2 lg:w-2/5 text-left md:text-right mt-4 md:mt-0">
+          <h2 class="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-3 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
             Planning Ahead for Peace of Mind and Faith
           </h2>
-          <p class="text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-justify md:text-right">
-            Thinking about the end of life can be hard. However, making plans now is one of the best gifts you can give to your family. Providing clarity and peace of mind for your family by documenting your preferences in advance. It also helps them avoid difficult choices during a sad time. For Catholics, planning ahead is also a way to show our faith. We believe that death is not the end. It is a change. We believe that we will be with God.
+          <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-left md:text-right">
+            Thinking about the end of life can be hard. However, making plans now is one of the best gifts you can give to your family. For Catholics, planning ahead is also a way to show our faith. We believe that death is not the end. It is a change. We believe that we will be with God.
           </p>
         </div>
       </div>
+    </div>
+    
+    <!-- Attribution Footnote -->
+    <div class="absolute bottom-0 right-0 z-10 px-4 sm:px-6 lg:px-8 pb-3 md:pb-4">
+      <p class="text-xs sm:text-sm text-white/80 drop-shadow-md text-right">
+        Provided by Arbaugh-Pearce-Greenisen & Sons
+      </p>
     </div>
   </section>
 
@@ -155,14 +162,17 @@ const displayCompanyName = getCompanyName();
     <!-- Burial Options Section -->
     <section class="py-10 md:py-24 bg-secondary">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-7xl mx-auto">
           <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
             General Burial Options
           </h2>
+          <p class="text-base md:text-lg text-text text-center mb-6 md:mb-8 max-w-3xl mx-auto italic">
+            Honoring the timeless dignity of a final resting place with grace and reverence.
+          </p>
           <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12">
             The Catholic Church prefers burial of the body, as it follows the example of Jesus who was buried in a tomb. There are affordable choices for Catholic burial.
           </p>
-          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
             <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
               <div class="flex items-center gap-2 mb-3">
                 <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -172,8 +182,11 @@ const displayCompanyName = getCompanyName();
                   Traditional Farewell
                 </h3>
               </div>
-              <p class="text-sm md:text-base text-text">
-                This includes getting the body ready, a visitation, a funeral Mass, and a ride to the cemetery.
+              <p class="text-[10px] md:text-xs font-semibold text-primary mb-2">
+                The Classic Tribute
+              </p>
+              <p class="text-xs md:text-sm text-text leading-relaxed">
+                This is a full service for families who want to follow time-honored traditions. It includes a visitation for friends to gather, a formal funeral service, and a procession to the cemetery. We handle every detail to ensure a respectful and complete goodbye.
               </p>
             </div>
             <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -185,8 +198,11 @@ const displayCompanyName = getCompanyName();
                   Simple Farewell
                 </h3>
               </div>
-              <p class="text-sm md:text-base text-text">
-                This is like the traditional one, but the visitation time is shorter.
+              <p class="text-[10px] md:text-xs font-semibold text-primary mb-2">
+                A Focused Remembrance
+              </p>
+              <p class="text-xs md:text-sm text-text leading-relaxed">
+                This option offers a beautiful service in a shorter timeframe. It includes a time for family and friends to share memories followed by a meaningful ceremony. It is designed for those who want a professional and dignified day focused on the essentials of saying goodbye.
               </p>
             </div>
             <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -198,8 +214,11 @@ const displayCompanyName = getCompanyName();
                   Graveside Service
                 </h3>
               </div>
-              <p class="text-sm md:text-base text-text">
-                This is a service held right at the cemetery.
+              <p class="text-[10px] md:text-xs font-semibold text-primary mb-2">
+                A Quiet Outdoor Tribute
+              </p>
+              <p class="text-xs md:text-sm text-text leading-relaxed">
+                This service takes place entirely at the cemetery. It is a calm and elegant way to honor your loved one under the open sky. We coordinate everything at the resting place, allowing you to focus on a quiet moment of reflection with those closest to you.
               </p>
             </div>
             <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -211,8 +230,11 @@ const displayCompanyName = getCompanyName();
                   Immediate Burial
                 </h3>
               </div>
-              <p class="text-sm md:text-base text-text">
-                This is burial with no public service or visitation.
+              <p class="text-[10px] md:text-xs font-semibold text-primary mb-2">
+                A Simple, Private Path
+              </p>
+              <p class="text-xs md:text-sm text-text leading-relaxed">
+                This is our most straightforward burial choice. It is a modest option for families who do not wish to have a public ceremony. We provide professional care and transportation to ensure a private and dignified burial takes place promptly.
               </p>
             </div>
           </div>
@@ -233,7 +255,7 @@ const displayCompanyName = getCompanyName();
               It Helps Your Family
             </h3>
             <p class="text-sm md:text-base text-text leading-relaxed">
-              Providing clarity and peace of mind for your family by documenting your preferences in advance. Your family won't have to guess what you wanted. You can choose the songs and prayers for your Mass.
+              It provides clarity and peace of mind for your family by documenting your preferences in advance. Your family won't have to guess what you wanted.
             </p>
           </div>
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -303,6 +325,17 @@ const displayCompanyName = getCompanyName();
             Yes, absolutely. We are here to guide you through these decisions. We maintain a complete directory of local Catholic cemeteries and their prices to help you find a peaceful resting place that is right for your family. We can also connect you with trusted local experts to help you design a beautiful headstone or marker. You do not have to make these choices alone; we will ensure you have all the options you need.
           </p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ongoing Care Section -->
+  <section class="py-10 md:py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center">
+          Our care does not end when the service concludes. We are here to assist with the practicalities of loss—from grief resources to assistance with documentation—ensuring you never have to navigate the path forward alone.
+        </p>
       </div>
     </div>
   </section>

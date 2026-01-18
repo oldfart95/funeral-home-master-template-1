@@ -25,7 +25,7 @@ const displayCompanyName = getCompanyName();
 
 <Layout title="Servicios de Entierro para Veteranos - Planificar con Anticipación" pageType="veteran" language="es">
   <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-12 md:py-32 overflow-hidden">
+  <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-8 md:py-32 overflow-hidden">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
       <img 
@@ -39,24 +39,31 @@ const displayCompanyName = getCompanyName();
     
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12 min-h-[400px] md:min-h-[500px]">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-12 min-h-[300px] md:min-h-[500px] py-4 md:py-0">
         <!-- Company Name - Left/Top -->
-        <div class="flex-1">
-          <h1 class="text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+        <div class="flex-1 w-full md:w-auto">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
             {displayCompanyName}
           </h1>
         </div>
         
         <!-- Hero Text - Center Right -->
-        <div class="flex-1 md:flex-none md:w-1/2 lg:w-2/5 text-right md:text-right">
-          <h2 class="text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
+        <div class="flex-1 w-full md:flex-none md:w-1/2 lg:w-2/5 text-left md:text-right mt-4 md:mt-0">
+          <h2 class="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-3 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
             Planificar con Anticipación para la Tranquilidad
           </h2>
-          <p class="text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-justify md:text-right">
-            Pensar en el final de la vida puede ser difícil. Sin embargo, hacer planes ahora es uno de los mejores regalos que puede darle a su familia. Proporcionando claridad y tranquilidad para su familia al documentar sus preferencias con anticipación. También les ayuda a evitar decisiones difíciles durante un momento triste.
+          <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-left md:text-right">
+            Pensar en el final de la vida puede ser difícil. Sin embargo, hacer planes ahora es uno de los mejores regalos que puede darle a su familia.
           </p>
         </div>
       </div>
+    </div>
+    
+    <!-- Attribution Footnote -->
+    <div class="absolute bottom-0 right-0 z-10 px-4 sm:px-6 lg:px-8 pb-3 md:pb-4">
+      <p class="text-xs sm:text-sm text-white/80 drop-shadow-md text-right">
+        Proporcionado por Arbaugh-Pearce-Greenisen & Sons
+      </p>
     </div>
   </section>
 
@@ -78,14 +85,17 @@ const displayCompanyName = getCompanyName();
     <!-- Burial Options Section -->
     <section class="py-10 md:py-24 bg-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-7xl mx-auto">
           <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
             Opciones de Entierro
           </h2>
+          <p class="text-base md:text-lg text-text text-center mb-6 md:mb-8 max-w-3xl mx-auto italic">
+            Honrando la dignidad atemporal de un lugar de descanso final con gracia y reverencia.
+          </p>
           <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12">
             Si prefiere el entierro en lugar de la cremación, también hay opciones asequibles para eso.
           </p>
-          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
             <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
               <div class="flex items-center gap-2 mb-3">
                 <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -95,8 +105,11 @@ const displayCompanyName = getCompanyName();
                   Despedida Tradicional
                 </h3>
               </div>
-              <p class="text-sm md:text-base text-text">
-                Incluye preparar el cuerpo, una visita, un servicio funerario y un viaje al cementerio.
+              <p class="text-[10px] md:text-xs font-semibold text-primary mb-2">
+                El Tributo Clásico
+              </p>
+              <p class="text-xs md:text-sm text-text leading-relaxed">
+                Este es un servicio completo para familias que desean seguir tradiciones consagradas por el tiempo. Incluye una visita para que los amigos se reúnan, un servicio funerario formal y una procesión al cementerio. Nos encargamos de cada detalle para asegurar una despedida respetuosa y completa.
               </p>
             </div>
             <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -108,8 +121,11 @@ const displayCompanyName = getCompanyName();
                   Despedida Simple
                 </h3>
               </div>
-              <p class="text-sm md:text-base text-text">
-                Similar a la tradicional, pero con un tiempo de visita más corto.
+              <p class="text-[10px] md:text-xs font-semibold text-primary mb-2">
+                Un Recuerdo Enfocado
+              </p>
+              <p class="text-xs md:text-sm text-text leading-relaxed">
+                Esta opción ofrece un hermoso servicio en un período de tiempo más corto. Incluye un tiempo para que la familia y los amigos compartan recuerdos seguido de una ceremonia significativa. Está diseñado para aquellos que desean un día profesional y digno enfocado en lo esencial de despedirse.
               </p>
             </div>
             <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -121,8 +137,11 @@ const displayCompanyName = getCompanyName();
                   Servicio en el Cementerio
                 </h3>
               </div>
-              <p class="text-sm md:text-base text-text">
-                Un servicio realizado directamente en el cementerio.
+              <p class="text-[10px] md:text-xs font-semibold text-primary mb-2">
+                Un Tributo Silencioso al Aire Libre
+              </p>
+              <p class="text-xs md:text-sm text-text leading-relaxed">
+                Este servicio tiene lugar completamente en el cementerio. Es una forma tranquila y elegante de honrar a su ser querido bajo el cielo abierto. Coordinamos todo en el lugar de descanso, permitiéndole enfocarse en un momento tranquilo de reflexión con aquellos más cercanos a usted.
               </p>
             </div>
             <div class="bg-secondary p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -134,8 +153,11 @@ const displayCompanyName = getCompanyName();
                   Entierro Inmediato
                 </h3>
               </div>
-              <p class="text-sm md:text-base text-text">
-                Entierro sin servicio público ni visita.
+              <p class="text-[10px] md:text-xs font-semibold text-primary mb-2">
+                Un Camino Simple y Privado
+              </p>
+              <p class="text-xs md:text-sm text-text leading-relaxed">
+                Esta es nuestra opción de entierro más directa. Es una opción modesta para familias que no desean tener una ceremonia pública. Proporcionamos cuidado profesional y transporte para asegurar que un entierro privado y digno tenga lugar de inmediato.
               </p>
             </div>
           </div>
@@ -193,7 +215,7 @@ const displayCompanyName = getCompanyName();
               Ayuda a Su Familia
             </h3>
             <p class="text-sm md:text-base text-text leading-relaxed">
-              Proporcionando claridad y tranquilidad para su familia al documentar sus preferencias con anticipación. Su familia no tendrá que adivinar lo que usted quería. Usted escribe sus deseos para su servicio, si desea ser enterrado o cremado, y otros detalles.
+              Proporciona claridad y tranquilidad para su familia al documentar sus preferencias con anticipación. Su familia no tendrá que adivinar lo que usted quería.
             </p>
           </div>
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -255,6 +277,17 @@ const displayCompanyName = getCompanyName();
             Sí, absolutamente. Estamos aquí para guiarlo a través de estas decisiones. Mantenemos un directorio completo de cementerios locales y sus precios para ayudarlo a encontrar un lugar de descanso pacífico que sea adecuado para su familia. También podemos conectarlo con expertos locales de confianza para ayudarlo a diseñar una hermosa lápida o marcador. No tiene que tomar estas decisiones solo; nos aseguraremos de que tenga todas las opciones que necesita.
           </p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ongoing Care Section -->
+  <section class="py-10 md:py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center">
+          Nuestro cuidado no termina cuando concluye el servicio. Estamos aquí para ayudar con las practicidades de la pérdida—desde recursos de duelo hasta asistencia con documentación—asegurando que nunca tenga que navegar el camino hacia adelante solo.
+        </p>
       </div>
     </div>
   </section>
