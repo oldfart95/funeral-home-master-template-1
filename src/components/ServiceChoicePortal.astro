@@ -1,0 +1,78 @@
+---
+interface ServiceChoicePortalProps {
+  // Cremation Card Props
+  cremationHeadline: string;
+  cremationBody: string;
+  cremationLink: string;
+  
+  // Burial Card Props
+  burialHeadline: string;
+  burialBody: string;
+  burialLink: string;
+  
+  // Optional: Section title/intro
+  sectionTitle?: string;
+  sectionIntro?: string;
+}
+
+const {
+  cremationHeadline,
+  cremationBody,
+  cremationLink,
+  burialHeadline,
+  burialBody,
+  burialLink,
+  sectionTitle,
+  sectionIntro,
+} = Astro.props;
+---
+
+<section class="py-10 md:py-24 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      {sectionTitle && (
+        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
+          {sectionTitle}
+        </h2>
+      )}
+      {sectionIntro && (
+        <p class="text-base md:text-lg text-text text-center mb-6 md:mb-8 max-w-3xl mx-auto">
+          {sectionIntro}
+        </p>
+      )}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <!-- Cremation Card -->
+        <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
+          <h3 class="text-2xl md:text-3xl font-heading font-bold text-primary mb-4 md:mb-6">
+            {cremationHeadline}
+          </h3>
+          <p class="text-base md:text-lg text-text leading-relaxed mb-6 md:mb-8">
+            {cremationBody}
+          </p>
+          <a
+            href={cremationLink}
+            class="block w-full bg-accent text-white px-6 py-3 rounded-md font-semibold text-lg hover:bg-accent-dark transition shadow-sm text-center"
+          >
+            Learn More
+          </a>
+        </div>
+
+        <!-- Burial Card -->
+        <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm border-t-4 border-primary">
+          <h3 class="text-2xl md:text-3xl font-heading font-bold text-primary mb-4 md:mb-6">
+            {burialHeadline}
+          </h3>
+          <p class="text-base md:text-lg text-text leading-relaxed mb-6 md:mb-8">
+            {burialBody}
+          </p>
+          <a
+            href={burialLink}
+            class="block w-full bg-primary text-white px-6 py-3 rounded-md font-semibold text-lg hover:bg-primary-dark transition shadow-sm text-center"
+          >
+            Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
