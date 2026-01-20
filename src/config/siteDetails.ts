@@ -38,7 +38,7 @@ export interface SiteDetails {
 
 const siteDetails: SiteDetails = {
   companyName: "Arbaugh-Pearce-Greenisen & Sons Funeral and Cremation Services",
-  phone: "(330) 332-4401",
+  phone: "(111) 111-1111",
   address: {
     street: "", // Add address when available
     city: "",

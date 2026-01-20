@@ -1,5 +1,6 @@
 ---
 import siteDetails from '../config/siteDetails';
+import { formatPhoneTel } from '../utils/phone';
 
 // Detect current page type and language from URL
 const pathname = Astro.url.pathname;
@@ -67,15 +68,17 @@ function getCompanyName(): string {
 const displayCompanyName = getCompanyName();
 ---
 
-<nav class="sticky top-0 z-50 bg-primary text-white shadow-lg">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<nav class="sticky top-0 z-50 bg-primary text-white shadow-lg overflow-x-hidden">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-full">
     <!-- Unified Navigation Bar -->
-    <div class="flex items-center justify-between gap-2 md:gap-4 h-14 md:h-16">
+    <div class="flex items-center justify-between gap-2 md:gap-4 h-14 md:h-16 min-w-0">
       <!-- Left Side: Page Type Navigation -->
-      <div class="flex items-center gap-1 md:gap-2">
+      <div class="flex items-center gap-1 md:gap-2 min-w-0" role="navigation" aria-label={isSpanish ? "Navegación principal" : "Main navigation"}>
         <a
           href={generalPath}
-          class={`px-3 md:px-4 lg:px-6 py-2 md:py-3 font-semibold text-sm md:text-base transition-all duration-200 ${
+          aria-label={isSpanish ? "Inicio" : "Home"}
+          aria-current={currentPageType === 'general' ? 'page' : undefined}
+          class={`px-2 sm:px-3 md:px-4 lg:px-6 py-2 md:py-3 font-semibold text-xs sm:text-sm md:text-base transition-all duration-200 whitespace-nowrap ${
             currentPageType === 'general'
               ? 'bg-accent text-white border-b-2 border-white'
               : 'text-white/80 hover:text-white hover:bg-primary-light/20'
@@ -85,7 +88,9 @@ const displayCompanyName = getCompanyName();
         </a>
         <a
           href={catholicPath}
-          class={`px-3 md:px-4 lg:px-6 py-2 md:py-3 font-semibold text-sm md:text-base transition-all duration-200 ${
+          aria-label={isSpanish ? "Católico" : "Catholic"}
+          aria-current={currentPageType === 'catholic' ? 'page' : undefined}
+          class={`px-2 sm:px-3 md:px-4 lg:px-6 py-2 md:py-3 font-semibold text-xs sm:text-sm md:text-base transition-all duration-200 whitespace-nowrap ${
             currentPageType === 'catholic'
               ? 'bg-accent text-white border-b-2 border-white'
               : 'text-white/80 hover:text-white hover:bg-primary-light/20'
@@ -95,7 +100,9 @@ const displayCompanyName = getCompanyName();
         </a>
         <a
           href={veteranPath}
-          class={`px-3 md:px-4 lg:px-6 py-2 md:py-3 font-semibold text-sm md:text-base transition-all duration-200 ${
+          aria-label={isSpanish ? "Veterano" : "Veteran"}
+          aria-current={currentPageType === 'veteran' ? 'page' : undefined}
+          class={`px-2 sm:px-3 md:px-4 lg:px-6 py-2 md:py-3 font-semibold text-xs sm:text-sm md:text-base transition-all duration-200 whitespace-nowrap ${
             currentPageType === 'veteran'
               ? 'bg-accent text-white border-b-2 border-white'
               : 'text-white/80 hover:text-white hover:bg-primary-light/20'
@@ -106,22 +113,24 @@ const displayCompanyName = getCompanyName();
       </div>
       
       <!-- Right Side: Language Toggle and Call Now Button -->
-      <div class="flex items-center gap-2 md:gap-3">
+      <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
         <!-- Language Toggle -->
         <a 
           href={alternateLanguageUrl}
-          class="bg-white/10 hover:bg-white/20 text-white px-3 md:px-4 lg:px-5 py-2 md:py-2.5 rounded-md font-semibold text-sm md:text-base whitespace-nowrap transition-all duration-200 border border-white/30 hover:border-white/50 flex items-center gap-2"
+          aria-label={isSpanish ? 'Switch to English' : 'Cambiar a Español'}
+          class="bg-white/10 hover:bg-white/20 text-white px-2 sm:px-3 md:px-4 lg:px-5 py-2 md:py-2.5 rounded-md font-semibold text-xs sm:text-sm md:text-base whitespace-nowrap transition-all duration-200 border border-white/30 hover:border-white/50 flex items-center gap-1 sm:gap-2 flex-shrink-0"
           title={isSpanish ? 'Switch to English' : 'Cambiar a Español'}
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg class="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 002 2h2.945M15 11a3 3 0 11-6 0m6 0a3 3 0 10-6 0m6 0H9m3 0v1m0-1v-1m0 1H9m3 0h3M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
           {alternateLanguageLabel}
         </a>
         <!-- Call Now Button -->
         <a 
-          href={`tel:${siteDetails.phone.replace(/\D/g, '')}`} 
-          class="bg-accent hover:bg-accent-dark text-white px-4 md:px-6 lg:px-8 py-2 md:py-2.5 rounded-md font-semibold text-sm md:text-base whitespace-nowrap transition-all duration-200 shadow-md hover:shadow-lg"
+          href={`tel:${formatPhoneTel(siteDetails.phone)}`}
+          aria-label={isSpanish ? 'Llame ahora' : 'Call now'}
+          class="bg-accent hover:bg-accent-dark text-white px-3 sm:px-4 md:px-6 lg:px-8 py-2 md:py-2.5 rounded-md font-semibold text-xs sm:text-sm md:text-base whitespace-nowrap transition-all duration-200 shadow-md hover:shadow-lg flex-shrink-0"
           data-lang-en="Call Now"
           data-lang-es="Llame Ahora"
         >
@@ -136,38 +145,56 @@ const displayCompanyName = getCompanyName();
   // Language detection and text switching for Call Now button
   // Ensure this runs after DOM is ready to prevent any rendering issues
   (function() {
-    function updateLanguage() {
-      const isSpanish = window.location.pathname.includes('-es') || window.location.pathname === '/es';
-      
-      if (isSpanish) {
-        // Update Call Now button text
-        document.querySelectorAll('[data-lang-es]').forEach(el => {
-          const esText = el.getAttribute('data-lang-es');
-          if (esText && el.href?.includes('tel:')) {
-            el.textContent = esText;
+    try {
+      function updateLanguage() {
+        try {
+          const isSpanish = window.location.pathname.includes('-es') || window.location.pathname === '/es';
+          
+          if (isSpanish) {
+            // Update Call Now button text
+            document.querySelectorAll('[data-lang-es]').forEach(el => {
+              try {
+                const esText = el.getAttribute('data-lang-es');
+                if (esText && el.href?.includes('tel:')) {
+                  el.textContent = esText;
+                }
+              } catch (err) {
+                // Silently fail for individual element updates
+              }
+            });
           }
-        });
+          
+          // Explicit safeguard: ensure Call Now button is always visible
+          const callNowButton = document.querySelector('a[href^="tel:"]');
+          if (callNowButton) {
+            callNowButton.classList.remove('hidden');
+            callNowButton.style.display = '';
+            callNowButton.style.visibility = '';
+          }
+        } catch (err) {
+          // Silently fail - language switching is a non-critical enhancement
+        }
       }
       
-      // Explicit safeguard: ensure Call Now button is always visible
-      const callNowButton = document.querySelector('a[href^="tel:"]');
-      if (callNowButton) {
-        callNowButton.classList.remove('hidden');
-        callNowButton.style.display = '';
-        callNowButton.style.visibility = '';
+      // Run immediately if DOM is already loaded, otherwise wait
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', updateLanguage);
+      } else {
+        // DOM already loaded, run immediately
+        updateLanguage();
       }
+      
+      // Also run after a short delay to catch any late-rendering issues
+      setTimeout(() => {
+        try {
+          updateLanguage();
+        } catch (err) {
+          // Silently fail
+        }
+      }, 100);
+    } catch (error) {
+      // Silently fail - language switching is a non-critical enhancement
     }
-    
-    // Run immediately if DOM is already loaded, otherwise wait
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', updateLanguage);
-    } else {
-      // DOM already loaded, run immediately
-      updateLanguage();
-    }
-    
-    // Also run after a short delay to catch any late-rendering issues
-    setTimeout(updateLanguage, 100);
   })();
 </script>
 

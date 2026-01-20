@@ -64,7 +64,7 @@ const burialButtonText = {
       <div class="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center">
         <a
           href={cremationUrl}
-          class="w-full sm:w-auto bg-accent text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-accent-dark transition shadow-sm text-center"
+          class="btn btn-accent btn-lg w-full sm:w-auto"
           data-lang-en={cremationButtonText[currentPageType].en}
           data-lang-es={cremationButtonText[currentPageType].es}
         >
@@ -72,7 +72,7 @@ const burialButtonText = {
         </a>
         <a
           href={burialUrl}
-          class="w-full sm:w-auto bg-primary text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-primary-dark transition shadow-sm text-center"
+          class="btn btn-primary btn-lg w-full sm:w-auto"
           data-lang-en={burialButtonText[currentPageType].en}
           data-lang-es={burialButtonText[currentPageType].es}
         >
@@ -88,34 +88,50 @@ const burialButtonText = {
   // This ensures buttons are correctly displayed based on URL language
   // Runs after DOM is ready to prevent any rendering hiccups
   (function() {
-    function updateServiceButtons() {
-      const isSpanish = window.location.pathname.includes('-es') || window.location.pathname === '/es';
-      
-      if (isSpanish) {
-        // Update all service button elements with Spanish text
-        document.querySelectorAll('section.py-10 a[data-lang-es]').forEach(el => {
-          const esText = el.getAttribute('data-lang-es');
-          if (esText) {
-            el.textContent = esText;
+    try {
+      function updateServiceButtons() {
+        try {
+          const isSpanish = window.location.pathname.includes('-es') || window.location.pathname === '/es';
+          
+          if (isSpanish) {
+            // Update all service button elements with Spanish text
+            document.querySelectorAll('section.py-10 a[data-lang-es]').forEach(el => {
+              try {
+                const esText = el.getAttribute('data-lang-es');
+                if (esText) {
+                  el.textContent = esText;
+                }
+              } catch (err) {
+                // Silently fail for individual element updates
+              }
+            });
+            
+            // Update intro text
+            document.querySelectorAll('section.py-10 p[data-lang-es]').forEach(el => {
+              try {
+                const esText = el.getAttribute('data-lang-es');
+                if (esText) {
+                  el.textContent = esText;
+                }
+              } catch (err) {
+                // Silently fail for individual element updates
+              }
+            });
           }
-        });
-        
-        // Update intro text
-        document.querySelectorAll('section.py-10 p[data-lang-es]').forEach(el => {
-          const esText = el.getAttribute('data-lang-es');
-          if (esText) {
-            el.textContent = esText;
-          }
-        });
+        } catch (err) {
+          // Silently fail - language switching is a non-critical enhancement
+        }
       }
-    }
-    
-    // Ensure DOM is ready before updating
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', updateServiceButtons);
-    } else {
-      // DOM already loaded, run immediately
-      updateServiceButtons();
+      
+      // Ensure DOM is ready before updating
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', updateServiceButtons);
+      } else {
+        // DOM already loaded, run immediately
+        updateServiceButtons();
+      }
+    } catch (error) {
+      // Silently fail - language switching is a non-critical enhancement
     }
   })();
 </script>

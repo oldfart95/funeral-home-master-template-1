@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+import siteDetails from '../config/siteDetails';
+---
+
+<Layout 
+  title="Privacy Policy" 
+  description="Privacy policy for Arbaugh-Pearce-Greenisen & Sons Funeral and Cremation Services. Learn how we collect, use, and protect your personal information."
+  pageType="general" 
+  language="en"
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-12 md:py-20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 md:mb-6">
+          Privacy Policy
+        </h1>
+        <p class="text-xl md:text-2xl text-white/95">
+          Your privacy is important to us.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-10 md:py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="prose prose-lg max-w-none">
+          <p class="text-sm text-text/70 mb-8">
+            <strong>Last Updated:</strong> {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </p>
+
+          <p class="text-base md:text-lg text-text leading-relaxed mb-6">
+            At {siteDetails.companyName}, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.
+          </p>
+
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-primary mt-8 mb-4">
+            Information We Collect
+          </h2>
+          <p class="text-base md:text-lg text-text leading-relaxed mb-4">
+            We may collect information that you provide directly to us, including:
+          </p>
+          <ul class="list-disc pl-6 mb-6 space-y-2 text-base text-text">
+            <li>Name and contact information (phone number, email address, mailing address)</li>
+            <li>Information about funeral or cremation services you are interested in</li>
+            <li>Any other information you choose to provide through our contact forms</li>
+          </ul>
+
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-primary mt-8 mb-4">
+            How We Use Your Information
+          </h2>
+          <p class="text-base md:text-lg text-text leading-relaxed mb-4">
+            We use the information we collect to:
+          </p>
+          <ul class="list-disc pl-6 mb-6 space-y-2 text-base text-text">
+            <li>Respond to your inquiries and provide information about our services</li>
+            <li>Schedule consultations and appointments</li>
+            <li>Send you updates about our services (with your consent)</li>
+            <li>Improve our website and services</li>
+            <li>Comply with legal obligations</li>
+          </ul>
+
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-primary mt-8 mb-4">
+            Information Sharing
+          </h2>
+          <p class="text-base md:text-lg text-text leading-relaxed mb-6">
+            We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:
+          </p>
+          <ul class="list-disc pl-6 mb-6 space-y-2 text-base text-text">
+            <li>With service providers who assist us in operating our website and conducting our business</li>
+            <li>When required by law or to protect our rights</li>
+            <li>With your explicit consent</li>
+          </ul>
+
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-primary mt-8 mb-4">
+            Data Security
+          </h2>
+          <p class="text-base md:text-lg text-text leading-relaxed mb-6">
+            We implement appropriate technical and organizational measures to protect your personal information. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
+          </p>
+
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-primary mt-8 mb-4">
+            Your Rights
+          </h2>
+          <p class="text-base md:text-lg text-text leading-relaxed mb-4">
+            You have the right to:
+          </p>
+          <ul class="list-disc pl-6 mb-6 space-y-2 text-base text-text">
+            <li>Access the personal information we hold about you</li>
+            <li>Request correction of inaccurate information</li>
+            <li>Request deletion of your personal information</li>
+            <li>Opt-out of marketing communications</li>
+          </ul>
+
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-primary mt-8 mb-4">
+            Cookies and Tracking
+          </h2>
+          <p class="text-base md:text-lg text-text leading-relaxed mb-6">
+            Our website may use cookies and similar tracking technologies to enhance your experience. You can set your browser to refuse cookies, but this may limit some functionality of our website.
+          </p>
+
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-primary mt-8 mb-4">
+            Changes to This Privacy Policy
+          </h2>
+          <p class="text-base md:text-lg text-text leading-relaxed mb-6">
+            We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.
+          </p>
+
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-primary mt-8 mb-4">
+            Contact Us
+          </h2>
+          <p class="text-base md:text-lg text-text leading-relaxed mb-6">
+            If you have any questions about this Privacy Policy, please contact us using the information provided on our website or call us at {siteDetails.phone && siteDetails.phone !== '(111) 111-1111' ? siteDetails.phone : '(111) 111-1111'}.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

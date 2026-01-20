@@ -1,0 +1,83 @@
+---
+// BackToTop component - Floating button that appears after scrolling
+// Shows after 300px scroll, smooth scrolls to top on click
+---
+
+<button
+  id="back-to-top"
+  class="btn btn-accent fixed bottom-8 right-8 z-50 p-3 rounded-full opacity-0 pointer-events-none focus-visible:opacity-100 focus-visible:pointer-events-auto"
+  aria-label="Back to top"
+  title="Back to top"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    stroke-width="2"
+    aria-hidden="true"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+  </svg>
+</button>
+
+<script>
+  (function() {
+    try {
+      const backToTopButton = document.getElementById('back-to-top');
+      if (!backToTopButton) return;
+
+      // Show/hide button based on scroll position
+      function toggleBackToTop() {
+        if (window.scrollY > 300) {
+          backToTopButton.classList.remove('opacity-0', 'pointer-events-none');
+          backToTopButton.classList.add('opacity-100', 'pointer-events-auto');
+        } else {
+          backToTopButton.classList.add('opacity-0', 'pointer-events-none');
+          backToTopButton.classList.remove('opacity-100', 'pointer-events-auto');
+        }
+      }
+
+      // Smooth scroll to top
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+
+      // Event listeners
+      window.addEventListener('scroll', toggleBackToTop, { passive: true });
+      backToTopButton.addEventListener('click', scrollToTop);
+
+      // Initial check
+      toggleBackToTop();
+    } catch (error) {
+      // Silently fail - button will still work via native behavior
+    }
+  })();
+</script>
+
+<style>
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    #back-to-top {
+      bottom: 1rem;
+      right: 1rem;
+      padding: 0.75rem;
+    }
+    
+    #back-to-top svg {
+      height: 1.25rem;
+      width: 1.25rem;
+    }
+  }
+
+  /* Ensure button doesn't interfere with footer on small screens */
+  @media (max-width: 768px) {
+    #back-to-top {
+      bottom: 5rem;
+    }
+  }
+</style>

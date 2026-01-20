@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import siteDetails from '../config/siteDetails';
+import { formatPhoneDisplay, formatPhoneTel } from '../utils/phone';
+
+const phone = siteDetails.phone && siteDetails.phone !== '(111) 111-1111' 
+  ? siteDetails.phone 
+  : '(111) 111-1111';
+---
+
+<Layout 
+  title="Immediate Need - We Are Here for You" 
+  description="If a death has occurred, we are here to help. Available 24/7 for immediate funeral and cremation services with compassionate guidance."
+  pageType="general" 
+  language="en"
+>
+  <!-- Emergency Contact Box -->
+  <section class="bg-primary text-white py-8 md:py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="bg-primary-dark/50 border-2 border-white/30 rounded-lg p-6 md:p-8 shadow-xl">
+          <p class="text-lg md:text-xl font-semibold mb-4">24/7 Available</p>
+          <a 
+            href={`tel:${formatPhoneTel(phone)}`}
+            class="text-3xl md:text-5xl font-bold font-heading hover:text-accent transition-colors block mb-2"
+          >
+            {formatPhoneDisplay(phone)}
+          </a>
+          <p class="text-base md:text-lg text-white/90">Our directors are standing by to assist you</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-10 md:py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-primary mb-4 md:mb-6 text-center">
+          We Are Here for You in Your Time of Loss
+        </h1>
+        <p class="text-xl md:text-2xl text-text/80 mb-8 md:mb-12 text-center font-medium">
+          Compassionate guidance and professional care, 24 hours a day.
+        </p>
+
+        <div class="prose prose-lg max-w-none">
+          <p class="text-base md:text-lg text-text leading-relaxed mb-6">
+            If a death has occurred, please accept our deepest condolences. Whether a loss was expected or sudden, the first few hours can feel overwhelming. Our family is here to handle every detail with dignity and respect.
+          </p>
+
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-primary mt-8 mb-4">
+            Our Immediate Care Includes:
+          </h2>
+
+          <div class="space-y-6 mb-8">
+            <div class="border-l-4 border-accent pl-6">
+              <h3 class="text-xl md:text-2xl font-heading font-semibold text-primary mb-2">
+                Initial Transfer
+              </h3>
+              <p class="text-base md:text-lg text-text leading-relaxed">
+                We coordinate the respectful transport of your loved one into our care.
+              </p>
+            </div>
+
+            <div class="border-l-4 border-accent pl-6">
+              <h3 class="text-xl md:text-2xl font-heading font-semibold text-primary mb-2">
+                Professional Guidance
+              </h3>
+              <p class="text-base md:text-lg text-text leading-relaxed">
+                We assist with all necessary legal authorizations and death certificate filings.
+              </p>
+            </div>
+
+            <div class="border-l-4 border-accent pl-6">
+              <h3 class="text-xl md:text-2xl font-heading font-semibold text-primary mb-2">
+                Arrangement Consultation
+              </h3>
+              <p class="text-base md:text-lg text-text leading-relaxed">
+                We sit down with you to discuss burial or cremation options that honor your family's wishes and budget.
+              </p>
+            </div>
+
+            <div class="border-l-4 border-accent pl-6">
+              <h3 class="text-xl md:text-2xl font-heading font-semibold text-primary mb-2">
+                Direct Support
+              </h3>
+              <p class="text-base md:text-lg text-text leading-relaxed">
+                We are available 24/7 to answer questions and provide a steady hand during this difficult transition.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-secondary rounded-lg p-6 md:p-8 mt-8 md:mt-12 text-center">
+            <p class="text-lg md:text-xl font-semibold text-primary mb-4">
+              If you have an immediate need, please call us right now at
+            </p>
+            <a 
+              href={`tel:${formatPhoneTel(phone)}`}
+              class="text-2xl md:text-3xl font-bold font-heading text-accent hover:text-accent-dark transition-colors"
+            >
+              {formatPhoneDisplay(phone)}
+            </a>
+            <p class="text-base md:text-lg text-text mt-4">
+              Our directors are standing by to assist you.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

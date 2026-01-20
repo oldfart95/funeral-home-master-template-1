@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import siteDetails from '../config/siteDetails';
 import ServiceNav from '../components/ServiceNav.astro';
 import Accordion from '../components/Accordion.astro';
+import OngoingCare from '../components/OngoingCare.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { getFAQs } from '../utils/faqs';
 
 // Determine company name based on page type and language
 const pathname = Astro.url.pathname;
@@ -14,24 +17,83 @@ function getCompanyName(): string {
   if (isVeteran) {
     return isSpanish ? 'Cuidado de Veteranos' : 'Veteran Care';
   } else if (isCatholic) {
-    return isSpanish ? 'Cuidado Católico' : 'Catholic Care';
+    return isSpanish ? 'Cuidado Cat?lico' : 'Catholic Care';
   } else {
     return isSpanish ? 'Cuidado Asequible' : 'Affordable Care';
   }
 }
 
+function getLogoPath(): string {
+  if (isVeteran) {
+    return '/images/VeteranLogo.webp';
+  } else if (isCatholic) {
+    return isSpanish ? '/images/SpanishCathLogo.webp' : '/images/CatholicLogo.webp';
+  } else {
+    return isSpanish ? '/images/SpanishAffLogo.webp' : '/images/AffCareLogo.webp';
+  }
+}
+
 const displayCompanyName = getCompanyName();
+const logoPath = getLogoPath();
+
+// Generate service-specific structured data
+function generateServiceSchema() {
+  const baseUrl = Astro.site?.href || Astro.url.origin;
+  const phone = siteDetails.phone && siteDetails.phone !== '(111) 111-1111' 
+    ? siteDetails.phone 
+    : '(111) 111-1111';
+  
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Servicios de Cremaci?n',
+    description: 'Servicios completos de cremaci?n incluyendo cremaci?n directa, servicios conmemorativos y opciones de servicio completo. Planifique con anticipaci?n con dignidad y respeto.',
+    provider: {
+      '@type': 'FuneralHome',
+      name: siteDetails.companyName,
+      telephone: phone,
+      url: baseUrl
+    },
+    serviceType: 'Funeral Service',
+    areaServed: {
+      '@type': 'Country',
+      name: 'United States'
+    },
+    offers: {
+      '@type': 'Offer',
+      priceRange: '$$',
+      description: 'Opciones flexibles de cremaci?n para adaptarse a sus necesidades y presupuesto'
+    }
+  };
+  
+  return JSON.stringify(schema);
+}
+
+const serviceSchema = generateServiceSchema();
 ---
 
-<Layout title="Servicios de Cremación - Planificar con Anticipación" pageType="general" language="es">
+<Layout 
+  title="Servicios de Cremaci?n - Planificar con Anticipaci?n" 
+  description="Servicios completos de cremaci?n incluyendo cremaci?n directa, servicios conmemorativos y opciones de servicio completo. Planifique con anticipaci?n con dignidad y respeto."
+  pageType="general" 
+  language="es"
+>
+  <!-- Service-specific Structured Data -->
+  <script type="application/ld+json" set:html={serviceSchema} />
   <!-- Hero Section -->
   <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-8 md:py-32 overflow-hidden">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
       <img 
-        src="/images/hero.webp" 
-        alt="Ambiente conmemorativo pacífico" 
-        class="w-full h-full object-cover"
+        src="/images/hero.webp"
+        srcset="/images/hero-640.webp 640w,
+                /images/hero.webp 970w"
+        sizes="(max-width: 640px) 640px,
+               970px"
+        loading="eager"
+        fetchpriority="high"
+        alt="Servicios completos de cremación" 
+        class="w-full h-full object-cover blur-sm"
       />
       <!-- Dark overlay for text readability -->
       <div class="absolute inset-0 bg-gradient-to-br from-primary/40 via-primary-dark/40 to-primary-light/40"></div>
@@ -42,6 +104,12 @@ const displayCompanyName = getCompanyName();
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-12 min-h-[300px] md:min-h-[500px] py-4 md:py-0">
         <!-- Company Name - Left/Top -->
         <div class="flex-1 w-full md:w-auto">
+          <img 
+            src={logoPath}
+            alt={displayCompanyName}
+            class="mb-4 md:mb-6 w-auto h-12 sm:h-14 md:h-20 lg:h-28 xl:h-36 drop-shadow-lg bg-white/90 rounded-lg p-2 sm:p-2.5 md:p-3 lg:p-3.5 xl:p-4 shadow-xl"
+            loading="eager"
+          />
           <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
             {displayCompanyName}
           </h1>
@@ -50,10 +118,10 @@ const displayCompanyName = getCompanyName();
         <!-- Hero Text - Center Right -->
         <div class="flex-1 w-full md:flex-none md:w-1/2 lg:w-2/5 text-left md:text-right mt-4 md:mt-0">
           <h2 class="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-3 md:mb-6 drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
-            Planificar con Anticipación para la Tranquilidad
+            Planificar con Anticipaci?n para la Tranquilidad
           </h2>
           <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-left md:text-right">
-            Pensar en el final de la vida puede ser difícil. Sin embargo, hacer planes ahora es uno de los mejores regalos que puede darle a su familia.
+            Pensar en el final de la vida puede ser dif?cil. Sin embargo, hacer planes ahora es uno de los mejores regalos que puede darle a su familia.
           </p>
         </div>
       </div>
@@ -76,7 +144,7 @@ const displayCompanyName = getCompanyName();
       <div class="max-w-4xl mx-auto">
         <div class="bg-secondary p-6 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
           <p class="text-base md:text-lg text-text leading-relaxed text-center">
-            Ofrecemos servicios completos de cremación y entierro. Ambas opciones están disponibles y son igualmente respetadas. Elija el servicio que se alinee con sus deseos, creencias y presupuesto. Todos los arreglos se alinean con los deseos de su familia.
+            Ofrecemos servicios completos de cremaci?n y entierro. Ambas opciones est?n disponibles y son igualmente respetadas. Elija el servicio que se alinee con sus deseos, creencias y presupuesto. Todos los arreglos se alinean con los deseos de su familia.
           </p>
         </div>
       </div>
@@ -84,17 +152,17 @@ const displayCompanyName = getCompanyName();
   </section>
 
   <!-- Cremation Options Section -->
-    <section class="py-10 md:py-24 bg-white">
+    <section class="py-10 md:py-24 bg-secondary">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-6xl mx-auto">
           <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
-            Opciones de Cremación
+            Opciones de Cremaci?n
           </h2>
           <p class="text-base md:text-lg text-text text-center mb-6 md:mb-8 max-w-3xl mx-auto italic">
-            Un enfoque moderno a la tradición, ofreciendo flexibilidad y remembranza personalizada.
+            Un enfoque moderno a la tradici?n, ofreciendo flexibilidad y remembranza personalizada.
           </p>
           <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12 max-w-3xl mx-auto">
-            Hay diferentes formas de manejar la cremación. Puede elegir la que se ajuste a su vida y su presupuesto.
+            Hay diferentes formas de manejar la cremaci?n. Puede elegir la que se ajuste a su vida y su presupuesto.
           </p>
           <div class="grid md:grid-cols-3 gap-4 md:gap-8">
             <!-- Option 1: Direct Cremation -->
@@ -104,28 +172,28 @@ const displayCompanyName = getCompanyName();
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <h3 class="text-lg md:text-2xl font-heading font-bold text-primary">
-                  La Opción Simple<br />
-                  <span class="text-base md:text-lg font-normal">(Cremación Directa)</span>
+                  La Opci?n Simple<br />
+                  <span class="text-base md:text-lg font-normal">(Cremaci?n Directa)</span>
                 </h3>
               </div>
               <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
-                Esta es la opción más básica. Es para personas que quieren algo simple y privado.
+                Esta es la opci?n m?s b?sica. Es para personas que quieren algo simple y privado.
               </p>
               <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
                 <li class="flex items-start">
-                  <span class="text-accent mr-2">•</span>
+                  <span class="text-accent mr-2">?</span>
                   <span>Transporte profesional y cuidado del fallecido.</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-accent mr-2">•</span>
-                  <span>Tiene lugar la cremación.</span>
+                  <span class="text-accent mr-2">?</span>
+                  <span>Tiene lugar la cremaci?n.</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-accent mr-2">•</span>
-                  <span>No hay funeral público ni visita.</span>
+                  <span class="text-accent mr-2">?</span>
+                  <span>No hay funeral p?blico ni visita.</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-accent mr-2">•</span>
+                  <span class="text-accent mr-2">?</span>
                   <span>La familia recibe las cenizas para enterrar, esparcir o guardar en casa.</span>
                 </li>
               </ul>
@@ -138,25 +206,25 @@ const displayCompanyName = getCompanyName();
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
                 <h3 class="text-lg md:text-2xl font-heading font-bold text-primary">
-                  La Opción Conmemorativa<br />
+                  La Opci?n Conmemorativa<br />
                   <span class="text-base md:text-lg font-normal">(Viaje del Recuerdo)</span>
                 </h3>
               </div>
               <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
-                Esta opción permite que amigos y familiares se despidan juntos.
+                Esta opci?n permite que amigos y familiares se despidan juntos.
               </p>
               <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
                 <li class="flex items-start">
-                  <span class="text-accent mr-2">•</span>
+                  <span class="text-accent mr-2">?</span>
                   <span>Incluye un tiempo para que familiares y amigos visiten.</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-accent mr-2">•</span>
+                  <span class="text-accent mr-2">?</span>
                   <span>Incluye un servicio conmemorativo para compartir recuerdos.</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-accent mr-2">•</span>
-                  <span>Ocurre la cremación y las cenizas se devuelven a la familia.</span>
+                  <span class="text-accent mr-2">?</span>
+                  <span>Ocurre la cremaci?n y las cenizas se devuelven a la familia.</span>
                 </li>
               </ul>
             </div>
@@ -168,25 +236,25 @@ const displayCompanyName = getCompanyName();
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                 </svg>
                 <h3 class="text-lg md:text-2xl font-heading font-bold text-primary">
-                  La Opción de Servicio Completo<br />
+                  La Opci?n de Servicio Completo<br />
                   <span class="text-base md:text-lg font-normal">(Viaje de la Vida)</span>
                 </h3>
               </div>
               <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
-                Esto es como un funeral tradicional, pero termina con cremación en lugar de entierro.
+                Esto es como un funeral tradicional, pero termina con cremaci?n en lugar de entierro.
               </p>
               <ul class="space-y-2 md:space-y-3 text-sm md:text-base text-text">
                 <li class="flex items-start">
-                  <span class="text-accent mr-2">•</span>
-                  <span>Su cuerpo está preparado para que familiares y amigos puedan visitar y despedirse.</span>
+                  <span class="text-accent mr-2">?</span>
+                  <span>Su cuerpo est? preparado para que familiares y amigos puedan visitar y despedirse.</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-accent mr-2">•</span>
-                  <span>Se usa un "ataúd de alquiler" especial para el servicio.</span>
+                  <span class="text-accent mr-2">?</span>
+                  <span>Se usa un "ata?d de alquiler" especial para el servicio.</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-accent mr-2">•</span>
-                  <span>Después de que termine el servicio funerario, tiene lugar la cremación.</span>
+                  <span class="text-accent mr-2">?</span>
+                  <span>Despu?s de que termine el servicio funerario, tiene lugar la cremaci?n.</span>
                 </li>
               </ul>
             </div>
@@ -200,7 +268,7 @@ const displayCompanyName = getCompanyName();
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
-          Preguntas Sobre la Planificación
+          Preguntas Sobre la Planificaci?n
         </h2>
         <div class="grid md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12">
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -208,7 +276,7 @@ const displayCompanyName = getCompanyName();
               Ayuda a Su Familia
             </h3>
             <p class="text-sm md:text-base text-text leading-relaxed">
-              Proporciona claridad y tranquilidad para su familia al documentar sus preferencias con anticipación. Su familia no tendrá que adivinar lo que usted quería.
+              Proporciona claridad y tranquilidad para su familia al documentar sus preferencias con anticipaci?n. Su familia no tendr? que adivinar lo que usted quer?a.
             </p>
           </div>
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
@@ -216,218 +284,32 @@ const displayCompanyName = getCompanyName();
               Ahorra Dinero
             </h3>
             <p class="text-sm md:text-base text-text leading-relaxed">
-              Opciones de prefinanciación para fijar las tarifas de hoy. Esto protege a su familia de los costos crecientes en el futuro. El dinero se mantiene seguro en una cuenta de fideicomiso especial o de seguro hasta que se necesite.
+              Opciones de prefinanciaci?n para fijar las tarifas de hoy. Esto protege a su familia de los costos crecientes en el futuro. El dinero se mantiene seguro en una cuenta de fideicomiso especial o de seguro hasta que se necesite.
             </p>
           </div>
           <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent">
             <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-3 md:mb-4">
-              Es Su Elección
+              Es Su Elecci?n
             </h3>
             <p class="text-sm md:text-base text-text leading-relaxed">
-              Usted decide exactamente cómo quiere ser recordado.
+              Usted decide exactamente c?mo quiere ser recordado.
             </p>
           </div>
         </div>
         <div class="bg-white p-4 md:p-8 rounded-lg shadow-sm">
           <h3 class="text-xl md:text-2xl font-heading font-bold text-primary mb-6 text-center">
-            Preguntas Comunes Sobre Planificar con Anticipación
+            Preguntas Comunes Sobre Planificar con Anticipaci?n
           </h3>
           <Accordion 
             language="es"
-            items={[
-              {
-                question: "¿Puedo pagar todo antes de morir?",
-                answer: "Sí. Puede poner dinero en una cuenta segura (una póliza de seguro de vida, con la cual le ayudamos). Esto es algo muy cariñoso de hacer porque quita el estrés de su familia más tarde."
-              },
-              {
-                question: "¿Qué pasa si muero mientras estoy viajando?",
-                answer: "Si está lejos de casa cuando fallece, su familia solo necesita llamar a la funeraria. Ellos hablarán con las autoridades locales y lo traerán de vuelta a casa."
-              },
-              {
-                question: "¿Hay mucho papeleo?",
-                answer: "Puede haberlo, pero la funeraria ayudará. Guiarán a su familia a través de cada paso. Ayudan a notificar al Seguro Social y verificar cualquier beneficio de Veterano o dinero del seguro."
-              },
-              {
-                question: "¿Mi familia puede verme antes de que sea cremado?",
-                answer: "Sí, en la mayoría de los casos. Si su familia quiere verlo una última vez, la funeraria puede prepararlo para una vista privada. Esto generalmente necesita suceder dentro de unos días."
-              },
-              {
-                question: "¿Necesito comprar una urna?",
-                answer: "Puede elegir entre muchos tipos diferentes de urnas. Algunas están hechas de madera, metal u otros materiales. Puede elegir una que se ajuste a su estilo."
-              },
-              {
-                question: "Si no tenemos una parcela de cementerio o una lápida, ¿puede ayudarnos a elegir una?",
-                answer: "Sí, absolutamente. Estamos aquí para guiarlo a través de estas decisiones. Mantenemos un directorio completo de cementerios locales y sus precios para ayudarlo a encontrar un lugar de descanso pacífico que sea adecuado para su familia. También podemos conectarlo con expertos locales de confianza para ayudarlo a diseñar una hermosa lápida o marcador. No tiene que tomar estas decisiones solo; nos aseguraremos de que tenga todas las opciones que necesita."
-              }
-            ]}
+            items={getFAQs('es', 'general', 'cremation')}
           />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Ongoing Care Section -->
-  <section class="py-10 md:py-16 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
-        <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center">
-          Nuestro cuidado no termina cuando concluye el servicio. Estamos aquí para ayudar con las practicidades de la pérdida—desde recursos de duelo hasta asistencia con documentación—asegurando que nunca tenga que navegar el camino hacia adelante solo.
-        </p>
-      </div>
-    </div>
-  </section>
+  <OngoingCare language={isSpanish ? 'es' : 'en'} />
 
-  <!-- Contact & Support Section -->
-  <section id="contact" class="py-10 md:py-24 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-2xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
-          Contacto y Apoyo
-        </h2>
-        <p class="text-base md:text-xl text-text text-center mb-6 md:mb-8">
-          Nuestro equipo compasivo está aquí para guiarlo a través de cada paso.
-        </p>
-        
-        <!-- Phone Number Badge -->
-        <div class="bg-primary text-white p-4 md:p-6 rounded-lg shadow-sm mb-6 md:mb-8 text-center">
-          <p class="text-sm md:text-base text-white/90 mb-2">Disponible 24/7</p>
-          <a
-            href={`tel:${siteDetails.phone.replace(/\D/g, '')}`}
-            class="text-2xl md:text-3xl font-bold text-white hover:text-accent transition-colors inline-block"
-          >
-            {siteDetails.phone}
-          </a>
-        </div>
-        
-        <div class="bg-secondary p-5 md:p-12 rounded-lg shadow-sm">
-          <form id="contact-form" class="space-y-4 md:space-y-6">
-            <!-- Honeypot field for spam prevention -->
-            <input type="text" name="honeypot" style="display: none;" tabindex="-1" autocomplete="off" />
-            
-            <div>
-              <label for="name" class="block text-sm font-semibold text-primary mb-2">
-                Nombre Completo *
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                autocomplete="name"
-                required
-                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-accent focus:border-transparent"
-                placeholder="Su nombre"
-              />
-            </div>
-            
-            <div>
-              <label for="email" class="block text-sm font-semibold text-primary mb-2">
-                Dirección de Correo Electrónico *
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                autocomplete="email"
-                required
-                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-accent focus:border-transparent"
-                placeholder="su@correo.com"
-              />
-            </div>
-            
-            <div>
-              <label for="phone" class="block text-sm font-semibold text-primary mb-2">
-                Número de Teléfono
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                autocomplete="tel"
-                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-accent focus:border-transparent"
-                placeholder="(330) 332-4401"
-              />
-            </div>
-            
-            <div>
-              <label for="message" class="block text-sm font-semibold text-primary mb-2">
-                Mensaje *
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                autocomplete="off"
-                required
-                rows="5"
-                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-accent focus:border-transparent"
-                placeholder="Cuéntenos cómo podemos ayudarlo a planificar con anticipación..."
-              ></textarea>
-            </div>
-            
-            <button
-              type="submit"
-              class="w-full bg-accent text-white px-6 py-3 rounded-md font-semibold text-lg hover:bg-accent-dark transition shadow-sm"
-            >
-              Enviar Mensaje
-            </button>
-            
-            <div id="form-message" class="hidden mt-4 p-4 rounded-md"></div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <script>
-    // Contact form handling
-    const form = document.getElementById('contact-form');
-    const messageDiv = document.getElementById('form-message');
-
-    form?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const formData = {
-        name: (document.getElementById('name') as HTMLInputElement).value,
-        email: (document.getElementById('email') as HTMLInputElement).value,
-        phone: (document.getElementById('phone') as HTMLInputElement).value,
-        message: (document.getElementById('message') as HTMLTextAreaElement).value,
-        honeypot: (document.querySelector('input[name="honeypot"]') as HTMLInputElement).value,
-      };
-
-      // Show loading state
-      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      const originalText = submitButton.textContent;
-      submitButton.textContent = 'Enviando...';
-      submitButton.disabled = true;
-      messageDiv.classList.add('hidden');
-
-      try {
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          messageDiv.className = 'mt-4 p-4 rounded-md bg-green-100 text-green-800';
-          messageDiv.textContent = data.message || 'Gracias por su mensaje. Nos pondremos en contacto con usted pronto.';
-          form.reset();
-        } else {
-          messageDiv.className = 'mt-4 p-4 rounded-md bg-red-100 text-red-800';
-          messageDiv.textContent = data.error || 'Ocurrió un error. Por favor, intente nuevamente.';
-        }
-      } catch (error) {
-        messageDiv.className = 'mt-4 p-4 rounded-md bg-red-100 text-red-800';
-        messageDiv.textContent = 'Ocurrió un error. Por favor, intente nuevamente o llámenos directamente.';
-      } finally {
-        messageDiv.classList.remove('hidden');
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-      }
-    });
-  </script>
+  <ContactForm language={isSpanish ? 'es' : 'en'} />
 </Layout>

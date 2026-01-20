@@ -1,0 +1,362 @@
+---
+import siteDetails from '../config/siteDetails';
+import { formatPhoneDisplay, formatPhoneTel } from '../utils/phone';
+
+interface Props {
+  language?: 'en' | 'es';
+}
+
+const { language = 'en' } = Astro.props;
+
+const content = {
+  en: {
+    heading: "Contact & Support",
+    description: "Our compassionate team is here to guide you through every step.",
+    available: "Available 24/7",
+    formLabels: {
+      name: "Your Name *",
+      email: "Your Email Address *",
+      phone: "Phone Number",
+      message: "How can we help? *"
+    },
+    placeholders: {
+      name: "Your name",
+      email: "your@email.com",
+      phone: "(111) 111-1111",
+      message: "Tell us how we can help you plan ahead..."
+    },
+    submitButton: "Send Message",
+    sending: "Sending...",
+    validation: {
+      nameRequired: "Please enter your full name",
+      emailRequired: "Please enter your email address",
+      emailInvalid: "Please enter a valid email address",
+      messageRequired: "Please enter a message (at least 10 characters)",
+      messageTooShort: "Please enter a message (at least 10 characters)"
+    },
+    errors: {
+      validation: "An error occurred during validation. Please try again.",
+      tooManyRequests: "Too many requests. Please try again later.",
+      validationFailed: "Please check that all fields are complete and valid.",
+      generic: "An error occurred. Please try again.",
+      network: "An error occurred. Please try again or call us directly."
+    },
+    success: "Thank you for your message. We will get back to you soon."
+  },
+  es: {
+    heading: "Contacto y Apoyo",
+    description: "Nuestro equipo compasivo está aquí para guiarlo a través de cada paso.",
+    available: "Disponible 24/7",
+    formLabels: {
+      name: "Su Nombre *",
+      email: "Su Dirección de Correo Electrónico *",
+      phone: "Número de Teléfono",
+      message: "¿Cómo podemos ayudarle? *"
+    },
+    placeholders: {
+      name: "Su nombre",
+      email: "su@correo.com",
+      phone: "(111) 111-1111",
+      message: "Cuéntenos cómo podemos ayudarlo a planificar con anticipación..."
+    },
+    submitButton: "Enviar Mensaje",
+    sending: "Enviando...",
+    validation: {
+      nameRequired: "Por favor ingrese su nombre completo",
+      emailRequired: "Por favor ingrese su dirección de correo electrónico",
+      emailInvalid: "Por favor ingrese una dirección de correo electrónico válida",
+      messageRequired: "Por favor ingrese un mensaje (al menos 10 caracteres)",
+      messageTooShort: "Por favor ingrese un mensaje (al menos 10 caracteres)"
+    },
+    errors: {
+      validation: "Ocurrió un error durante la validación. Por favor, intente nuevamente.",
+      tooManyRequests: "Demasiadas solicitudes. Por favor, intente nuevamente más tarde.",
+      validationFailed: "Por favor, verifique que todos los campos estén completos y sean válidos.",
+      generic: "Ocurrió un error. Por favor, intente nuevamente.",
+      network: "Ocurrió un error. Por favor, intente nuevamente o llámenos directamente."
+    },
+    success: "Gracias por su mensaje. Nos pondremos en contacto con usted pronto."
+  }
+};
+
+const text = content[language];
+const phone = siteDetails.phone && siteDetails.phone !== '(111) 111-1111' 
+  ? siteDetails.phone 
+  : '(111) 111-1111';
+---
+
+<!-- Contact & Support Section -->
+<section id="contact" class="py-10 md:py-24 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
+        {text.heading}
+      </h2>
+      <p class="text-base md:text-xl text-text text-center mb-6 md:mb-8">
+        {text.description}
+      </p>
+      
+      <!-- Phone Number Badge -->
+      <div class="bg-primary text-white p-4 md:p-6 rounded-lg shadow-sm mb-6 md:mb-8 text-center">
+        <p class="text-sm md:text-base text-white/90 mb-2">{text.available}</p>
+        <a
+          href={`tel:${formatPhoneTel(phone)}`}
+          class="text-2xl md:text-3xl font-bold text-white hover:text-accent transition-colors inline-block"
+        >
+          {formatPhoneDisplay(phone)}
+        </a>
+      </div>
+      
+      <div class="bg-secondary p-5 md:p-12 rounded-lg shadow-sm">
+        <form id="contact-form" class="space-y-4 md:space-y-6">
+          <!-- Honeypot field for spam prevention -->
+          <input type="text" name="honeypot" style="display: none;" tabindex="-1" autocomplete="off" />
+          
+          <div>
+            <label for="name" class="block text-sm font-semibold text-primary mb-2">
+              {text.formLabels.name}
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              autocomplete="name"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-accent focus:border-transparent"
+              placeholder={text.placeholders.name}
+            />
+          </div>
+          
+          <div>
+            <label for="email" class="block text-sm font-semibold text-primary mb-2">
+              {text.formLabels.email}
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-accent focus:border-transparent"
+              placeholder={text.placeholders.email}
+            />
+          </div>
+          
+          <div>
+            <label for="phone" class="block text-sm font-semibold text-primary mb-2">
+              {text.formLabels.phone}
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              autocomplete="tel"
+              class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-accent focus:border-transparent"
+              placeholder={text.placeholders.phone}
+            />
+          </div>
+          
+          <div>
+            <label for="message" class="block text-sm font-semibold text-primary mb-2">
+              {text.formLabels.message}
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              autocomplete="off"
+              required
+              rows="5"
+              class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-accent focus:border-transparent"
+              placeholder={text.placeholders.message}
+            ></textarea>
+          </div>
+          
+          <button
+            type="submit"
+            id="submit-button"
+            class="w-full bg-accent text-white px-6 py-3 rounded-md font-semibold text-lg hover:bg-accent-dark transition shadow-sm flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            <span id="button-text">{text.submitButton}</span>
+            <span id="button-spinner" class="hidden">
+              <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </span>
+          </button>
+          
+          <div id="form-message" class="hidden mt-4 p-4 rounded-md"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ language, text }}>
+  (function() {
+    try {
+      // Validation utility functions
+      function isValidEmail(email) {
+        try {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return emailRegex.test(email);
+        } catch (err) {
+          return false;
+        }
+      }
+
+      function validateForm(formData) {
+        try {
+          const errors = [];
+          if (!formData.name || formData.name.trim().length < 2) {
+            errors.push(text.validation.nameRequired);
+          }
+          if (!formData.email || formData.email.trim().length === 0) {
+            errors.push(text.validation.emailRequired);
+          } else if (!isValidEmail(formData.email)) {
+            errors.push(text.validation.emailInvalid);
+          }
+          if (!formData.message || formData.message.trim().length < 10) {
+            errors.push(text.validation.messageRequired);
+          }
+          return errors;
+        } catch (err) {
+          return [text.errors.validation];
+        }
+      }
+
+      function parseApiError(data) {
+        try {
+          if (data.details && Array.isArray(data.details) && data.details.length > 0) {
+            const messages = data.details.map(error => {
+              try {
+                const field = error.path?.[0] || 'field';
+                const message = error.message || '';
+                if (field === 'name' && message.includes('at least 2')) {
+                  return text.validation.nameRequired;
+                } else if (field === 'email' && message.includes('Invalid email')) {
+                  return text.validation.emailInvalid;
+                } else if (field === 'email' && message.includes('required')) {
+                  return text.validation.emailRequired;
+                } else if (field === 'message' && message.includes('at least 10')) {
+                  return text.validation.messageRequired;
+                } else if (field === 'message' && message.includes('required')) {
+                  return text.validation.messageRequired;
+                }
+                return message;
+              } catch (err) {
+                return 'Validation error';
+              }
+            });
+            return messages.length === 1 ? messages[0] : messages.join('. ');
+          }
+          if (data.error) {
+            if (data.error.includes('Too many requests')) {
+              return text.errors.tooManyRequests;
+            } else if (data.error.includes('Validation failed')) {
+              return text.errors.validationFailed;
+            }
+            return data.error;
+          }
+          return text.errors.generic;
+        } catch (err) {
+          return text.errors.generic;
+        }
+      }
+
+      // Contact form handling
+      const form = document.getElementById('contact-form');
+      const messageDiv = document.getElementById('form-message');
+
+      if (form && messageDiv) {
+        form.addEventListener('submit', async (e) => {
+          try {
+            e.preventDefault();
+            
+            const formData = {
+              name: (document.getElementById('name') as HTMLInputElement)?.value || '',
+              email: (document.getElementById('email') as HTMLInputElement)?.value || '',
+              phone: (document.getElementById('phone') as HTMLInputElement)?.value || '',
+              message: (document.getElementById('message') as HTMLTextAreaElement)?.value || '',
+              honeypot: (document.querySelector('input[name="honeypot"]') as HTMLInputElement)?.value || '',
+            };
+
+            // Client-side validation
+            const validationErrors = validateForm(formData);
+            if (validationErrors.length > 0) {
+              messageDiv.className = 'mt-4 p-4 rounded-md bg-red-100 text-red-800';
+              messageDiv.textContent = validationErrors[0];
+              messageDiv.classList.remove('hidden');
+              return;
+            }
+
+            // Show loading state
+            const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+            const buttonText = document.getElementById('button-text') as HTMLSpanElement;
+            const buttonSpinner = document.getElementById('button-spinner') as HTMLSpanElement;
+            const originalText = buttonText?.textContent || text.submitButton;
+            
+            if (submitButton && buttonText && buttonSpinner) {
+              buttonText.textContent = text.sending;
+              buttonSpinner.classList.remove('hidden');
+              submitButton.disabled = true;
+            }
+            messageDiv.classList.add('hidden');
+
+            try {
+              const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+              });
+
+              const data = await response.json();
+
+              if (response.ok) {
+                messageDiv.className = 'mt-4 p-4 rounded-md bg-green-100 text-green-800';
+                messageDiv.textContent = data.message || text.success;
+                form.reset();
+              } else {
+                messageDiv.className = 'mt-4 p-4 rounded-md bg-red-100 text-red-800';
+                messageDiv.textContent = parseApiError(data);
+              }
+            } catch (error) {
+              messageDiv.className = 'mt-4 p-4 rounded-md bg-red-100 text-red-800';
+              messageDiv.textContent = text.errors.network;
+            } finally {
+              messageDiv.classList.remove('hidden');
+              if (submitButton && buttonText && buttonSpinner) {
+                buttonText.textContent = originalText;
+                buttonSpinner.classList.add('hidden');
+                submitButton.disabled = false;
+              }
+            }
+          } catch (error) {
+            // Show user-friendly error message for critical form functionality
+            const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+            const buttonText = document.getElementById('button-text') as HTMLSpanElement;
+            const buttonSpinner = document.getElementById('button-spinner') as HTMLSpanElement;
+            const originalText = buttonText?.textContent || text.submitButton;
+            
+            if (messageDiv) {
+              messageDiv.className = 'mt-4 p-4 rounded-md bg-red-100 text-red-800';
+              messageDiv.textContent = text.errors.network;
+              messageDiv.classList.remove('hidden');
+            }
+            
+            // Reset button state
+            if (submitButton && buttonText && buttonSpinner) {
+              buttonText.textContent = originalText;
+              buttonSpinner.classList.add('hidden');
+              submitButton.disabled = false;
+            }
+          }
+        });
+      }
+    } catch (error) {
+      // Silently fail - form will still work via native HTML submission if JS fails
+    }
+  })();
+</script>

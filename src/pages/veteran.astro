@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import siteDetails from '../config/siteDetails';
 import ServiceChoicePortal from '../components/ServiceChoicePortal.astro';
 import Accordion from '../components/Accordion.astro';
+import OurStory from '../components/OurStory.astro';
+import OngoingCare from '../components/OngoingCare.astro';
+import ContactForm from '../components/ContactForm.astro';
 
 // Determine company name based on page type and language
 const pathname = Astro.url.pathname;
@@ -20,18 +23,40 @@ function getCompanyName(): string {
   }
 }
 
+function getLogoPath(): string {
+  if (isVeteran) {
+    return '/images/VeteranLogo.webp';
+  } else if (isCatholic) {
+    return isSpanish ? '/images/SpanishCathLogo.webp' : '/images/CatholicLogo.webp';
+  } else {
+    return isSpanish ? '/images/SpanishAffLogo.webp' : '/images/AffCareLogo.webp';
+  }
+}
+
 const displayCompanyName = getCompanyName();
+const logoPath = getLogoPath();
 ---
 
-<Layout title="Veteran Services - Planning Ahead" pageType="veteran" language="en">
+<Layout 
+  title="Veteran Services - Planning Ahead" 
+  description="Veteran funeral and cremation services with specialized benefits assistance. We honor our veterans and help you access all eligible benefits."
+  pageType="veteran" 
+  language="en"
+>
   <!-- Hero Section -->
   <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-8 md:py-32 overflow-hidden">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
       <img 
-        src="/images/hero.webp" 
-        alt="Peaceful memorial setting" 
-        class="w-full h-full object-cover"
+        src="/images/hero.webp"
+        srcset="/images/hero-640.webp 640w,
+                /images/hero.webp 970w"
+        sizes="(max-width: 640px) 640px,
+               970px"
+        loading="eager"
+        fetchpriority="high"
+        alt="Veteran funeral and cremation services" 
+        class="w-full h-full object-cover blur-sm"
       />
       <!-- Dark overlay for text readability -->
       <div class="absolute inset-0 bg-gradient-to-br from-primary/40 via-primary-dark/40 to-primary-light/40"></div>
@@ -42,6 +67,12 @@ const displayCompanyName = getCompanyName();
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-12 min-h-[300px] md:min-h-[500px] py-4 md:py-0">
         <!-- Company Name - Left/Top -->
         <div class="flex-1 w-full md:w-auto">
+          <img 
+            src={logoPath}
+            alt={displayCompanyName}
+            class="mb-4 md:mb-6 w-auto h-12 sm:h-14 md:h-20 lg:h-28 xl:h-36 drop-shadow-lg bg-white/90 rounded-lg p-2 sm:p-2.5 md:p-3 lg:p-3.5 xl:p-4 shadow-xl"
+            loading="eager"
+          />
           <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg" style="line-height: 1.2; letter-spacing: -0.02em;">
             {displayCompanyName}
           </h1>
@@ -67,23 +98,7 @@ const displayCompanyName = getCompanyName();
     </div>
   </section>
 
-  <!-- Our Story Section -->
-  <section class="py-10 md:py-16 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
-        <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center">
-          Our family has been a steady hand for our community for over 120 years. We believe that every life tells a unique story, and our role is to ensure that story is told with dignity, respect, and a meticulous attention to detail.
-        </p>
-        <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center mt-4 md:mt-6">
-          We understand the traditions and values that define our community. From the first call to the final farewell, we serve as more than just directors—we are neighbors caring for neighbors.
-        </p>
-        <!-- Decorative Line -->
-        <div class="flex justify-center mt-6 md:mt-8 mb-6 md:mb-8">
-          <div class="w-1/2 max-w-md h-1 bg-text/40"></div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <OurStory language={isSpanish ? 'es' : 'en'} />
 
   <ServiceChoicePortal
     cremationHeadline="Veteran Honors"
@@ -175,167 +190,7 @@ const displayCompanyName = getCompanyName();
     </div>
   </section>
 
-  <!-- Ongoing Care Section -->
-  <section class="py-10 md:py-16 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
-        <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center">
-          Our care does not end when the service concludes. We are here to assist with the practicalities of loss—from grief resources to assistance with documentation—ensuring you never have to navigate the path forward alone.
-        </p>
-      </div>
-    </div>
-  </section>
+  <OngoingCare language={isSpanish ? 'es' : 'en'} />
 
-  <!-- Contact & Support Section -->
-  <section id="contact" class="py-10 md:py-24 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-2xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
-          Contact & Support
-        </h2>
-        <p class="text-base md:text-xl text-text text-center mb-6 md:mb-8">
-          Our compassionate team is here to guide you through every step.
-        </p>
-        
-        <!-- Phone Number Badge -->
-        <div class="bg-primary text-white p-4 md:p-6 rounded-lg shadow-sm mb-6 md:mb-8 text-center">
-          <p class="text-sm md:text-base text-white/90 mb-2">Available 24/7</p>
-          <a
-            href={`tel:${siteDetails.phone.replace(/\D/g, '')}`}
-            class="text-2xl md:text-3xl font-bold text-white hover:text-accent transition-colors inline-block"
-          >
-            {siteDetails.phone}
-          </a>
-        </div>
-        
-        <div class="bg-secondary p-5 md:p-12 rounded-lg shadow-sm">
-          <form id="contact-form" class="space-y-4 md:space-y-6">
-            <!-- Honeypot field for spam prevention -->
-            <input type="text" name="honeypot" style="display: none;" tabindex="-1" autocomplete="off" />
-            
-            <div>
-              <label for="name" class="block text-sm font-semibold text-primary mb-2">
-                Full Name *
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                autocomplete="name"
-                required
-                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-accent focus:border-transparent"
-                placeholder="Your name"
-              />
-            </div>
-            
-            <div>
-              <label for="email" class="block text-sm font-semibold text-primary mb-2">
-                Email Address *
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                autocomplete="email"
-                required
-                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-accent focus:border-transparent"
-                placeholder="your@email.com"
-              />
-            </div>
-            
-            <div>
-              <label for="phone" class="block text-sm font-semibold text-primary mb-2">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                autocomplete="tel"
-                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-accent focus:border-transparent"
-                placeholder="(330) 332-4401"
-              />
-            </div>
-            
-            <div>
-              <label for="message" class="block text-sm font-semibold text-primary mb-2">
-                Message *
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                autocomplete="off"
-                required
-                rows="5"
-                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-accent focus:border-transparent"
-                placeholder="Tell us how we can help you plan ahead..."
-              ></textarea>
-            </div>
-            
-            <button
-              type="submit"
-              class="w-full bg-accent text-white px-6 py-3 rounded-md font-semibold text-lg hover:bg-accent-dark transition shadow-sm"
-            >
-              Send Message
-            </button>
-            
-            <div id="form-message" class="hidden mt-4 p-4 rounded-md"></div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    // Contact form handling
-    const form = document.getElementById('contact-form');
-    const messageDiv = document.getElementById('form-message');
-
-    form?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const formData = {
-        name: (document.getElementById('name') as HTMLInputElement).value,
-        email: (document.getElementById('email') as HTMLInputElement).value,
-        phone: (document.getElementById('phone') as HTMLInputElement).value,
-        message: (document.getElementById('message') as HTMLTextAreaElement).value,
-        honeypot: (document.querySelector('input[name="honeypot"]') as HTMLInputElement).value,
-      };
-
-      // Show loading state
-      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      const originalText = submitButton.textContent;
-      submitButton.textContent = 'Sending...';
-      submitButton.disabled = true;
-      messageDiv.classList.add('hidden');
-
-      try {
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          messageDiv.className = 'mt-4 p-4 rounded-md bg-green-100 text-green-800';
-          messageDiv.textContent = data.message || 'Thank you for your message. We will get back to you soon.';
-          form.reset();
-        } else {
-          messageDiv.className = 'mt-4 p-4 rounded-md bg-red-100 text-red-800';
-          messageDiv.textContent = data.error || 'An error occurred. Please try again.';
-        }
-      } catch (error) {
-        messageDiv.className = 'mt-4 p-4 rounded-md bg-red-100 text-red-800';
-        messageDiv.textContent = 'An error occurred. Please try again or call us directly.';
-      } finally {
-        messageDiv.classList.remove('hidden');
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-      }
-    });
-  </script>
+  <ContactForm language={isSpanish ? 'es' : 'en'} />
 </Layout>

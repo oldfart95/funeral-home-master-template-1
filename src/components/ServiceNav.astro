@@ -24,28 +24,36 @@ if (isCatholic) {
 <section class="py-4 md:py-6 bg-secondary border-b-2 border-gray-200">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="max-w-6xl mx-auto">
-      <div class="flex items-center justify-center gap-1 md:gap-2">
+      <div class="flex items-center justify-center gap-1 md:gap-2" role="tablist" aria-label={isSpanish ? "Navegación de servicios" : "Service navigation"}>
         <a
           href={cremationPath}
+          aria-label={isSpanish ? "Cremación" : "Cremation"}
+          aria-current={currentService === 'cremation' ? 'page' : undefined}
+          role="tab"
+          aria-selected={currentService === 'cremation' ? 'true' : 'false'}
           class={`px-6 md:px-8 py-3 md:py-4 font-semibold text-base md:text-lg transition-all duration-200 rounded-t-lg ${
             currentService === 'cremation'
               ? 'bg-primary text-white border-b-4 border-accent shadow-md'
               : 'bg-white text-primary hover:bg-gray-50 border-b-2 border-transparent hover:border-accent'
           }`}
         >
-          <span data-lang-en="Cremation">Cremation</span>
-          <span data-lang-es="Cremación" class="hidden">Cremación</span>
+          <span lang="en" aria-hidden={isSpanish ? 'true' : 'false'} class={isSpanish ? 'hidden' : ''}>Cremation</span>
+          <span lang="es" aria-hidden={isSpanish ? 'false' : 'true'} class={isSpanish ? '' : 'hidden'}>Cremación</span>
         </a>
         <a
           href={burialPath}
+          aria-label={isSpanish ? "Entierro" : "Burial"}
+          aria-current={currentService === 'burial' ? 'page' : undefined}
+          role="tab"
+          aria-selected={currentService === 'burial' ? 'true' : 'false'}
           class={`px-6 md:px-8 py-3 md:py-4 font-semibold text-base md:text-lg transition-all duration-200 rounded-t-lg ${
             currentService === 'burial'
               ? 'bg-primary text-white border-b-4 border-accent shadow-md'
               : 'bg-white text-primary hover:bg-gray-50 border-b-2 border-transparent hover:border-accent'
           }`}
         >
-          <span data-lang-en="Burial">Burial</span>
-          <span data-lang-es="Entierro" class="hidden">Entierro</span>
+          <span lang="en" aria-hidden={isSpanish ? 'true' : 'false'} class={isSpanish ? 'hidden' : ''}>Burial</span>
+          <span lang="es" aria-hidden={isSpanish ? 'false' : 'true'} class={isSpanish ? '' : 'hidden'}>Entierro</span>
         </a>
       </div>
     </div>
@@ -53,21 +61,23 @@ if (isCatholic) {
 </section>
 
 <script>
-  // Language detection and text switching
+  // Language detection and accessibility handling
+  // This ensures proper lang attributes and aria-hidden are set for screen readers
   (function() {
     const isSpanish = window.location.pathname.includes('-es') || window.location.pathname === '/es';
     
-    if (isSpanish) {
-      document.querySelectorAll('[data-lang-es]').forEach(el => {
-        const esText = el.getAttribute('data-lang-es');
-        if (esText) {
-          el.textContent = esText;
-          el.classList.remove('hidden');
-        }
-      });
-      document.querySelectorAll('[data-lang-en]').forEach(el => {
+    // Update all language-specific spans in ServiceNav
+    document.querySelectorAll('section[role="tablist"] span[lang]').forEach(el => {
+      const lang = el.getAttribute('lang');
+      const shouldShow = (lang === 'es' && isSpanish) || (lang === 'en' && !isSpanish);
+      
+      if (shouldShow) {
+        el.classList.remove('hidden');
+        el.setAttribute('aria-hidden', 'false');
+      } else {
         el.classList.add('hidden');
-      });
-    }
+        el.setAttribute('aria-hidden', 'true');
+      }
+    });
   })();
 </script>

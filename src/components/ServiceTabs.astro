@@ -42,43 +42,65 @@ const burialLabel = isEnglish ? 'Burial' : 'Entierro';
 
 <script>
   // Tab switching functionality
-  function initTabs() {
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const cremationContent = document.getElementById('cremation-content');
-    const burialContent = document.getElementById('burial-content');
-    
-    tabButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const tab = button.getAttribute('data-tab');
-        
-        // Update button states
-        tabButtons.forEach(btn => {
-          if (btn.getAttribute('data-tab') === tab) {
-            btn.classList.remove('bg-secondary', 'text-primary');
-            btn.classList.add('bg-primary', 'text-white', 'border-b-4', 'border-accent');
-          } else {
-            btn.classList.remove('bg-primary', 'text-white', 'border-b-4', 'border-accent');
-            btn.classList.add('bg-secondary', 'text-primary');
-          }
-        });
-        
-        // Show/hide content
-        if (tab === 'cremation' && cremationContent) {
-          cremationContent.classList.remove('hidden');
-          if (burialContent) burialContent.classList.add('hidden');
-        } else if (tab === 'burial' && burialContent) {
-          burialContent.classList.remove('hidden');
-          if (cremationContent) cremationContent.classList.add('hidden');
+  (function() {
+    try {
+      function initTabs() {
+        try {
+          const tabButtons = document.querySelectorAll('.tab-button');
+          const cremationContent = document.getElementById('cremation-content');
+          const burialContent = document.getElementById('burial-content');
+          
+          tabButtons.forEach(button => {
+            try {
+              button.addEventListener('click', () => {
+                try {
+                  const tab = button.getAttribute('data-tab');
+                  
+                  // Update button states
+                  tabButtons.forEach(btn => {
+                    try {
+                      if (btn.getAttribute('data-tab') === tab) {
+                        btn.classList.remove('bg-secondary', 'text-primary');
+                        btn.classList.add('bg-primary', 'text-white', 'border-b-4', 'border-accent');
+                      } else {
+                        btn.classList.remove('bg-primary', 'text-white', 'border-b-4', 'border-accent');
+                        btn.classList.add('bg-secondary', 'text-primary');
+                      }
+                    } catch (err) {
+                      // Silently fail for individual button state updates
+                    }
+                  });
+                  
+                  // Show/hide content
+                  if (tab === 'cremation' && cremationContent) {
+                    cremationContent.classList.remove('hidden');
+                    if (burialContent) burialContent.classList.add('hidden');
+                  } else if (tab === 'burial' && burialContent) {
+                    burialContent.classList.remove('hidden');
+                    if (cremationContent) cremationContent.classList.add('hidden');
+                  }
+                } catch (err) {
+                  // Silently fail for tab switching - non-critical feature
+                }
+              });
+            } catch (err) {
+              // Silently fail for individual button setup
+            }
+          });
+        } catch (err) {
+          // Silently fail - tabs are a non-critical enhancement
         }
-      });
-    });
-  }
-  
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTabs);
-  } else {
-    initTabs();
-  }
+      }
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTabs);
+      } else {
+        initTabs();
+      }
+    } catch (error) {
+      // Silently fail - tabs are a non-critical enhancement
+    }
+  })();
 </script>
 
 <style>

@@ -1,5 +1,6 @@
 ---
 import siteDetails from '../config/siteDetails';
+import { formatPhoneDisplay, formatPhoneTel } from '../utils/phone';
 
 interface Props {
   pageType?: 'general' | 'catholic' | 'veteran';
@@ -7,24 +8,6 @@ interface Props {
 }
 
 const { pageType = 'general', language = 'en' } = Astro.props;
-
-// Determine logo based on page type and language
-function getLogoPath(): string {
-  if (pageType === 'catholic') {
-    return language === 'es' ? '/images/SpanishCathLogo.webp' : '/images/CatholicLogo.webp';
-  } else if (pageType === 'veteran') {
-    return '/images/VeteranLogo.webp'; // Same for both languages
-  } else {
-    return language === 'es' ? '/images/SpanishAffLogo.webp' : '/images/AffCareLogo.webp';
-  }
-}
-
-const logoPath = getLogoPath();
-const logoAlt = pageType === 'catholic' 
-  ? (language === 'es' ? 'Cuidado Católico' : 'Catholic Care')
-  : pageType === 'veteran'
-  ? 'Veteran Services'
-  : (language === 'es' ? 'Cuidado AFF' : 'AFF Care');
 
 // Generate cremation link based on pageType and language
 function getCremationLink(): string {
@@ -50,13 +33,24 @@ function getBurialLink(): string {
 
 const cremationLink = getCremationLink();
 const burialLink = getBurialLink();
+
+// Get phone number (use placeholder if not set)
+const phone = siteDetails.phone && siteDetails.phone !== '(111) 111-1111' 
+  ? siteDetails.phone 
+  : '(111) 111-1111';
+
+// Check if address is available
+const hasAddress = siteDetails.address.street && siteDetails.address.city;
 ---
 
 <footer class="bg-primary text-white py-12 md:py-16 mt-auto">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 lg:gap-8 mb-8">
+      <!-- Quick Links -->
       <div>
-        <h3 class="text-xl font-heading font-bold mb-4 text-white">Quick Links</h3>
+        <h3 class="text-xl font-heading font-bold mb-4 text-white">
+          {language === 'es' ? 'Enlaces Rápidos' : 'Quick Links'}
+        </h3>
         <ul class="space-y-2">
           <li>
             <a href={cremationLink} class="text-white/80 hover:text-accent transition-colors">
@@ -71,6 +65,74 @@ const burialLink = getBurialLink();
           <li>
             <a href="#contact" class="text-white/80 hover:text-accent transition-colors">
               {language === 'es' ? 'Contáctenos' : 'Contact Us'}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h3 class="text-xl font-heading font-bold mb-4 text-white">
+          {language === 'es' ? 'Servicios' : 'Services'}
+        </h3>
+        <ul class="space-y-2">
+          <li>
+            <a href="/pre-planning" class="text-white/80 hover:text-accent transition-colors">
+              {language === 'es' ? 'Planificación Previa' : 'Pre-Planning'}
+            </a>
+          </li>
+          <li>
+            <a href="/immediate-need" class="text-white/80 hover:text-accent transition-colors">
+              {language === 'es' ? 'Necesidad Inmediata' : 'Immediate Need'}
+            </a>
+          </li>
+          <li>
+            <a href="/traditional-services" class="text-white/80 hover:text-accent transition-colors">
+              {language === 'es' ? 'Servicios Tradicionales' : 'Traditional Services'}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h3 class="text-xl font-heading font-bold mb-4 text-white">
+          {language === 'es' ? 'Empresa' : 'Company'}
+        </h3>
+        <ul class="space-y-2">
+          <li>
+            <a href="/privacy-policy" class="text-white/80 hover:text-accent transition-colors">
+              {language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
+            </a>
+          </li>
+          <li>
+            <a href="/accessibility" class="text-white/80 hover:text-accent transition-colors">
+              {language === 'es' ? 'Declaración de Accesibilidad' : 'Accessibility Statement'}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-xl font-heading font-bold mb-4 text-white">
+          {language === 'es' ? 'Contacto' : 'Contact'}
+        </h3>
+        <ul class="space-y-2">
+          {hasAddress && (
+            <li class="text-white/80">
+              <address class="not-italic">
+                {siteDetails.address.street}<br />
+                {siteDetails.address.city}, {siteDetails.address.state} {siteDetails.address.zip}
+              </address>
+            </li>
+          )}
+          <li>
+            <a 
+              href={`tel:${formatPhoneTel(phone)}`}
+              class="text-white/80 hover:text-accent transition-colors"
+            >
+              {formatPhoneDisplay(phone)}
             </a>
           </li>
         </ul>

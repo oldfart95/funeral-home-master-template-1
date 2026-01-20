@@ -1,0 +1,29 @@
+---
+interface Props {
+  language?: 'en' | 'es';
+}
+
+const { language = 'en' } = Astro.props;
+
+const content = {
+  en: {
+    text: "Our care does not end when the service concludes. We are here to assist with the practicalities of loss—from grief resources to assistance with documentation—ensuring you never have to navigate the path forward alone."
+  },
+  es: {
+    text: "Nuestro cuidado no termina cuando concluye el servicio. Estamos aquí para ayudar con las practicidades de la pérdida—desde recursos de duelo hasta asistencia con documentación—asegurando que nunca tenga que navegar el camino hacia adelante solo."
+  }
+};
+
+const text = content[language];
+---
+
+<!-- Ongoing Care Section -->
+<section class="py-10 md:py-16 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center">
+        {text.text}
+      </p>
+    </div>
+  </div>
+</section>

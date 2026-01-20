@@ -1,0 +1,38 @@
+---
+interface Props {
+  language?: 'en' | 'es';
+}
+
+const { language = 'en' } = Astro.props;
+
+const content = {
+  en: {
+    paragraph1: "Our funeral home has been a steady hand for our community for over 120 years. We believe that every life tells a unique story, and our role is to ensure that story is told with dignity, respect, and a meticulous attention to detail.",
+    paragraph2: "We understand the traditions and values that define our community. From the first call to the final farewell, we serve as more than just directors—we are neighbors caring for neighbors."
+  },
+  es: {
+    paragraph1: "Nuestra funeraria ha sido una mano firme para nuestra comunidad durante más de 120 años. Creemos que cada vida cuenta una historia única, y nuestro papel es asegurar que esa historia se cuente con dignidad, respeto y una atención meticulosa a los detalles.",
+    paragraph2: "Entendemos las tradiciones y valores que definen nuestra comunidad. Desde la primera llamada hasta la despedida final, servimos como algo más que directores: somos vecinos que cuidan a vecinos."
+  }
+};
+
+const text = content[language];
+---
+
+<!-- Our Story Section -->
+<section class="py-10 md:py-16 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center">
+        {text.paragraph1}
+      </p>
+      <p class="text-base md:text-lg lg:text-xl text-text leading-relaxed text-center mt-4 md:mt-6">
+        {text.paragraph2}
+      </p>
+      <!-- Decorative Line -->
+      <div class="flex justify-center mt-6 md:mt-8 mb-6 md:mb-8">
+        <div class="w-1/2 max-w-md h-1 bg-text/40"></div>
+      </div>
+    </div>
+  </div>
+</section>

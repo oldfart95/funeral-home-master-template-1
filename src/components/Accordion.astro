@@ -47,48 +47,70 @@ const { items, language = 'en' } = Astro.props;
 </div>
 
 <script>
-  function initAccordion() {
-    const buttons = document.querySelectorAll('.accordion-button');
-    
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const index = button.getAttribute('data-accordion-index');
-        const content = document.getElementById(`accordion-content-${index}`);
-        const icon = button.querySelector('.accordion-icon');
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        
-        if (isExpanded) {
-          // Close this item
-          content?.classList.add('hidden');
-          button.setAttribute('aria-expanded', 'false');
-          icon?.classList.remove('rotate-180');
-        } else {
-          // Close all other items
-          buttons.forEach(otherButton => {
-            const otherIndex = otherButton.getAttribute('data-accordion-index');
-            if (otherIndex !== index) {
-              const otherContent = document.getElementById(`accordion-content-${otherIndex}`);
-              const otherIcon = otherButton.querySelector('.accordion-icon');
-              otherContent?.classList.add('hidden');
-              otherButton.setAttribute('aria-expanded', 'false');
-              otherIcon?.classList.remove('rotate-180');
+  (function() {
+    try {
+      function initAccordion() {
+        try {
+          const buttons = document.querySelectorAll('.accordion-button');
+          
+          buttons.forEach(button => {
+            try {
+              button.addEventListener('click', () => {
+                try {
+                  const index = button.getAttribute('data-accordion-index');
+                  const content = document.getElementById(`accordion-content-${index}`);
+                  const icon = button.querySelector('.accordion-icon');
+                  const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                  
+                  if (isExpanded) {
+                    // Close this item
+                    content?.classList.add('hidden');
+                    button.setAttribute('aria-expanded', 'false');
+                    icon?.classList.remove('rotate-180');
+                  } else {
+                    // Close all other items
+                    buttons.forEach(otherButton => {
+                      try {
+                        const otherIndex = otherButton.getAttribute('data-accordion-index');
+                        if (otherIndex !== index) {
+                          const otherContent = document.getElementById(`accordion-content-${otherIndex}`);
+                          const otherIcon = otherButton.querySelector('.accordion-icon');
+                          otherContent?.classList.add('hidden');
+                          otherButton.setAttribute('aria-expanded', 'false');
+                          otherIcon?.classList.remove('rotate-180');
+                        }
+                      } catch (err) {
+                        // Silently fail for individual button handling
+                      }
+                    });
+                    
+                    // Open this item
+                    content?.classList.remove('hidden');
+                    button.setAttribute('aria-expanded', 'true');
+                    icon?.classList.add('rotate-180');
+                  }
+                } catch (err) {
+                  // Silently fail for accordion toggle - non-critical feature
+                }
+              });
+            } catch (err) {
+              // Silently fail for individual button setup
             }
           });
-          
-          // Open this item
-          content?.classList.remove('hidden');
-          button.setAttribute('aria-expanded', 'true');
-          icon?.classList.add('rotate-180');
+        } catch (err) {
+          // Silently fail - accordion is a non-critical enhancement
         }
-      });
-    });
-  }
-  
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAccordion);
-  } else {
-    initAccordion();
-  }
+      }
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAccordion);
+      } else {
+        initAccordion();
+      }
+    } catch (error) {
+      // Silently fail - accordion is a non-critical enhancement
+    }
+  })();
 </script>
 
 <style>
