@@ -1,0 +1,124 @@
+:root {
+    --color-primary: #5A7D7C; /* Sage Green - Calming */
+    --color-primary-dark: #466362;
+    --color-urgent: #B85C50; /* Muted Terra Cotta - Urgent but not alarmist */
+    --color-urgent-dark: #96483D;
+    --color-text: #333;
+    --color-bg-light: #F9F9F7; /* Cream */
+    --color-bg-warm: #EFEFEF;  /* Warm Grey */
+    
+    --font-heading: 'Lora', serif;
+    --font-body: 'Open Sans', sans-serif;
+}
+
+/* Base Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); line-height: 1.6; color: var(--color-text); }
+h1, h2, h3 { font-family: var(--font-heading); margin-bottom: 1rem; }
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+    border: none;
+    cursor: pointer;
+}
+.btn-primary { background: var(--color-primary); color: white; }
+.btn-primary:hover { background: var(--color-primary-dark); }
+.btn-urgent { background: var(--color-urgent); color: white; }
+.btn-urgent:hover { background: var(--color-urgent-dark); }
+.btn-large { font-size: 1.2rem; padding: 15px 30px; }
+.full-width { width: 100%; text-align: center; }
+
+/* --- Index Triage Layout --- */
+.home-body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.main-header {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+}
+.header-phone { text-decoration: none; color: var(--color-text); font-weight: bold; }
+.triage-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.triage-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+.plan-ahead { background-color: var(--color-bg-light); }
+.immediate-need { background-color: var(--color-bg-warm); border-left: 1px solid #ccc; }
+.card-content { max-width: 400px; }
+
+/* --- Mobile Stack for Index --- */
+@media (max-width: 768px) {
+    .triage-container { grid-template-columns: 1fr; }
+    .home-body { height: auto; }
+    .triage-card { padding: 4rem 1rem; }
+    .immediate-need { border-left: none; border-top: 1px solid #ccc; order: -1; } /* Urgent comes first on mobile! */
+}
+
+/* --- Immediate Need Layout --- */
+.simple-nav { padding: 1rem; background: #fff; display: flex; justify-content: space-between; border-bottom: 1px solid #eee; }
+.crisis-header {
+    background: var(--color-bg-warm);
+    padding: 3rem 1rem;
+    text-align: center;
+}
+.checklist-section, .prep-section {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+.step { margin-bottom: 1.5rem; border-left: 4px solid var(--color-urgent); padding-left: 1rem; }
+.sticky-mobile-footer {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+@media (max-width: 768px) {
+    .desktop-only { display: none; }
+    .sticky-mobile-footer { display: block; }
+    .urgent-container { padding-bottom: 80px; } /* Space for sticky footer */
+}
+
+/* --- Planning Layout --- */
+.hero-planning { background: var(--color-primary); color: white; padding: 4rem 1rem; text-align: center; }
+.planning-container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+.step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.p-step { background: var(--color-bg-light); padding: 1rem; border: 1px solid #ddd; }
+.planning-form {
+    background: var(--color-bg-light);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+.form-group input[type="text"], .form-group input[type="email"], .form-group input[type="tel"] {
+    width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;
+}
+.checkbox-group label { display: block; margin-bottom: 0.5rem; font-weight: normal; }
+
+/* Footer */
+.main-footer { text-align: center; padding: 2rem; background: #333; color: #fff; margin-top: auto; }
