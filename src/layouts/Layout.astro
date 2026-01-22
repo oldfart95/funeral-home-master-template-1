@@ -566,99 +566,111 @@ const baseSchema = generateBaseSchema();
        * Automatic language detection based on browser settings
        * Redirects to appropriate language version on first visit
        * Allows manual override via localStorage
+       * 
+       * Optimized: Uses requestIdleCallback to defer execution and avoid blocking rendering
        */
       (function() {
-        try {
-          // Only run on client-side
-          if (typeof window === 'undefined') return;
-          
-          const currentPath = window.location.pathname;
-          const isSpanishPage = currentPath.includes('-es') || currentPath === '/es';
-          const currentLang = isSpanishPage ? 'es' : 'en';
-          
-          // Check if this is the first visit (no language preference saved)
-          const hasVisited = localStorage.getItem('hasVisited');
-          const savedPreference = localStorage.getItem('preferredLanguage');
-          const languageOverride = localStorage.getItem('languageOverride');
-          
-          // If user has manually selected a language via toggle, don't auto-redirect
-          // This allows users to override browser preferences
-          if (languageOverride) {
-            // Update saved preference to match override
-            if (languageOverride !== savedPreference) {
-              localStorage.setItem('preferredLanguage', languageOverride);
-            }
-            // Don't redirect - respect user's manual choice
-            return;
-          }
-          
-          // On first visit, detect and redirect if needed
-          if (!hasVisited && !savedPreference) {
-            // Detect browser language
-            const browserLang = navigator.language || (navigator as any).userLanguage || 'en';
-            const langCode = browserLang.split('-')[0].toLowerCase();
-            let detectedLang: 'en' | 'es' = 'en';
+        // Defer execution to avoid blocking initial page render
+        const runLanguageDetection = () => {
+          try {
+            // Only run on client-side
+            if (typeof window === 'undefined') return;
             
-            // Check if browser language is Spanish
-            if (langCode === 'es') {
-              detectedLang = 'es';
-            } else if (navigator.languages) {
-              // Check all preferred languages
-              for (const lang of navigator.languages) {
-                if (lang.toLowerCase().startsWith('es')) {
-                  detectedLang = 'es';
-                  break;
-                }
-              }
-            }
+            const currentPath = window.location.pathname;
+            const isSpanishPage = currentPath.includes('-es') || currentPath === '/es';
+            const currentLang = isSpanishPage ? 'es' : 'en';
             
-            // Only redirect if detected language differs from current page
-            if (detectedLang === 'es' && currentLang === 'en' && currentPath === '/') {
-              // Redirect to Spanish version
-              const routeMap: Record<string, string> = {
-                '/': '/es',
-                '/catholic': '/catholic-es',
-                '/veteran': '/veteran-es',
-                '/cremation': '/cremation-es',
-                '/burial': '/burial-es',
-                '/catholic-cremation': '/catholic-cremation-es',
-                '/catholic-burial': '/catholic-burial-es',
-                '/veteran-cremation': '/veteran-cremation-es',
-                '/veteran-burial': '/veteran-burial-es',
-              };
-              
-              const redirectPath = routeMap[currentPath] || `${currentPath}-es`;
-              if (redirectPath !== currentPath) {
-                // Save preference to prevent redirect loops
-                localStorage.setItem('preferredLanguage', detectedLang);
-                localStorage.setItem('hasVisited', 'true');
-                window.location.href = redirectPath;
-                return;
+            // Check if this is the first visit (no language preference saved)
+            const hasVisited = localStorage.getItem('hasVisited');
+            const savedPreference = localStorage.getItem('preferredLanguage');
+            const languageOverride = localStorage.getItem('languageOverride');
+            
+            // If user has manually selected a language via toggle, don't auto-redirect
+            // This allows users to override browser preferences
+            if (languageOverride) {
+              // Update saved preference to match override
+              if (languageOverride !== savedPreference) {
+                localStorage.setItem('preferredLanguage', languageOverride);
               }
-            } else if (detectedLang === 'en' && currentLang === 'es' && currentPath === '/es') {
-              // Redirect to English version if on Spanish home and browser prefers English
-              localStorage.setItem('preferredLanguage', 'en');
-              localStorage.setItem('hasVisited', 'true');
-              window.location.href = '/';
+              // Don't redirect - respect user's manual choice
               return;
             }
             
-            // Mark as visited
-            localStorage.setItem('hasVisited', 'true');
-            localStorage.setItem('preferredLanguage', detectedLang);
-          } else if (savedPreference && savedPreference !== currentLang) {
-            // If user has a saved preference that differs from current page
-            // Only redirect on home page to avoid breaking deep links
-            if (currentPath === '/' || currentPath === '/es') {
-              const redirectPath = savedPreference === 'es' ? '/es' : '/';
-              if (redirectPath !== currentPath) {
-                window.location.href = redirectPath;
+            // On first visit, detect and redirect if needed
+            if (!hasVisited && !savedPreference) {
+              // Detect browser language
+              const browserLang = navigator.language || (navigator as any).userLanguage || 'en';
+              const langCode = browserLang.split('-')[0].toLowerCase();
+              let detectedLang: 'en' | 'es' = 'en';
+              
+              // Check if browser language is Spanish
+              if (langCode === 'es') {
+                detectedLang = 'es';
+              } else if (navigator.languages) {
+                // Check all preferred languages
+                for (const lang of navigator.languages) {
+                  if (lang.toLowerCase().startsWith('es')) {
+                    detectedLang = 'es';
+                    break;
+                  }
+                }
+              }
+              
+              // Only redirect if detected language differs from current page
+              if (detectedLang === 'es' && currentLang === 'en' && currentPath === '/') {
+                // Redirect to Spanish version
+                const routeMap: Record<string, string> = {
+                  '/': '/es',
+                  '/catholic': '/catholic-es',
+                  '/veteran': '/veteran-es',
+                  '/cremation': '/cremation-es',
+                  '/burial': '/burial-es',
+                  '/catholic-cremation': '/catholic-cremation-es',
+                  '/catholic-burial': '/catholic-burial-es',
+                  '/veteran-cremation': '/veteran-cremation-es',
+                  '/veteran-burial': '/veteran-burial-es',
+                };
+                
+                const redirectPath = routeMap[currentPath] || `${currentPath}-es`;
+                if (redirectPath !== currentPath) {
+                  // Save preference to prevent redirect loops
+                  localStorage.setItem('preferredLanguage', detectedLang);
+                  localStorage.setItem('hasVisited', 'true');
+                  window.location.href = redirectPath;
+                  return;
+                }
+              } else if (detectedLang === 'en' && currentLang === 'es' && currentPath === '/es') {
+                // Redirect to English version if on Spanish home and browser prefers English
+                localStorage.setItem('preferredLanguage', 'en');
+                localStorage.setItem('hasVisited', 'true');
+                window.location.href = '/';
                 return;
               }
+              
+              // Mark as visited
+              localStorage.setItem('hasVisited', 'true');
+              localStorage.setItem('preferredLanguage', detectedLang);
+            } else if (savedPreference && savedPreference !== currentLang) {
+              // If user has a saved preference that differs from current page
+              // Only redirect on home page to avoid breaking deep links
+              if (currentPath === '/' || currentPath === '/es') {
+                const redirectPath = savedPreference === 'es' ? '/es' : '/';
+                if (redirectPath !== currentPath) {
+                  window.location.href = redirectPath;
+                  return;
+                }
+              }
             }
+          } catch (error) {
+            // Silently fail - language detection is a non-critical enhancement
           }
-        } catch (error) {
-          // Silently fail - language detection is a non-critical enhancement
+        };
+
+        // Use requestIdleCallback if available, otherwise defer with setTimeout
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(runLanguageDetection, { timeout: 2000 });
+        } else {
+          setTimeout(runLanguageDetection, 0);
         }
       })();
     </script>
