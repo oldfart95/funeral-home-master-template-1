@@ -27,15 +27,31 @@ const projectRoot = path.resolve(__dirname, '..');
 const BASE_URL = process.env.BASE_URL || 'http://localhost:4321';
 const RESULTS_DIR = path.join(projectRoot, 'test-results', 'performance');
 
-// Core pages to test (fewer pages for performance testing as it's slower)
+// All public pages to test
 const PAGES_TO_TEST = [
+  // English pages
   '/',
   '/cremation',
   '/burial',
   '/catholic',
   '/veteran',
+  '/catholic-cremation',
+  '/catholic-burial',
+  '/veteran-cremation',
+  '/veteran-burial',
   '/immediate-need',
   '/pre-planning',
+  '/traditional-services',
+  // Spanish pages
+  '/es',
+  '/cremation-es',
+  '/burial-es',
+  '/catholic-es',
+  '/veteran-es',
+  '/catholic-cremation-es',
+  '/catholic-burial-es',
+  '/veteran-cremation-es',
+  '/veteran-burial-es',
 ];
 
 // Performance thresholds (0-100)

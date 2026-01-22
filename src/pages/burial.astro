@@ -5,7 +5,9 @@ import ServiceNav from '@/components/ServiceNav.astro';
 import Accordion from '@/components/Accordion.astro';
 import OngoingCare from '@/components/OngoingCare.astro';
 import ContactForm from '@/components/ContactForm.astro';
+import ResponsiveImage from '@/components/ResponsiveImage.astro';
 import { getFAQs } from '@/utils/faqs';
+import { images, getLogoImage } from '@/utils/images';
 
 // Determine company name based on page type and language
 const pathname = Astro.url.pathname;
@@ -23,18 +25,8 @@ function getCompanyName(): string {
   }
 }
 
-function getLogoPath(): string {
-  if (isVeteran) {
-    return '/images/VeteranLogo.webp';
-  } else if (isCatholic) {
-    return isSpanish ? '/images/SpanishCathLogo.webp' : '/images/CatholicLogo.webp';
-  } else {
-    return isSpanish ? '/images/SpanishAffLogo.webp' : '/images/AffCareLogo.webp';
-  }
-}
-
 const displayCompanyName = getCompanyName();
-const logoPath = getLogoPath();
+const logoImage = getLogoImage(isVeteran, isCatholic, isSpanish);
 
 // Generate service-specific structured data
 function generateServiceSchema() {
@@ -84,15 +76,14 @@ const serviceSchema = generateServiceSchema();
   <section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-8 md:py-32 overflow-hidden">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
-      <img 
-        src="/images/hero.webp"
-        srcset="/images/hero-640.webp 640w,
-                /images/hero.webp 970w"
-        sizes="100vw"
+      <ResponsiveImage
+        src={images.hero}
+        alt="Traditional burial services"
+        class="w-full h-full object-cover blur-sm"
         loading="eager"
         fetchpriority="high"
-        alt="Traditional burial services" 
-        class="w-full h-full object-cover blur-sm"
+        sizes="100vw"
+        widths={[640, 768, 1024, 1280, 1920]}
       />
       <!-- Dark overlay for text readability -->
       <div class="absolute inset-0 bg-gradient-to-br from-primary/40 via-primary-dark/40 to-primary-light/40"></div>
@@ -103,17 +94,12 @@ const serviceSchema = generateServiceSchema();
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-12 min-h-[300px] md:min-h-[500px] py-4 md:py-0">
         <!-- Company Name - Left/Top -->
         <div class="flex-1 w-full md:w-auto">
-          <img 
-            src={logoPath}
+          <ResponsiveImage
+            src={logoImage}
             alt={displayCompanyName}
             class="mb-4 md:mb-6 w-auto h-12 sm:h-14 md:h-20 lg:h-28 xl:h-36 drop-shadow-lg bg-white/90 rounded-lg p-2 sm:p-2.5 md:p-3 lg:p-3.5 xl:p-4 shadow-xl"
-            sizes="(max-width: 640px) 48px,
-                   (max-width: 768px) 56px,
-                   (max-width: 1024px) 80px,
-                   (max-width: 1280px) 112px,
-                   144px"
-            width="144"
-            height="144"
+            sizes="(max-width: 640px) 48px, (max-width: 768px) 56px, (max-width: 1024px) 80px, (max-width: 1280px) 112px, 144px"
+            widths={[48, 56, 80, 112, 144]}
             loading="eager"
           />
           <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg leading-hero tracking-hero">
