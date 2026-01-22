@@ -1,7 +1,7 @@
 /* empty css                                        */
 import { f as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, h as addAttribute } from '../assets/astro/server.CJ8kye3e.js';
 import 'piccolore';
-import { $ as $$Layout, a as formatPhoneDisplay, f as formatPhoneTel } from '../assets/Layout.CGO4HiXi.js';
+import { $ as $$Layout, a as formatPhoneDisplay, f as formatPhoneTel } from '../assets/Layout.BZOMPhEu.js';
 import siteDetails from '../assets/siteDetails.B9KLVKNZ.js';
 export { renderers } from '../renderers.mjs';
 

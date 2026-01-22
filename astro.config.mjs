@@ -34,17 +34,8 @@ export default defineConfig({
       // Minify JavaScript and CSS
       minify: 'esbuild', // Fast minification using esbuild
       cssMinify: true, // Minify CSS
-      // Optimize chunk splitting
-      rollupOptions: {
-        output: {
-          // Optimize chunk names for better caching
-          manualChunks: undefined,
-          // Asset file names with content hash for cache busting
-          assetFileNames: 'assets/[name].[hash][extname]',
-          chunkFileNames: 'assets/[name].[hash].js',
-          entryFileNames: 'assets/[name].[hash].js',
-        },
-      },
+      // Note: rollupOptions.output is not set to avoid conflicts with Vercel adapter
+      // The Vercel adapter handles output file naming automatically
     },
     // Optimize dependencies
     optimizeDeps: {

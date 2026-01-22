@@ -2,7 +2,7 @@ import { e as createAstro, f as createComponent, m as maybeRenderHead, r as rend
 import 'piccolore';
 import 'clsx';
 import siteDetails from './siteDetails.B9KLVKNZ.js';
-import { a as formatPhoneDisplay, f as formatPhoneTel } from './Layout.CGO4HiXi.js';
+import { a as formatPhoneDisplay, f as formatPhoneTel } from './Layout.BZOMPhEu.js';
 
 const $$Astro$1 = createAstro("https://example.com");
 const $$OngoingCare = createComponent(($$result, $$props, $$slots) => {

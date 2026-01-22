@@ -1,7 +1,7 @@
 /* empty css                                        */
 import { f as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../assets/astro/server.CJ8kye3e.js';
 import 'piccolore';
-import { $ as $$Layout } from '../assets/Layout.CGO4HiXi.js';
+import { $ as $$Layout } from '../assets/Layout.BZOMPhEu.js';
 import { $ as $$ServiceNav } from '../assets/ServiceNav.DU7wrBYK.js';
 export { renderers } from '../renderers.mjs';
 
