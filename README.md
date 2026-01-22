@@ -29,6 +29,8 @@ npm run build
 
 ## Configuration
 
+### Site Configuration
+
 To rebrand this site for a new client, update `src/config/siteDetails.ts` with:
 - Company name
 - Phone number
@@ -36,6 +38,22 @@ To rebrand this site for a new client, update `src/config/siteDetails.ts` with:
 - Email configuration
 - Theme colors
 - Social media links
+
+### Environment Variables
+
+The project uses environment variables for configuration. Set up your environment:
+
+1. Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edit `.env` and fill in your actual values:
+   - **SITE_URL** (recommended): Your site's URL for sitemap generation
+   - **SMTP_*** variables: Configure when enabling real email sending
+   - See `.env.example` for all available options and documentation
+
+**Note:** The `.env` file is gitignored and will not be committed to version control.
 
 ## Project Structure
 
@@ -64,7 +82,15 @@ The contact form API endpoint (`src/pages/api/contact.ts`) currently uses a mock
 
 1. Install an email library (e.g., `nodemailer` or `resend`)
 2. Replace the `MockEmailTransporter` class with your email provider
-3. Configure SMTP credentials via environment variables
+3. Configure SMTP credentials in your `.env` file:
+   - `SMTP_HOST` - Your SMTP server hostname
+   - `SMTP_PORT` - SMTP port (usually 587 for TLS)
+   - `SMTP_USER` - SMTP username/email
+   - `SMTP_PASS` - SMTP password or API key
+   - `EMAIL_FROM` - Sender email address
+   - `EMAIL_TO` - Recipient email address (optional)
+
+See `.env.example` for detailed configuration instructions.
 
 ## License
 

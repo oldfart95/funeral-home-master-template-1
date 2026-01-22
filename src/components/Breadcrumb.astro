@@ -54,7 +54,7 @@ if (items.length <= 1) {
 
 <style>
   .breadcrumb-container {
-    @apply py-4 px-4 sm:px-6 lg:px-8;
+    @apply py-3 px-4 sm:px-6 lg:px-8;
     background-color: var(--color-secondary);
     border-bottom: 1px solid var(--color-secondary-dark);
   }
@@ -76,14 +76,18 @@ if (items.length <= 1) {
   }
 
   .breadcrumb-link {
-    @apply text-primary hover:text-accent transition-colors duration-200;
+    @apply text-primary hover:text-accent transition-all duration-200;
     text-decoration: none;
     font-size: 0.875rem;
     font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
   }
 
   .breadcrumb-link:hover {
     text-decoration: underline;
+    transform: translateX(2px);
   }
 
   .breadcrumb-current {

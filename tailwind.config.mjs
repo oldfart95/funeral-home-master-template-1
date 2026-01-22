@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: 'class', // Enable class-based dark mode
   theme: {
     extend: {
       colors: {
@@ -15,8 +16,8 @@ export default {
           dark: '#e8e6e0',
         },
         accent: {
-          DEFAULT: '#b08d57',       // Muted Gold - Highlights
-          dark: '#8f6f44',
+          DEFAULT: '#8b6f3f',       // Muted Gold - Highlights (darkened for WCAG AA contrast)
+          dark: '#6d5632',
           sage: '#5a7d7c',          // Alternative Sage option
         },
         background: '#f9f7f2',
@@ -47,6 +48,12 @@ export default {
             },
           },
         },
+      },
+      lineHeight: {
+        'hero': '1.2',
+      },
+      letterSpacing: {
+        'hero': '-0.02em',
       },
     },
   },

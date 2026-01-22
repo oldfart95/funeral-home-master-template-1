@@ -1,6 +1,6 @@
 ---
-import siteDetails from '../config/siteDetails';
-import { formatPhoneDisplay, formatPhoneTel } from '../utils/phone';
+import siteDetails from '@/config/siteDetails';
+import { formatPhoneDisplay, formatPhoneTel } from '@/utils/phone';
 
 interface Props {
   language?: 'en' | 'es';
@@ -101,9 +101,12 @@ const phone = siteDetails.phone && siteDetails.phone !== '(111) 111-1111'
         <p class="text-sm md:text-base text-white/90 mb-2">{text.available}</p>
         <a
           href={`tel:${formatPhoneTel(phone)}`}
-          class="text-2xl md:text-3xl font-bold text-white hover:text-accent transition-colors inline-block"
+          class="text-2xl md:text-3xl font-bold text-white hover:text-accent transition-all duration-200 inline-block hover:scale-105 active:scale-95 flex items-center justify-center gap-2 group"
         >
-          {formatPhoneDisplay(phone)}
+          <svg class="w-6 h-6 md:w-7 md:h-7 transition-transform duration-200 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+          </svg>
+          <span>{formatPhoneDisplay(phone)}</span>
         </a>
       </div>
       
@@ -111,6 +114,8 @@ const phone = siteDetails.phone && siteDetails.phone !== '(111) 111-1111'
         <form id="contact-form" class="space-y-4 md:space-y-6">
           <!-- Honeypot field for spam prevention -->
           <input type="text" name="honeypot" style="display: none;" tabindex="-1" autocomplete="off" />
+          <!-- CSRF token field (hidden, populated by JavaScript) -->
+          <input type="hidden" name="csrfToken" id="csrf-token" />
           
           <div>
             <label for="name" class="block text-sm font-semibold text-primary mb-2">
@@ -174,11 +179,16 @@ const phone = siteDetails.phone && siteDetails.phone !== '(111) 111-1111'
           <button
             type="submit"
             id="submit-button"
-            class="w-full bg-accent text-white px-6 py-3 rounded-md font-semibold text-lg hover:bg-accent-dark transition shadow-sm flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+            class="w-full bg-accent text-white px-6 py-3 rounded-md font-semibold text-lg hover:bg-accent-dark transition-all duration-200 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-sm relative group"
           >
-            <span id="button-text">{text.submitButton}</span>
-            <span id="button-spinner" class="hidden">
-              <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+            <span id="button-text" class="flex items-center gap-2">
+              <span>{text.submitButton}</span>
+              <svg class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+              </svg>
+            </span>
+            <span id="button-spinner" class="hidden absolute inset-0 flex items-center justify-center">
+              <svg class="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
@@ -195,8 +205,40 @@ const phone = siteDetails.phone && siteDetails.phone !== '(111) 111-1111'
 <script define:vars={{ language, text }}>
   (function() {
     try {
-      // Validation utility functions
-      function isValidEmail(email) {
+      // Type definitions
+      interface FormData {
+        name: string;
+        email: string;
+        phone: string;
+        message: string;
+        honeypot: string;
+      }
+
+      // Standardized API Response Types (matching API route)
+      interface ApiSuccessResponse {
+        success: true;
+        message: string;
+      }
+
+      interface ApiErrorResponse {
+        success: false;
+        error: string;
+        code?: string;
+        details?: Array<{
+          path?: string[];
+          message?: string;
+        }>;
+      }
+
+      type ApiResponse = ApiSuccessResponse | ApiErrorResponse;
+
+      /**
+       * Validates an email address using regex pattern
+       * 
+       * @param email - The email address to validate
+       * @returns `true` if the email is valid, `false` otherwise
+       */
+      function isValidEmail(email: string): boolean {
         try {
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           return emailRegex.test(email);
@@ -205,9 +247,18 @@ const phone = siteDetails.phone && siteDetails.phone !== '(111) 111-1111'
         }
       }
 
-      function validateForm(formData) {
+      /**
+       * Validates form data client-side before submission
+       * 
+       * Checks all required fields and validates email format.
+       * Returns an array of error messages (empty if validation passes).
+       * 
+       * @param formData - The form data to validate
+       * @returns Array of error messages, empty if validation passes
+       */
+      function validateForm(formData: FormData): string[] {
         try {
-          const errors = [];
+          const errors: string[] = [];
           if (!formData.name || formData.name.trim().length < 2) {
             errors.push(text.validation.nameRequired);
           }
@@ -225,82 +276,248 @@ const phone = siteDetails.phone && siteDetails.phone !== '(111) 111-1111'
         }
       }
 
-      function parseApiError(data) {
+      /**
+       * Standardized error handler that matches API response format
+       * 
+       * Parses API error responses and converts them to user-friendly messages.
+       * Handles validation errors, rate limiting, and other error codes.
+       * Maps field-specific validation errors to localized messages.
+       * 
+       * @param data - The API error response object
+       * @returns A user-friendly error message string
+       */
+      function handleApiError(data: ApiErrorResponse): string {
         try {
-          if (data.details && Array.isArray(data.details) && data.details.length > 0) {
+          // Handle validation errors with field-specific messages
+          if (data.code === 'VALIDATION_ERROR' && data.details && Array.isArray(data.details) && data.details.length > 0) {
             const messages = data.details.map(error => {
               try {
                 const field = error.path?.[0] || 'field';
                 const message = error.message || '';
-                if (field === 'name' && message.includes('at least 2')) {
-                  return text.validation.nameRequired;
-                } else if (field === 'email' && message.includes('Invalid email')) {
-                  return text.validation.emailInvalid;
-                } else if (field === 'email' && message.includes('required')) {
-                  return text.validation.emailRequired;
-                } else if (field === 'message' && message.includes('at least 10')) {
-                  return text.validation.messageRequired;
-                } else if (field === 'message' && message.includes('required')) {
-                  return text.validation.messageRequired;
+                
+                // Map field-specific validation errors to user-friendly messages
+                if (field === 'name') {
+                  if (message.includes('at least 2')) {
+                    return text.validation.nameRequired;
+                  }
+                } else if (field === 'email') {
+                  if (message.includes('Invalid email') || message.includes('email')) {
+                    return text.validation.emailInvalid;
+                  }
+                  if (message.includes('required')) {
+                    return text.validation.emailRequired;
+                  }
+                } else if (field === 'message') {
+                  if (message.includes('at least 10')) {
+                    return text.validation.messageRequired;
+                  }
+                  if (message.includes('required')) {
+                    return text.validation.messageRequired;
+                  }
                 }
+                
+                // Fallback to original message if no specific mapping
                 return message;
               } catch (err) {
-                return 'Validation error';
+                return text.errors.validation;
               }
             });
+            
+            // Return first error or combined message
             return messages.length === 1 ? messages[0] : messages.join('. ');
           }
-          if (data.error) {
-            if (data.error.includes('Too many requests')) {
-              return text.errors.tooManyRequests;
-            } else if (data.error.includes('Validation failed')) {
-              return text.errors.validationFailed;
+          
+          // Handle specific error codes
+          if (data.code) {
+            switch (data.code) {
+              case 'RATE_LIMIT_EXCEEDED':
+                return text.errors.tooManyRequests;
+              case 'CSRF_TOKEN_INVALID':
+              case 'CSRF_TOKEN_ERROR':
+                // Refresh CSRF token and show error
+                fetchCsrfToken().then(token => {
+                  csrfToken = token;
+                  if (csrfTokenInput && token) {
+                    csrfTokenInput.value = token;
+                  }
+                });
+                return text.errors.validation; // Generic validation error for CSRF
+              case 'VALIDATION_ERROR':
+                return text.errors.validationFailed;
+              case 'EMAIL_SEND_FAILED':
+                return text.errors.network;
+              case 'INVALID_REQUEST':
+              case 'INVALID_JSON':
+                return text.errors.validationFailed;
+              case 'INTERNAL_SERVER_ERROR':
+                return text.errors.network;
+              default:
+                // Fall through to error message
+                break;
             }
+          }
+          
+          // Use error message if available
+          if (data.error) {
             return data.error;
           }
+          
+          // Fallback to generic error
           return text.errors.generic;
         } catch (err) {
+          // Last resort fallback
           return text.errors.generic;
+        }
+      }
+
+      /**
+       * Standardized success handler
+       * 
+       * Extracts the success message from API response.
+       * 
+       * @param data - The API success response object
+       * @returns The success message string
+       */
+      function handleApiSuccess(data: ApiSuccessResponse): string {
+        return data.message || text.success;
+      }
+
+      /**
+       * Standardized error display helper
+       * 
+       * Displays an error message in the form's message div with consistent styling.
+       * 
+       * @param message - The error message to display
+       */
+      function showError(message: string): void {
+        if (messageDiv) {
+          messageDiv.className = 'mt-4 p-4 rounded-md bg-red-100 text-red-800';
+          messageDiv.textContent = message;
+          messageDiv.classList.remove('hidden');
+        }
+      }
+
+      /**
+       * Standardized success display helper
+       * 
+       * Displays a success message in the form's message div with consistent styling.
+       * 
+       * @param message - The success message to display
+       */
+      function showSuccess(message: string): void {
+        if (messageDiv) {
+          messageDiv.className = 'mt-4 p-4 rounded-md bg-green-100 text-green-800';
+          messageDiv.textContent = message;
+          messageDiv.classList.remove('hidden');
+        }
+      }
+
+      /**
+       * Standardized loading state management
+       * 
+       * Manages the form's loading state by showing/hiding the spinner
+       * and enabling/disabling the submit button.
+       * 
+       * @param isLoading - `true` to show loading state, `false` to hide it
+       */
+      function setLoadingState(isLoading: boolean): void {
+        const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+        const buttonText = document.getElementById('button-text') as HTMLSpanElement;
+        const buttonSpinner = document.getElementById('button-spinner') as HTMLSpanElement;
+        
+        if (submitButton && buttonText && buttonSpinner) {
+          if (isLoading) {
+            buttonText.textContent = text.sending;
+            buttonText.classList.add('opacity-0');
+            buttonSpinner.classList.remove('hidden');
+            submitButton.disabled = true;
+          } else {
+            buttonText.textContent = text.submitButton;
+            buttonText.classList.remove('opacity-0');
+            buttonSpinner.classList.add('hidden');
+            submitButton.disabled = false;
+          }
+        }
+      }
+
+      /**
+       * Fetches a CSRF token from the API
+       * 
+       * @returns The CSRF token string, or null if fetch fails
+       */
+      async function fetchCsrfToken(): Promise<string | null> {
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            return data.csrfToken || null;
+          }
+          
+          return null;
+        } catch (error) {
+          console.error('Failed to fetch CSRF token:', error);
+          return null;
         }
       }
 
       // Contact form handling
       const form = document.getElementById('contact-form');
       const messageDiv = document.getElementById('form-message');
+      const csrfTokenInput = document.getElementById('csrf-token') as HTMLInputElement;
+
+      // Fetch CSRF token when form loads
+      let csrfToken: string | null = null;
+      if (form && csrfTokenInput) {
+        fetchCsrfToken().then(token => {
+          csrfToken = token;
+          if (csrfTokenInput && token) {
+            csrfTokenInput.value = token;
+          }
+        });
+      }
 
       if (form && messageDiv) {
         form.addEventListener('submit', async (e) => {
           try {
             e.preventDefault();
             
-            const formData = {
+            // Ensure we have a CSRF token before submitting
+            if (!csrfToken && csrfTokenInput) {
+              csrfToken = csrfTokenInput.value || await fetchCsrfToken();
+              if (csrfToken && csrfTokenInput) {
+                csrfTokenInput.value = csrfToken;
+              }
+            }
+            
+            if (!csrfToken) {
+              showError(text.errors.network);
+              return;
+            }
+
+            const formData: FormData = {
               name: (document.getElementById('name') as HTMLInputElement)?.value || '',
               email: (document.getElementById('email') as HTMLInputElement)?.value || '',
               phone: (document.getElementById('phone') as HTMLInputElement)?.value || '',
               message: (document.getElementById('message') as HTMLTextAreaElement)?.value || '',
               honeypot: (document.querySelector('input[name="honeypot"]') as HTMLInputElement)?.value || '',
+              csrfToken: csrfToken,
             };
 
             // Client-side validation
             const validationErrors = validateForm(formData);
             if (validationErrors.length > 0) {
-              messageDiv.className = 'mt-4 p-4 rounded-md bg-red-100 text-red-800';
-              messageDiv.textContent = validationErrors[0];
-              messageDiv.classList.remove('hidden');
+              showError(validationErrors[0]);
               return;
             }
 
             // Show loading state
-            const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-            const buttonText = document.getElementById('button-text') as HTMLSpanElement;
-            const buttonSpinner = document.getElementById('button-spinner') as HTMLSpanElement;
-            const originalText = buttonText?.textContent || text.submitButton;
-            
-            if (submitButton && buttonText && buttonSpinner) {
-              buttonText.textContent = text.sending;
-              buttonSpinner.classList.remove('hidden');
-              submitButton.disabled = true;
-            }
+            setLoadingState(true);
             messageDiv.classList.add('hidden');
 
             try {
@@ -312,46 +529,46 @@ const phone = siteDetails.phone && siteDetails.phone !== '(111) 111-1111'
                 body: JSON.stringify(formData),
               });
 
-              const data = await response.json();
+              // Parse response with proper error handling
+              let data: ApiResponse;
+              try {
+                data = await response.json() as ApiResponse;
+              } catch (parseError) {
+                // Handle JSON parse errors
+                showError(text.errors.network);
+                setLoadingState(false);
+                return;
+              }
 
-              if (response.ok) {
-                messageDiv.className = 'mt-4 p-4 rounded-md bg-green-100 text-green-800';
-                messageDiv.textContent = data.message || text.success;
+              // Handle response based on standardized format
+              if (response.ok && 'success' in data && data.success === true) {
+                showSuccess(handleApiSuccess(data));
                 form.reset();
+                // Fetch new CSRF token after successful submission
+                fetchCsrfToken().then(token => {
+                  csrfToken = token;
+                  if (csrfTokenInput && token) {
+                    csrfTokenInput.value = token;
+                  }
+                });
+              } else if ('success' in data && data.success === false) {
+                showError(handleApiError(data));
               } else {
-                messageDiv.className = 'mt-4 p-4 rounded-md bg-red-100 text-red-800';
-                messageDiv.textContent = parseApiError(data);
+                // Fallback for unexpected response format
+                showError(text.errors.generic);
               }
             } catch (error) {
-              messageDiv.className = 'mt-4 p-4 rounded-md bg-red-100 text-red-800';
-              messageDiv.textContent = text.errors.network;
+              // Handle network errors, fetch failures, etc.
+              console.error('Contact form submission error:', error);
+              showError(text.errors.network);
             } finally {
-              messageDiv.classList.remove('hidden');
-              if (submitButton && buttonText && buttonSpinner) {
-                buttonText.textContent = originalText;
-                buttonSpinner.classList.add('hidden');
-                submitButton.disabled = false;
-              }
+              setLoadingState(false);
             }
           } catch (error) {
-            // Show user-friendly error message for critical form functionality
-            const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-            const buttonText = document.getElementById('button-text') as HTMLSpanElement;
-            const buttonSpinner = document.getElementById('button-spinner') as HTMLSpanElement;
-            const originalText = buttonText?.textContent || text.submitButton;
-            
-            if (messageDiv) {
-              messageDiv.className = 'mt-4 p-4 rounded-md bg-red-100 text-red-800';
-              messageDiv.textContent = text.errors.network;
-              messageDiv.classList.remove('hidden');
-            }
-            
-            // Reset button state
-            if (submitButton && buttonText && buttonSpinner) {
-              buttonText.textContent = originalText;
-              buttonSpinner.classList.add('hidden');
-              submitButton.disabled = false;
-            }
+            // Handle unexpected errors in form submission
+            console.error('Unexpected form error:', error);
+            showError(text.errors.network);
+            setLoadingState(false);
           }
         });
       }

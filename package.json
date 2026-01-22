@@ -7,7 +7,13 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "analyze": "astro build && node scripts/analyze-bundle.js",
+    "bundle-size": "npm run analyze",
+    "test:a11y": "node scripts/test-accessibility.js",
+    "test:performance": "node scripts/test-performance.js",
+    "test:performance:prod": "node scripts/test-performance.js",
+    "test:all": "npm run test:a11y && npm run test:performance"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
@@ -17,7 +23,12 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@playwright/test": "^1.48.0",
     "@types/node": "^20.10.0",
+    "chrome-launcher": "^1.1.0",
+    "lighthouse": "^12.0.0",
+    "playwright": "^1.48.0",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.3.3"
   }

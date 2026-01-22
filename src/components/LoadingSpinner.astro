@@ -1,9 +1,15 @@
 ---
 // LoadingSpinner component - Simple CSS spinner for form submissions
 // Usage: <LoadingSpinner client:load />
+
+interface Props {
+  size?: 'small' | 'medium' | 'large';
+}
+
+const { size = 'medium' } = Astro.props;
 ---
 
-<div class="loading-spinner" aria-hidden="true">
+<div class={`loading-spinner ${size !== 'medium' ? size : ''}`} aria-hidden="true">
   <div class="spinner-circle"></div>
 </div>
 

@@ -1,16 +1,19 @@
 ---
+// Type definitions
+type ServiceType = 'cremation' | 'burial' | null;
+
 // Detect current service type and page context
-const pathname = Astro.url.pathname;
-const isSpanish = pathname.includes('-es') || pathname === '/es';
-const isCatholic = pathname.includes('catholic');
-const isVeteran = pathname.includes('veteran');
-const isCremation = pathname.includes('cremation');
-const isBurial = pathname.includes('burial');
-const currentService = isCremation ? 'cremation' : isBurial ? 'burial' : null;
+const pathname: string = Astro.url.pathname;
+const isSpanish: boolean = pathname.includes('-es') || pathname === '/es';
+const isCatholic: boolean = pathname.includes('catholic');
+const isVeteran: boolean = pathname.includes('veteran');
+const isCremation: boolean = pathname.includes('cremation');
+const isBurial: boolean = pathname.includes('burial');
+const currentService: ServiceType = isCremation ? 'cremation' : isBurial ? 'burial' : null;
 
 // Determine base paths for navigation
-let cremationPath = isSpanish ? '/cremation-es' : '/cremation';
-let burialPath = isSpanish ? '/burial-es' : '/burial';
+let cremationPath: string = isSpanish ? '/cremation-es' : '/cremation';
+let burialPath: string = isSpanish ? '/burial-es' : '/burial';
 
 if (isCatholic) {
   cremationPath = isSpanish ? '/catholic-cremation-es' : '/catholic-cremation';

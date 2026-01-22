@@ -1,9 +1,11 @@
 ---
+interface AccordionItem {
+  question: string;
+  answer: string;
+}
+
 interface Props {
-  items: Array<{
-    question: string;
-    answer: string;
-  }>;
+  items: AccordionItem[];
   language?: 'en' | 'es';
 }
 
@@ -37,6 +39,7 @@ const { items, language = 'en' } = Astro.props;
       <div
         id={`accordion-content-${index}`}
         class="accordion-content hidden px-4 md:px-6 pb-4 md:pb-6"
+        style="max-height: 0;"
       >
         <p class="text-sm md:text-base text-text leading-relaxed">
           {item.answer}
@@ -63,19 +66,42 @@ const { items, language = 'en' } = Astro.props;
                   const isExpanded = button.getAttribute('aria-expanded') === 'true';
                   
                   if (isExpanded) {
-                    // Close this item
-                    content?.classList.add('hidden');
+                    // Close this item with animation
+                    if (content) {
+                      const currentHeight = content.scrollHeight;
+                      content.style.maxHeight = `${currentHeight}px`;
+                      // Force reflow
+                      void content.offsetHeight;
+                      content.classList.add('accordion-closing');
+                      content.style.maxHeight = '0';
+                      setTimeout(() => {
+                        content.classList.add('hidden');
+                        content.classList.remove('accordion-closing');
+                        content.style.maxHeight = '';
+                      }, 300);
+                    }
                     button.setAttribute('aria-expanded', 'false');
                     icon?.classList.remove('rotate-180');
                   } else {
-                    // Close all other items
+                    // Close all other items with animation
                     buttons.forEach(otherButton => {
                       try {
                         const otherIndex = otherButton.getAttribute('data-accordion-index');
                         if (otherIndex !== index) {
                           const otherContent = document.getElementById(`accordion-content-${otherIndex}`);
                           const otherIcon = otherButton.querySelector('.accordion-icon');
-                          otherContent?.classList.add('hidden');
+                          if (otherContent && !otherContent.classList.contains('hidden')) {
+                            const currentHeight = otherContent.scrollHeight;
+                            otherContent.style.maxHeight = `${currentHeight}px`;
+                            void otherContent.offsetHeight;
+                            otherContent.classList.add('accordion-closing');
+                            otherContent.style.maxHeight = '0';
+                            setTimeout(() => {
+                              otherContent.classList.add('hidden');
+                              otherContent.classList.remove('accordion-closing');
+                              otherContent.style.maxHeight = '';
+                            }, 300);
+                          }
                           otherButton.setAttribute('aria-expanded', 'false');
                           otherIcon?.classList.remove('rotate-180');
                         }
@@ -84,8 +110,20 @@ const { items, language = 'en' } = Astro.props;
                       }
                     });
                     
-                    // Open this item
-                    content?.classList.remove('hidden');
+                    // Open this item with animation
+                    if (content) {
+                      content.classList.remove('hidden');
+                      const targetHeight = content.scrollHeight;
+                      content.style.maxHeight = '0';
+                      // Force reflow
+                      void content.offsetHeight;
+                      content.classList.add('accordion-opening');
+                      content.style.maxHeight = `${targetHeight}px`;
+                      setTimeout(() => {
+                        content.classList.remove('accordion-opening');
+                        content.style.maxHeight = '';
+                      }, 300);
+                    }
                     button.setAttribute('aria-expanded', 'true');
                     icon?.classList.add('rotate-180');
                   }
@@ -115,21 +153,33 @@ const { items, language = 'en' } = Astro.props;
 
 <style>
   .accordion-icon {
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .accordion-content {
-    animation: slideDown 0.3s ease-out;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .accordion-content.hidden {
+    max-height: 0 !important;
+    opacity: 0;
+  }
+  
+  .accordion-content.accordion-opening {
+    opacity: 1;
+  }
+  
+  .accordion-content.accordion-closing {
+    opacity: 0;
+  }
+  
+  .accordion-button {
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+  }
+  
+  .accordion-button:active {
+    transform: scale(0.98);
   }
 </style>

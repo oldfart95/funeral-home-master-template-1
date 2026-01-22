@@ -1,0 +1,46 @@
+/* empty css                                        */
+import { f as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../assets/astro/server.CJ8kye3e.js';
+import 'piccolore';
+import { $ as $$Layout } from '../assets/Layout.CGO4HiXi.js';
+import { $ as $$ServiceNav } from '../assets/ServiceNav.DU7wrBYK.js';
+export { renderers } from '../renderers.mjs';
+
+const $$TraditionalServices = createComponent(($$result, $$props, $$slots) => {
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Traditional Services - Burial Options", "description": "Explore our traditional burial services including full-service funerals, graveside ceremonies, and immediate burial options. Honor your loved one with dignity and respect.", "pageType": "general", "language": "en" }, { "default": ($$result2) => renderTemplate`  ${maybeRenderHead()}<section class="bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-12 md:py-20"> <div class="container mx-auto px-4 sm:px-6 lg:px-8"> <div class="max-w-4xl mx-auto text-center"> <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 md:mb-6">
+Traditional Services
+</h1> <p class="text-xl md:text-2xl text-white/95">
+Honoring the timeless dignity of a final resting place with grace and reverence.
+</p> </div> </div> </section>  ${renderComponent($$result2, "ServiceNav", $$ServiceNav, { "currentService": "burial", "pageType": "general", "language": "en" })}  <section class="py-10 md:py-16 bg-white"> <div class="container mx-auto px-4 sm:px-6 lg:px-8"> <div class="max-w-4xl mx-auto"> <div class="prose prose-lg max-w-none"> <p class="text-base md:text-lg text-text leading-relaxed mb-8">
+Our traditional burial services honor the timeless dignity of a final resting place with grace and reverence. We offer a range of options to meet your family's needs, from full-service funerals to simple graveside ceremonies.
+</p> <h2 class="text-2xl md:text-3xl font-heading font-bold text-primary mt-8 mb-6">
+Explore Our Burial Services
+</h2> <div class="grid md:grid-cols-3 gap-6 mb-8"> <a href="/burial" class="bg-secondary rounded-lg p-6 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-accent"> <h3 class="text-xl font-heading font-semibold text-primary mb-3">
+General Burial Services
+</h3> <p class="text-base text-text leading-relaxed">
+Traditional burial services with visitation, funeral services, and graveside ceremonies.
+</p> </a> <a href="/catholic-burial" class="bg-secondary rounded-lg p-6 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-accent"> <h3 class="text-xl font-heading font-semibold text-primary mb-3">
+Catholic Burial Services
+</h3> <p class="text-base text-text leading-relaxed">
+Burial services that honor Catholic traditions and religious observances.
+</p> </a> <a href="/veteran-burial" class="bg-secondary rounded-lg p-6 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-accent"> <h3 class="text-xl font-heading font-semibold text-primary mb-3">
+Veteran Burial Services
+</h3> <p class="text-base text-text leading-relaxed">
+Specialized burial services honoring those who served our country.
+</p> </a> </div> <div class="bg-secondary rounded-lg p-6 md:p-8 mt-8"> <h3 class="text-xl md:text-2xl font-heading font-semibold text-primary mb-4">
+What We Offer
+</h3> <ul class="space-y-3 text-base md:text-lg text-text"> <li class="flex items-start"> <span class="text-accent mr-3 font-bold">•</span> <span>Full-service funerals with visitation and ceremony</span> </li> <li class="flex items-start"> <span class="text-accent mr-3 font-bold">•</span> <span>Simple graveside ceremonies</span> </li> <li class="flex items-start"> <span class="text-accent mr-3 font-bold">•</span> <span>Immediate burial options</span> </li> <li class="flex items-start"> <span class="text-accent mr-3 font-bold">•</span> <span>Customized services to honor your family's traditions</span> </li> <li class="flex items-start"> <span class="text-accent mr-3 font-bold">•</span> <span>Professional guidance through every step</span> </li> </ul> </div> </div> </div> </div> </section> ` })}`;
+}, "C:/Users/User A/Documents/GitHub/funeral-home-landing-site/src/pages/traditional-services.astro", void 0);
+
+const $$file = "C:/Users/User A/Documents/GitHub/funeral-home-landing-site/src/pages/traditional-services.astro";
+const $$url = "/traditional-services";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$TraditionalServices,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };

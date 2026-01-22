@@ -1,0 +1,158 @@
+---
+// Page Loading Overlay Component
+// Shows a loading indicator during page transitions
+// Usage: Include in Layout.astro
+---
+
+<div id="page-loading-overlay" class="page-loading-overlay" aria-hidden="true" aria-live="polite">
+  <div class="loading-content">
+    <div class="loading-spinner">
+      <div class="spinner-circle"></div>
+    </div>
+    <p class="loading-text">Loading...</p>
+  </div>
+</div>
+
+<style>
+  .page-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .page-loading-overlay.active {
+    display: flex;
+    opacity: 1;
+  }
+  
+  .loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .loading-spinner {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .spinner-circle {
+    width: 100%;
+    height: 100%;
+    border: 4px solid var(--color-primary);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loading-text {
+    color: var(--color-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--font-body, 'Inter', sans-serif);
+  }
+  
+  /* Dark mode support */
+  .dark .page-loading-overlay {
+    background-color: rgba(15, 15, 15, 0.95);
+  }
+  
+  .dark .loading-text {
+    color: var(--color-text);
+  }
+  
+  .dark .spinner-circle {
+    border-color: var(--color-accent);
+    border-top-color: transparent;
+  }
+</style>
+
+<script>
+  // Page Loading State Management
+  (function() {
+    try {
+      let loadingTimeout;
+      const overlay = document.getElementById('page-loading-overlay');
+      
+      if (!overlay) return;
+      
+      // Show loading overlay
+      function showLoading() {
+        if (overlay) {
+          clearTimeout(loadingTimeout);
+          overlay.classList.add('active');
+          overlay.setAttribute('aria-hidden', 'false');
+        }
+      }
+      
+      // Hide loading overlay
+      function hideLoading() {
+        if (overlay) {
+          overlay.classList.remove('active');
+          overlay.setAttribute('aria-hidden', 'true');
+        }
+      }
+      
+      // Handle link clicks
+      function handleLinkClick(e) {
+        const link = e.target.closest('a.page-link, a[href^="/"], a[href^="#"]');
+        
+        if (!link) return;
+        
+        // Skip if it's an external link, anchor link, or special protocol
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('http')) {
+          return;
+        }
+        
+        // Show loading after a short delay (to avoid flash on fast connections)
+        loadingTimeout = setTimeout(() => {
+          showLoading();
+        }, 150);
+      }
+      
+      // Handle page load completion
+      function handlePageLoad() {
+        hideLoading();
+        clearTimeout(loadingTimeout);
+      }
+      
+      // Listen for link clicks
+      document.addEventListener('click', handleLinkClick, true);
+      
+      // Hide loading when page is fully loaded
+      if (document.readyState === 'complete') {
+        hideLoading();
+      } else {
+        window.addEventListener('load', handlePageLoad);
+        document.addEventListener('DOMContentLoaded', () => {
+          // Hide any existing loading state after DOM is ready
+          setTimeout(hideLoading, 100);
+        });
+      }
+      
+      // Also hide on popstate (back/forward navigation)
+      window.addEventListener('popstate', handlePageLoad);
+      
+    } catch (error) {
+      // Silently fail - loading overlay is a non-critical enhancement
+    }
+  })();
+</script>

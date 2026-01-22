@@ -1,9 +1,10 @@
 ---
-import siteDetails from '../config/siteDetails';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import BackToTop from '../components/BackToTop.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import siteDetails from '@/config/siteDetails';
+import Navbar from '@/components/Navbar.astro';
+import Footer from '@/components/Footer.astro';
+import BackToTop from '@/components/BackToTop.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import PageLoadingOverlay from '@/components/PageLoadingOverlay.astro';
 
 interface Props {
   title?: string;
@@ -209,12 +210,18 @@ function generateBreadcrumbs(): Array<{ label: string; href: string }> {
 
 const breadcrumbItems = generateBreadcrumbs();
 
-// Determine favicon based on page type
-const faviconPath = detectedPageType === 'veteran' 
-  ? '/images/VeteranLogo.webp'
-  : detectedPageType === 'catholic'
-  ? '/images/CatholicLogo.webp'
-  : '/images/AffCareLogo.webp';
+// Determine favicon paths based on page type
+const faviconConfig = detectedPageType === 'veteran' 
+  ? {
+      standard: '/favicon-veteran.webp',
+      highDpi: '/favicon-veteran-high-dpi.webp',
+      appleTouch: '/favicon-veteran-apple-touch.webp',
+    }
+  : {
+      standard: '/favicon.webp',
+      highDpi: '/favicon-high-dpi.webp',
+      appleTouch: '/favicon-apple-touch.webp',
+    };
 
 // Generate base structured data (Schema.org JSON-LD)
 function generateBaseSchema() {
@@ -296,8 +303,12 @@ const baseSchema = generateBaseSchema();
     <meta charset="UTF-8" />
     <meta name="description" content={pageDescription} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/webp" href={faviconPath} />
-    <link rel="apple-touch-icon" href={faviconPath} />
+    
+    <!-- Favicons - WebP format for optimal performance -->
+    <link rel="icon" type="image/webp" href={faviconConfig.standard} />
+    <link rel="icon" type="image/webp" href={faviconConfig.highDpi} sizes="32x32" />
+    <link rel="apple-touch-icon" href={faviconConfig.appleTouch} />
+    
     <meta name="generator" content={Astro.generator} />
     
     <!-- Open Graph / Facebook -->
@@ -330,11 +341,45 @@ const baseSchema = generateBaseSchema();
     <link rel="preload" as="image" href="/images/hero.webp" imagesrcset="/images/hero-640.webp 640w, /images/hero.webp 970w" imagesizes="(max-width: 640px) 640px, 970px" />
     
     <!-- Google Fonts: Merriweather (headings) + Inter (body) -->
+    <!-- Resource hints for faster font loading -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Load fonts asynchronously to prevent render-blocking -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    </noscript>
     
     <title>{pageTitle}</title>
+    <!-- Early dark mode detection to prevent flash -->
+    <script>
+      (function() {
+        try {
+          function getDarkModePreference() {
+            try {
+              const saved = localStorage.getItem('darkMode');
+              if (saved !== null) {
+                return saved === 'true';
+              }
+              if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return true;
+              }
+              return false;
+            } catch (err) {
+              return false;
+            }
+          }
+          
+          if (getDarkModePreference()) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (err) {
+          // Silently fail
+        }
+      })();
+    </script>
     <style>
       /* Ensure colors are applied */
       :root {
@@ -343,10 +388,145 @@ const baseSchema = generateBaseSchema();
         --color-primary-light: #2d5a4f;
         --color-secondary: #f9f7f2;
         --color-secondary-dark: #e8e6e0;
-        --color-accent: #b08d57;
-        --color-accent-dark: #8f6f44;
+        --color-accent: #8b6f3f;
+        --color-accent-dark: #6d5632;
         --color-background: #f9f7f2;
         --color-text: #2d2d2d;
+      }
+      
+      /* Font display strategy - prevents layout shift during font loading */
+      @font-face {
+        font-family: 'Merriweather';
+        font-display: swap;
+      }
+      
+      @font-face {
+        font-family: 'Inter';
+        font-display: swap;
+      }
+      
+      /* Dark mode color variables */
+      .dark {
+        --color-primary: #2d5a4f;
+        --color-primary-dark: #1a3b34;
+        --color-primary-light: #3d6a5f;
+        --color-secondary: #1a1a1a;
+        --color-secondary-dark: #2d2d2d;
+        --color-accent: #a6895f;
+        --color-accent-dark: #8b6f3f;
+        --color-background: #0f0f0f;
+        --color-text: #e8e8e8;
+      }
+      
+      /* Dark mode styles */
+      .dark body {
+        background-color: var(--color-background);
+        color: var(--color-text);
+      }
+      
+      .dark .bg-primary {
+        background-color: var(--color-primary);
+      }
+      
+      .dark .bg-secondary {
+        background-color: var(--color-secondary);
+      }
+      
+      .dark .bg-background {
+        background-color: var(--color-background);
+      }
+      
+      .dark .text-primary {
+        color: var(--color-primary-light);
+      }
+      
+      .dark .text-text {
+        color: var(--color-text);
+      }
+      
+      .dark .text-white {
+        color: #ffffff;
+      }
+      
+      .dark nav {
+        background-color: var(--color-primary-dark);
+      }
+      
+      .dark .bg-secondary {
+        background-color: var(--color-secondary);
+      }
+      
+      .dark .hover\:bg-secondary\/80:hover {
+        background-color: var(--color-secondary-dark);
+      }
+      
+      .dark .border-gray-200 {
+        border-color: #374151;
+      }
+      
+      .dark .hover\:bg-gray-100:hover {
+        background-color: var(--color-secondary-dark);
+      }
+      
+      /* Smooth transitions for dark mode */
+      * {
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      }
+      
+      /* Exclude certain elements from transition */
+      img,
+      video,
+      canvas,
+      audio,
+      iframe,
+      embed,
+      object {
+        transition: none;
+      }
+      
+      /* Enhanced link hover effects */
+      a:not(.btn):not(.nav-link):not(.footer-link) {
+        transition: color 0.2s ease, transform 0.2s ease;
+      }
+      
+      a:not(.btn):not(.nav-link):not(.footer-link):hover {
+        transform: translateX(2px);
+      }
+      
+      /* Navigation link hover effects */
+      .nav-link:not([aria-current="page"]):hover {
+        transform: translateY(-1px);
+      }
+      
+      /* Footer link hover effects */
+      .footer-link:hover {
+        transform: translateX(4px);
+      }
+      
+      /* SVG icons should have smooth transitions */
+      svg {
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+      
+      /* Skip to main content link - hidden by default, visible on focus */
+      .skip-to-content {
+        position: absolute;
+        top: -100px;
+        left: 0;
+        z-index: 100;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--color-primary);
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        border-radius: 0 0 0.375rem 0;
+        transition: top 0.2s ease;
+      }
+      
+      .skip-to-content:focus {
+        top: 0;
+        outline: 3px solid var(--color-accent);
+        outline-offset: 2px;
       }
       
       /* Prevent horizontal overflow globally */
@@ -363,11 +543,15 @@ const baseSchema = generateBaseSchema();
       }
     </style>
   </head>
-  <body class="font-body text-text bg-background min-h-screen flex flex-col antialiased">
+  <body class="font-body text-text bg-background min-h-screen flex flex-col antialiased relative">
     <!-- Skip to main content link for keyboard navigation -->
-    <a href="#main-content" class="btn btn-primary btn-sm sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50">
+    <a 
+      href="#main-content" 
+      class="skip-to-content"
+    >
       {detectedLanguage === 'es' ? 'Saltar al contenido principal' : 'Skip to main content'}
     </a>
+    <PageLoadingOverlay />
     <Navbar />
     <Breadcrumb items={breadcrumbItems} />
     <main id="main-content" class="flex-grow">
@@ -375,6 +559,109 @@ const baseSchema = generateBaseSchema();
     </main>
     <Footer pageType={detectedPageType} language={detectedLanguage} />
     <BackToTop />
+    
+    <!-- Language Detection Script -->
+    <script>
+      /**
+       * Automatic language detection based on browser settings
+       * Redirects to appropriate language version on first visit
+       * Allows manual override via localStorage
+       */
+      (function() {
+        try {
+          // Only run on client-side
+          if (typeof window === 'undefined') return;
+          
+          const currentPath = window.location.pathname;
+          const isSpanishPage = currentPath.includes('-es') || currentPath === '/es';
+          const currentLang = isSpanishPage ? 'es' : 'en';
+          
+          // Check if this is the first visit (no language preference saved)
+          const hasVisited = localStorage.getItem('hasVisited');
+          const savedPreference = localStorage.getItem('preferredLanguage');
+          const languageOverride = localStorage.getItem('languageOverride');
+          
+          // If user has manually selected a language via toggle, don't auto-redirect
+          // This allows users to override browser preferences
+          if (languageOverride) {
+            // Update saved preference to match override
+            if (languageOverride !== savedPreference) {
+              localStorage.setItem('preferredLanguage', languageOverride);
+            }
+            // Don't redirect - respect user's manual choice
+            return;
+          }
+          
+          // On first visit, detect and redirect if needed
+          if (!hasVisited && !savedPreference) {
+            // Detect browser language
+            const browserLang = navigator.language || (navigator as any).userLanguage || 'en';
+            const langCode = browserLang.split('-')[0].toLowerCase();
+            let detectedLang: 'en' | 'es' = 'en';
+            
+            // Check if browser language is Spanish
+            if (langCode === 'es') {
+              detectedLang = 'es';
+            } else if (navigator.languages) {
+              // Check all preferred languages
+              for (const lang of navigator.languages) {
+                if (lang.toLowerCase().startsWith('es')) {
+                  detectedLang = 'es';
+                  break;
+                }
+              }
+            }
+            
+            // Only redirect if detected language differs from current page
+            if (detectedLang === 'es' && currentLang === 'en' && currentPath === '/') {
+              // Redirect to Spanish version
+              const routeMap: Record<string, string> = {
+                '/': '/es',
+                '/catholic': '/catholic-es',
+                '/veteran': '/veteran-es',
+                '/cremation': '/cremation-es',
+                '/burial': '/burial-es',
+                '/catholic-cremation': '/catholic-cremation-es',
+                '/catholic-burial': '/catholic-burial-es',
+                '/veteran-cremation': '/veteran-cremation-es',
+                '/veteran-burial': '/veteran-burial-es',
+              };
+              
+              const redirectPath = routeMap[currentPath] || `${currentPath}-es`;
+              if (redirectPath !== currentPath) {
+                // Save preference to prevent redirect loops
+                localStorage.setItem('preferredLanguage', detectedLang);
+                localStorage.setItem('hasVisited', 'true');
+                window.location.href = redirectPath;
+                return;
+              }
+            } else if (detectedLang === 'en' && currentLang === 'es' && currentPath === '/es') {
+              // Redirect to English version if on Spanish home and browser prefers English
+              localStorage.setItem('preferredLanguage', 'en');
+              localStorage.setItem('hasVisited', 'true');
+              window.location.href = '/';
+              return;
+            }
+            
+            // Mark as visited
+            localStorage.setItem('hasVisited', 'true');
+            localStorage.setItem('preferredLanguage', detectedLang);
+          } else if (savedPreference && savedPreference !== currentLang) {
+            // If user has a saved preference that differs from current page
+            // Only redirect on home page to avoid breaking deep links
+            if (currentPath === '/' || currentPath === '/es') {
+              const redirectPath = savedPreference === 'es' ? '/es' : '/';
+              if (redirectPath !== currentPath) {
+                window.location.href = redirectPath;
+                return;
+              }
+            }
+          }
+        } catch (error) {
+          // Silently fail - language detection is a non-critical enhancement
+        }
+      })();
+    </script>
     
     <style>
       /* Enhanced focus-visible states for accessibility */
@@ -413,10 +700,12 @@ const baseSchema = generateBaseSchema();
         font-weight: 600;
         text-align: center;
         text-decoration: none;
-        transition: all 0.2s ease-in-out;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         cursor: pointer;
         border: none;
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
       }
 
       /* Allow flex to override display for buttons that need it */
@@ -427,6 +716,17 @@ const baseSchema = generateBaseSchema();
       .btn:disabled {
         opacity: 0.7;
         cursor: not-allowed;
+      }
+
+      /* Button hover effects */
+      .btn:not(:disabled):hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      .btn:not(:disabled):active {
+        transform: translateY(0);
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
       }
 
       /* Button Variants */

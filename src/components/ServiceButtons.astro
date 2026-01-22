@@ -1,11 +1,26 @@
 ---
+// Type definitions
+type PageType = 'general' | 'catholic' | 'veteran';
+type Language = 'en' | 'es';
+
+interface ButtonText {
+  en: string;
+  es: string;
+}
+
+interface ButtonTexts {
+  general: ButtonText;
+  catholic: ButtonText;
+  veteran: ButtonText;
+}
+
 // Detect current page type and language from URL
-const pathname = Astro.url.pathname;
-const isSpanish = pathname.includes('-es') || pathname === '/es';
-const isCatholic = pathname.includes('catholic');
-const isVeteran = pathname.includes('veteran');
-const currentPageType = isVeteran ? 'veteran' : isCatholic ? 'catholic' : 'general';
-const language = isSpanish ? 'es' : 'en';
+const pathname: string = Astro.url.pathname;
+const isSpanish: boolean = pathname.includes('-es') || pathname === '/es';
+const isCatholic: boolean = pathname.includes('catholic');
+const isVeteran: boolean = pathname.includes('veteran');
+const currentPageType: PageType = isVeteran ? 'veteran' : isCatholic ? 'catholic' : 'general';
+const language: Language = isSpanish ? 'es' : 'en';
 
 // Determine URLs based on page type and language
 function getCremationUrl(): string {
@@ -28,22 +43,22 @@ function getBurialUrl(): string {
   }
 }
 
-const cremationUrl = getCremationUrl();
-const burialUrl = getBurialUrl();
+const cremationUrl: string = getCremationUrl();
+const burialUrl: string = getBurialUrl();
 
 // Text content for both languages
-const introText = {
+const introText: Record<Language, string> = {
   en: 'We offer both cremation and burial services - choose the option that best fits your needs and beliefs.',
   es: 'Ofrecemos servicios de cremación y entierro - elija la opción que mejor se adapte a sus necesidades y creencias.'
 };
 
-const cremationButtonText = {
+const cremationButtonText: ButtonTexts = {
   general: { en: 'Learn About Cremation', es: 'Conozca Sobre la Cremación' },
   catholic: { en: 'Learn About Catholic Cremation', es: 'Conozca Sobre la Cremación Católica' },
   veteran: { en: 'Learn About Veteran Cremation', es: 'Conozca Sobre la Cremación para Veteranos' }
 };
 
-const burialButtonText = {
+const burialButtonText: ButtonTexts = {
   general: { en: 'Learn About Burial', es: 'Conozca Sobre el Entierro' },
   catholic: { en: 'Learn About Catholic Burial', es: 'Conozca Sobre el Entierro Católico' },
   veteran: { en: 'Learn About Veteran Burial', es: 'Conozca Sobre el Entierro para Veteranos' }
@@ -64,19 +79,29 @@ const burialButtonText = {
       <div class="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center">
         <a
           href={cremationUrl}
-          class="btn btn-accent btn-lg w-full sm:w-auto"
+          class="btn btn-accent btn-lg w-full sm:w-auto group"
           data-lang-en={cremationButtonText[currentPageType].en}
           data-lang-es={cremationButtonText[currentPageType].es}
         >
-          {cremationButtonText[currentPageType][language]}
+          <span class="flex items-center justify-center gap-2">
+            <span>{cremationButtonText[currentPageType][language]}</span>
+            <svg class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </span>
         </a>
         <a
           href={burialUrl}
-          class="btn btn-primary btn-lg w-full sm:w-auto"
+          class="btn btn-primary btn-lg w-full sm:w-auto group"
           data-lang-en={burialButtonText[currentPageType].en}
           data-lang-es={burialButtonText[currentPageType].es}
         >
-          {burialButtonText[currentPageType][language]}
+          <span class="flex items-center justify-center gap-2">
+            <span>{burialButtonText[currentPageType][language]}</span>
+            <svg class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </span>
         </a>
       </div>
     </div>

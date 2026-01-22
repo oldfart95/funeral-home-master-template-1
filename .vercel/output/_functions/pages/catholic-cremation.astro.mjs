@@ -1,0 +1,145 @@
+/* empty css                                        */
+import { e as createAstro, f as createComponent, k as renderComponent, r as renderTemplate, h as addAttribute, m as maybeRenderHead, u as unescapeHTML } from '../assets/astro/server.CJ8kye3e.js';
+import 'piccolore';
+import { $ as $$Layout } from '../assets/Layout.CGO4HiXi.js';
+import siteDetails from '../assets/siteDetails.B9KLVKNZ.js';
+import { $ as $$ServiceNav } from '../assets/ServiceNav.DU7wrBYK.js';
+import { $ as $$Accordion, g as getFAQs } from '../assets/faqs.D1YdrLNw.js';
+import { $ as $$ContactForm, a as $$OngoingCare } from '../assets/ContactForm.DvREuagq.js';
+export { renderers } from '../renderers.mjs';
+
+var __freeze = Object.freeze;
+var __defProp = Object.defineProperty;
+var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(cooked.slice()) }));
+var _a;
+const $$Astro = createAstro("https://example.com");
+const $$CatholicCremation = createComponent(($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
+  Astro2.self = $$CatholicCremation;
+  const pathname = Astro2.url.pathname;
+  const isSpanish = pathname.includes("-es") || pathname === "/es";
+  const isCatholic = pathname.includes("catholic");
+  const isVeteran = pathname.includes("veteran");
+  function getCompanyName() {
+    if (isVeteran) {
+      return isSpanish ? "Cuidado de Veteranos" : "Veteran Care";
+    } else if (isCatholic) {
+      return isSpanish ? "Cuidado Cat\xF3lico" : "Catholic Care";
+    } else {
+      return isSpanish ? "Cuidado Asequible" : "Affordable Care";
+    }
+  }
+  function getLogoPath() {
+    if (isVeteran) {
+      return "/images/VeteranLogo.webp";
+    } else if (isCatholic) {
+      return isSpanish ? "/images/SpanishCathLogo.webp" : "/images/CatholicLogo.webp";
+    } else {
+      return isSpanish ? "/images/SpanishAffLogo.webp" : "/images/AffCareLogo.webp";
+    }
+  }
+  const displayCompanyName = getCompanyName();
+  const logoPath = getLogoPath();
+  function generateServiceSchema() {
+    const baseUrl = Astro2.site?.href || Astro2.url.origin;
+    const phone = siteDetails.phone && siteDetails.phone !== "(111) 111-1111" ? siteDetails.phone : "(111) 111-1111";
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "Catholic Cremation Services",
+      description: "Catholic cremation services following Church teachings. Proper burial of ashes in sacred ground. We guide you through the proper Catholic cremation process.",
+      provider: {
+        "@type": "FuneralHome",
+        name: siteDetails.companyName,
+        telephone: phone,
+        url: baseUrl
+      },
+      serviceType: "Funeral Service",
+      areaServed: {
+        "@type": "Country",
+        name: "United States"
+      },
+      offers: {
+        "@type": "Offer",
+        priceRange: "$$",
+        description: "Catholic cremation services that honor Church traditions"
+      }
+    };
+    return JSON.stringify(schema);
+  }
+  const serviceSchema = generateServiceSchema();
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Catholic Cremation Services - Planning Ahead", "description": "Catholic cremation services following Church teachings. Proper burial of ashes in sacred ground. We guide you through the proper Catholic cremation process.", "pageType": "catholic", "language": "en" }, { "default": ($$result2) => renderTemplate(_a || (_a = __template(['  <script type="application/ld+json">', "<\/script>  ", '<section class="relative bg-gradient-to-br from-primary via-primary-dark to-primary-light text-white py-8 md:py-32 overflow-hidden"> <!-- Background Image with Overlay --> <div class="absolute inset-0 z-0"> <img src="/images/hero.webp" srcset="/images/hero-640.webp 640w,\n                /images/hero.webp 970w" sizes="(max-width: 640px) 640px,\n               970px" loading="eager" fetchpriority="high" alt="Catholic cremation services" class="w-full h-full object-cover blur-sm"> <!-- Dark overlay for text readability --> <div class="absolute inset-0 bg-gradient-to-br from-primary/40 via-primary-dark/40 to-primary-light/40"></div> </div> <!-- Content --> <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-12 min-h-[300px] md:min-h-[500px] py-4 md:py-0"> <!-- Company Name - Left/Top --> <div class="flex-1 w-full md:w-auto"> <img', "", ' class="mb-4 md:mb-6 w-auto h-12 sm:h-14 md:h-20 lg:h-28 xl:h-36 drop-shadow-lg bg-white/90 rounded-lg p-2 sm:p-2.5 md:p-3 lg:p-3.5 xl:p-4 shadow-xl" loading="eager"> <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading font-bold drop-shadow-lg leading-hero tracking-hero"> ', ` </h1> </div> <!-- Hero Text - Center Right --> <div class="flex-1 w-full md:flex-none md:w-1/2 lg:w-2/5 text-left md:text-right mt-4 md:mt-0"> <h2 class="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-heading font-bold mb-3 md:mb-6 drop-shadow-lg leading-hero tracking-hero">
+Planning Ahead for Peace of Mind and Faith
+</h2> <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-md text-left md:text-right">
+Thinking about the end of life can be hard. However, making plans now is one of the best gifts you can give to your family. For Catholics, planning ahead is also a way to show our faith. We believe that death is not the end. It is a change. We believe that we will be with God.
+</p> </div> </div> </div> <!-- Attribution Footnote --> <div class="absolute bottom-0 right-0 z-10 px-4 sm:px-6 lg:px-8 pb-3 md:pb-4"> <p class="text-xs sm:text-sm text-white/80 drop-shadow-md text-right">
+Provided by Arbaugh-Pearce-Greenisen & Sons
+</p> </div> </section>  <section class="py-8 md:py-12 bg-white"> <div class="container mx-auto px-4 sm:px-6 lg:px-8"> <div class="max-w-4xl mx-auto"> <div class="bg-secondary p-6 md:p-8 rounded-lg shadow-sm border-t-4 border-accent"> <p class="text-base md:text-lg text-text leading-relaxed text-center">
+We offer comprehensive cremation and burial services for Catholic families. Both options are available and fully respected within the teachings of the Catholic Church. <strong>Important:</strong> The Catholic Church requires that all remains, whether cremated or not, must be interred in consecrated ground, such as a Catholic cemetery. This sacred requirement honors the dignity of the human body and reflects our faith in the resurrection. All arrangements align with Catholic teachings and your family's wishes.
+</p> </div> </div> </div> </section>  `, `  <section class="py-10 md:py-24 bg-secondary"> <div class="container mx-auto px-4 sm:px-6 lg:px-8"> <div class="max-w-4xl mx-auto"> <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
+The Catholic Church and Cremation
+</h2> <div class="bg-white p-5 md:p-8 rounded-lg shadow-sm space-y-4"> <p class="text-sm md:text-base text-text leading-relaxed">
+For a long time, the Catholic Church did not allow cremation. In 1963, the Church changed this rule. Now, Catholics are allowed to be cremated. However, the Church still prefers that the body be buried. This is because Jesus was buried in a tomb. We want to follow His example.
+</p> <p class="text-sm md:text-base text-text leading-relaxed">
+Even though cremation is allowed, there are special rules we must follow. These rules show respect for the human body. Our bodies are holy. They are "temples of the Holy Spirit." We believe that one day, God will raise our bodies up again. Because of this, we must treat ashes with the same respect as a full body.
+</p> </div> </div> </div> </section>  <section class="py-10 md:py-24 bg-white"> <div class="container mx-auto px-4 sm:px-6 lg:px-8"> <div class="max-w-4xl mx-auto"> <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
+Important Rules for Catholic Cremation: The Official Church Laws
+</h2> <div class="bg-secondary p-5 md:p-8 rounded-lg shadow-sm"> <p class="text-sm md:text-base text-text leading-relaxed mb-6">
+If you choose cremation, the Dioceses of Youngstown, Cleveland, and Pittsburgh follow the official rules from the Vatican and the Code of Canon Law. These laws make sure we treat our bodies with respect.
+</p> <ol class="space-y-4 text-sm md:text-base text-text"> <li class="flex items-start"> <span class="font-bold text-primary mr-3">1.</span> <span><strong>The Ashes Must Stay in a Holy Place (Instruction No. 5):</strong> The Church says ashes must be placed in a holy spot, like a cemetery or a special wall called a columbarium. You cannot keep the ashes at home on a shelf or in a closet. This lets the whole Church community remember and pray for you.</span> </li> <li class="flex items-start"> <span class="font-bold text-primary mr-3">2.</span> <span><strong>Sacred Ground (Canon 1176):</strong> Even though cremation is allowed, the Church still prefers a Catholic cemetery. This is "Holy Ground". It shows we believe we will rise again one day, and it gives your family a special place to visit and pray.</span> </li> <li class="flex items-start"> <span class="font-bold text-primary mr-3">3.</span> <span><strong>No Scattering (Instruction No. 7):</strong> You are not allowed to scatter ashes. You cannot let them go in the wind, on the ground, or on top of the water.</span> </li> <li class="flex items-start"> <span class="font-bold text-primary mr-3">4.</span> <span><strong>Do Not Divide the Ashes (Instruction No. 6 & 7):</strong> All the ashes must stay together in one container. You cannot split them up among different people. You also cannot put them into jewelry, like necklaces, or turn them into art.</span> </li> <li class="flex items-start"> <span class="font-bold text-primary mr-3">5.</span> <span><strong>Burial at Sea (Instruction No. 7):</strong> You cannot throw ashes on top of the waves. However, you can have a "burial at sea" if the ashes are in a heavy, respectful container that sinks to the bottom. This is just like being buried in the ground.</span> </li> </ol> </div> </div> </div> </section>  <section class="py-10 md:py-24 bg-secondary"> <div class="container mx-auto px-4 sm:px-6 lg:px-8"> <div class="max-w-4xl mx-auto"> <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
+Why Do We Follow These Rules?
+</h2> <div class="bg-white p-5 md:p-8 rounded-lg shadow-sm"> <p class="text-sm md:text-base text-text leading-relaxed">
+These rules might seem strict, but they are there for a reason. They remind us that we belong to God. When we are buried in a cemetery, we are resting with other members of our Church family. We are waiting together for the day when Jesus returns. Keeping the ashes together shows that we are one whole person. We do not want to be scattered or separated. We want to rest in peace in a holy place.
+</p> </div> </div> </div> </section>  <section class="py-10 md:py-24 bg-white"> <div class="container mx-auto px-4 sm:px-6 lg:px-8"> <div class="max-w-6xl mx-auto"> <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-3 md:mb-4 text-center">
+Catholic Funeral Options with Cremation
+</h2> <p class="text-base md:text-lg text-text text-center mb-6 md:mb-8 max-w-3xl mx-auto italic">
+A modern approach to tradition, offering flexibility and personalized remembrance.
+</p> <p class="text-base md:text-xl text-text text-center mb-6 md:mb-12">
+There are three main ways to have a Catholic funeral with cremation. You can choose the one that fits your needs, but the Church has a favorite choice.
+</p> <div class="grid md:grid-cols-3 gap-4 md:gap-8"> <!-- Option 1: Traditional --> <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent"> <div class="flex items-center gap-3 mb-3 md:mb-4"> <svg class="w-8 h-8 md:w-10 md:h-10 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path> </svg> <h3 class="text-lg md:text-2xl font-heading font-bold text-primary">
+The Traditional Choice<br> <span class="text-base md:text-lg font-normal text-primary/80">(Preferred)</span> </h3> </div> <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
+This is what the Church recommends most.
+</p> <ol class="space-y-2 md:space-y-3 text-sm md:text-base text-text list-decimal list-inside"> <li><strong>The Visitation:</strong> Family and friends gather at the funeral home to say goodbye. The body is present in a casket. This helps people accept that death is real. It gives them a chance to comfort each other.</li> <li><strong>The Funeral Mass:</strong> The body is brought to the Church. The priest prays for the person and blesses the body. This is a very special Mass.</li> <li><strong>Cremation:</strong> After the Mass is over, the body is taken to be cremated.</li> <li><strong>Burial:</strong> Later, the family gathers at the cemetery to bury the ashes.</li> </ol> </div> <!-- Option 2: Memorial --> <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent"> <div class="flex items-center gap-3 mb-3 md:mb-4"> <svg class="w-8 h-8 md:w-10 md:h-10 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path> </svg> <h3 class="text-lg md:text-2xl font-heading font-bold text-primary">
+The Memorial Choice
+</h3> </div> <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
+Sometimes, the body cannot be at the Mass.
+</p> <ol class="space-y-2 md:space-y-3 text-sm md:text-base text-text list-decimal list-inside"> <li><strong>Cremation First:</strong> The body is cremated before the funeral.</li> <li><strong>The Funeral Mass:</strong> The family brings the urn with the ashes to the Church. The priest can still celebrate the Funeral Mass with the ashes present. The ashes are placed on a small table near the altar.</li> <li><strong>Burial:</strong> After the Mass, the ashes are taken to the cemetery for burial.</li> </ol> </div> <!-- Option 3: Direct --> <div class="bg-secondary p-4 md:p-8 rounded-lg shadow-sm border-t-4 border-accent"> <div class="flex items-center gap-3 mb-3 md:mb-4"> <svg class="w-8 h-8 md:w-10 md:h-10 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path> </svg> <h3 class="text-lg md:text-2xl font-heading font-bold text-primary">
+The Direct Choice
+</h3> </div> <p class="text-sm md:text-base text-text mb-4 md:mb-6 leading-relaxed">
+This is the simplest option, but it might miss some important prayers.
+</p> <ol class="space-y-2 md:space-y-3 text-sm md:text-base text-text list-decimal list-inside"> <li><strong>Cremation Immediately:</strong> The body is cremated right away without a viewing.</li> <li><strong>Prayer Service:</strong> The family might have a small prayer service at the funeral home or at the graveside.</li> <li><strong>No Funeral Mass:</strong> If there is no Mass, the family misses out on the special blessings of the Church. It is always better to try to have a Mass if you can.</li> </ol> </div> </div> </div> </div> </section>  <section class="py-10 md:py-24 bg-secondary"> <div class="container mx-auto px-4 sm:px-6 lg:px-8"> <div class="max-w-4xl mx-auto"> <div class="bg-white p-5 md:p-8 rounded-lg shadow-sm space-y-4"> <h2 class="text-xl md:text-2xl font-heading font-bold text-primary mb-4 md:mb-6">
+Important Diocese Notes
+</h2> <div class="space-y-3"> <p class="text-sm md:text-base text-text leading-relaxed"> <strong>Visitation in Church:</strong> Visitation in church is prohibited in the Youngstown Diocese. Many other dioceses also prohibit practice of visitation in church prior to mass. Please check with your local diocese for specific guidelines.
+</p> <p class="text-sm md:text-base text-text leading-relaxed"> <strong>Non-Catholic Burial:</strong> Permission may be required for Burial of non-catholics in their cemetery. Please consult with your local Catholic cemetery for requirements.
+</p> </div> </div> </div> </div> </section>  <section class="py-10 md:py-24 bg-secondary"> <div class="container mx-auto px-4 sm:px-6 lg:px-8"> <div class="max-w-4xl mx-auto"> <h2 class="text-2xl md:text-4xl font-heading font-bold text-primary mb-6 md:mb-8 text-center">
+Questions About Planning
+</h2> <div class="grid md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12"> <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent"> <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-3 md:mb-4">
+It Helps Your Family
+</h3> <p class="text-sm md:text-base text-text leading-relaxed">
+It provides clarity and peace of mind for your family by documenting your preferences in advance. Your family won't have to guess what you wanted.
+</p> </div> <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent"> <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-3 md:mb-4">
+It Saves Money
+</h3> <p class="text-sm md:text-base text-text leading-relaxed">
+Pre-funding options to lock in today's rates. This protects your family from rising costs in the future. The money is kept safe in a special account until it is needed.
+</p> </div> <div class="bg-white p-4 md:p-6 rounded-lg shadow-sm border-t-4 border-accent"> <h3 class="text-lg md:text-xl font-heading font-semibold text-primary mb-3 md:mb-4">
+It is Your Choice
+</h3> <p class="text-sm md:text-base text-text leading-relaxed">
+You get to decide exactly how you want to be remembered. You can make sure your funeral follows the rules of the Catholic Church.
+</p> </div> </div> <div class="bg-white p-4 md:p-8 rounded-lg shadow-sm"> <h3 class="text-xl md:text-2xl font-heading font-bold text-primary mb-6 text-center">
+Common Questions About Planning Ahead
+</h3> `, " </div> </div> </div> </section> ", " ", " "])), unescapeHTML(serviceSchema), maybeRenderHead(), addAttribute(logoPath, "src"), addAttribute(displayCompanyName, "alt"), displayCompanyName, renderComponent($$result2, "ServiceNav", $$ServiceNav, {}), renderComponent($$result2, "Accordion", $$Accordion, { "language": "en", "items": getFAQs("en", "catholic", "cremation") }), renderComponent($$result2, "OngoingCare", $$OngoingCare, { "language": isSpanish ? "es" : "en" }), renderComponent($$result2, "ContactForm", $$ContactForm, { "language": isSpanish ? "es" : "en" })) })}`;
+}, "C:/Users/User A/Documents/GitHub/funeral-home-landing-site/src/pages/catholic-cremation.astro", void 0);
+
+const $$file = "C:/Users/User A/Documents/GitHub/funeral-home-landing-site/src/pages/catholic-cremation.astro";
+const $$url = "/catholic-cremation";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$CatholicCremation,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };

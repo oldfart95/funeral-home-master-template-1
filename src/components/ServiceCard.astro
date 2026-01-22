@@ -1,0 +1,89 @@
+---
+// Standardized Service Card Component
+// Provides consistent styling for service option cards across the site
+
+interface Props {
+  title: string;
+  description?: string;
+  borderColor?: 'accent' | 'primary';
+  backgroundColor?: 'white' | 'secondary';
+  icon?: string; // SVG path data or icon identifier
+  children?: any;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  borderColor = 'accent',
+  backgroundColor = 'white',
+  icon,
+  children,
+  class: className = '',
+} = Astro.props;
+
+const borderClass = borderColor === 'accent' ? 'border-accent' : 'border-primary';
+const bgClass = backgroundColor === 'white' ? 'bg-white' : 'bg-secondary';
+---
+
+<div class={`service-card ${bgClass} p-4 md:p-6 lg:p-8 rounded-lg shadow-sm border-t-4 ${borderClass} ${className}`}>
+  {icon && (
+    <div class="flex items-center gap-3 mb-3 md:mb-4">
+      <div class="w-8 h-8 md:w-10 md:h-10 text-accent flex-shrink-0">
+        {icon === 'check' && (
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        )}
+        {icon === 'people' && (
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+        )}
+        {icon === 'book' && (
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        )}
+        {icon === 'heart' && (
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+          </svg>
+        )}
+      </div>
+      <h3 class="text-lg md:text-xl lg:text-2xl font-heading font-bold text-primary">
+        <slot name="title">{title}</slot>
+      </h3>
+    </div>
+  )}
+  {!icon && (
+    <h3 class="text-xl md:text-2xl lg:text-3xl font-heading font-bold text-primary mb-4 md:mb-6">
+      {title}
+    </h3>
+  )}
+  {description && (
+    <p class="text-sm md:text-base text-text leading-relaxed mb-4 md:mb-6">
+      {description}
+    </p>
+  )}
+  {children && (
+    <div class="service-card-content">
+      <slot />
+    </div>
+  )}
+</div>
+
+<style>
+  .service-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .service-card-content {
+    color: var(--color-text);
+  }
+</style>

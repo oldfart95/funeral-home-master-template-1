@@ -1,5 +1,5 @@
 ---
-interface ServiceChoicePortalProps {
+interface Props {
   // Cremation Card Props
   cremationHeadline: string;
   cremationBody: string;
@@ -27,6 +27,17 @@ const {
 } = Astro.props;
 ---
 
+<style>
+  .service-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+</style>
+
 <section class="py-10 md:py-24 bg-white">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="max-w-6xl mx-auto">
@@ -42,7 +53,7 @@ const {
       )}
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         <!-- Cremation Card -->
-        <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
+        <div class="service-card bg-white p-6 md:p-8 rounded-lg shadow-sm border-t-4 border-accent">
           <h3 class="text-2xl md:text-3xl font-heading font-bold text-primary mb-4 md:mb-6">
             {cremationHeadline}
           </h3>
@@ -51,14 +62,14 @@ const {
           </p>
           <a
             href={cremationLink}
-            class="block w-full bg-accent text-white px-6 py-3 rounded-md font-semibold text-lg hover:bg-accent-dark transition shadow-sm text-center"
+            class="page-link block w-full bg-accent text-white px-6 py-3 rounded-md font-semibold text-lg hover:bg-accent-dark transition shadow-sm text-center min-h-[44px] flex items-center justify-center"
           >
-            Learn More
+            Get Started
           </a>
         </div>
 
         <!-- Burial Card -->
-        <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm border-t-4 border-primary">
+        <div class="service-card bg-white p-6 md:p-8 rounded-lg shadow-sm border-t-4 border-primary">
           <h3 class="text-2xl md:text-3xl font-heading font-bold text-primary mb-4 md:mb-6">
             {burialHeadline}
           </h3>
@@ -67,9 +78,9 @@ const {
           </p>
           <a
             href={burialLink}
-            class="block w-full bg-primary text-white px-6 py-3 rounded-md font-semibold text-lg hover:bg-primary-dark transition shadow-sm text-center"
+            class="page-link block w-full bg-primary text-white px-6 py-3 rounded-md font-semibold text-lg hover:bg-primary-dark transition shadow-sm text-center min-h-[44px] flex items-center justify-center"
           >
-            Learn More
+            Schedule Consultation
           </a>
         </div>
       </div>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Home Pages -->
+  <url>
+    <loc>https://example.com/</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/es"/>
+  </url>
+  <url>
+    <loc>https://example.com/es</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/es"/>
+  </url>
+
+  <!-- Catholic Landing Pages -->
+  <url>
+    <loc>https://example.com/catholic</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/catholic"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/catholic-es"/>
+  </url>
+  <url>
+    <loc>https://example.com/catholic-es</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/catholic"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/catholic-es"/>
+  </url>
+
+  <!-- Veteran Landing Pages -->
+  <url>
+    <loc>https://example.com/veteran</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/veteran"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/veteran-es"/>
+  </url>
+  <url>
+    <loc>https://example.com/veteran-es</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/veteran"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/veteran-es"/>
+  </url>
+
+  <!-- General Cremation Pages -->
+  <url>
+    <loc>https://example.com/cremation</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/cremation"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/cremation-es"/>
+  </url>
+  <url>
+    <loc>https://example.com/cremation-es</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/cremation"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/cremation-es"/>
+  </url>
+
+  <!-- General Burial Pages -->
+  <url>
+    <loc>https://example.com/burial</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/burial"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/burial-es"/>
+  </url>
+  <url>
+    <loc>https://example.com/burial-es</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/burial"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/burial-es"/>
+  </url>
+
+  <!-- Catholic Cremation Pages -->
+  <url>
+    <loc>https://example.com/catholic-cremation</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/catholic-cremation"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/catholic-cremation-es"/>
+  </url>
+  <url>
+    <loc>https://example.com/catholic-cremation-es</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/catholic-cremation"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/catholic-cremation-es"/>
+  </url>
+
+  <!-- Catholic Burial Pages -->
+  <url>
+    <loc>https://example.com/catholic-burial</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/catholic-burial"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/catholic-burial-es"/>
+  </url>
+  <url>
+    <loc>https://example.com/catholic-burial-es</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/catholic-burial"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/catholic-burial-es"/>
+  </url>
+
+  <!-- Veteran Cremation Pages -->
+  <url>
+    <loc>https://example.com/veteran-cremation</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/veteran-cremation"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/veteran-cremation-es"/>
+  </url>
+  <url>
+    <loc>https://example.com/veteran-cremation-es</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/veteran-cremation"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/veteran-cremation-es"/>
+  </url>
+
+  <!-- Veteran Burial Pages -->
+  <url>
+    <loc>https://example.com/veteran-burial</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/veteran-burial"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/veteran-burial-es"/>
+  </url>
+  <url>
+    <loc>https://example.com/veteran-burial-es</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/veteran-burial"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://example.com/veteran-burial-es"/>
+  </url>
+
+  <!-- Additional Pages -->
+  <url>
+    <loc>https://example.com/pre-planning</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://example.com/immediate-need</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://example.com/traditional-services</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://example.com/privacy-policy</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://example.com/accessibility</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>

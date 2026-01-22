@@ -71,13 +71,45 @@ const burialLabel = isEnglish ? 'Burial' : 'Entierro';
                     }
                   });
                   
-                  // Show/hide content
+                  // Show/hide content with smooth transitions
                   if (tab === 'cremation' && cremationContent) {
-                    cremationContent.classList.remove('hidden');
-                    if (burialContent) burialContent.classList.add('hidden');
+                    if (burialContent && !burialContent.classList.contains('hidden')) {
+                      burialContent.classList.add('tab-fade-out');
+                      setTimeout(() => {
+                        burialContent.classList.add('hidden');
+                        burialContent.classList.remove('tab-fade-out');
+                        cremationContent.classList.remove('hidden');
+                        cremationContent.classList.add('tab-fade-in');
+                        setTimeout(() => {
+                          cremationContent.classList.remove('tab-fade-in');
+                        }, 300);
+                      }, 150);
+                    } else {
+                      cremationContent.classList.remove('hidden');
+                      cremationContent.classList.add('tab-fade-in');
+                      setTimeout(() => {
+                        cremationContent.classList.remove('tab-fade-in');
+                      }, 300);
+                    }
                   } else if (tab === 'burial' && burialContent) {
-                    burialContent.classList.remove('hidden');
-                    if (cremationContent) cremationContent.classList.add('hidden');
+                    if (cremationContent && !cremationContent.classList.contains('hidden')) {
+                      cremationContent.classList.add('tab-fade-out');
+                      setTimeout(() => {
+                        cremationContent.classList.add('hidden');
+                        cremationContent.classList.remove('tab-fade-out');
+                        burialContent.classList.remove('hidden');
+                        burialContent.classList.add('tab-fade-in');
+                        setTimeout(() => {
+                          burialContent.classList.remove('tab-fade-in');
+                        }, 300);
+                      }, 150);
+                    } else {
+                      burialContent.classList.remove('hidden');
+                      burialContent.classList.add('tab-fade-in');
+                      setTimeout(() => {
+                        burialContent.classList.remove('tab-fade-in');
+                      }, 300);
+                    }
                   }
                 } catch (err) {
                   // Silently fail for tab switching - non-critical feature
@@ -106,9 +138,53 @@ const burialLabel = isEnglish ? 'Burial' : 'Entierro';
 <style>
   .tab-button {
     border-bottom: 2px solid transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
   }
   
   .tab-button:hover {
     opacity: 0.9;
+    transform: translateY(-1px);
+  }
+  
+  .tab-button:active {
+    transform: translateY(0);
+  }
+  
+  /* Tab content fade animations */
+  #cremation-content,
+  #burial-content {
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .tab-fade-in {
+    animation: tabFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .tab-fade-out {
+    animation: tabFadeOut 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes tabFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes tabFadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
   }
 </style>

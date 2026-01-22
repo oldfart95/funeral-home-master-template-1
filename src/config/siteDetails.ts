@@ -49,7 +49,7 @@ const siteDetails: SiteDetails = {
   themeColors: {
     primary: "#1a3b34",      // Forest Green / Deep Charcoal
     secondary: "#f9f7f2",     // Parchment / Soft Cream
-    accent: "#b08d57",        // Gold / Muted Gold
+    accent: "#8b6f3f",        // Gold / Muted Gold (darkened for WCAG AA contrast)
     background: "#f9f7f2",   // Parchment
     text: "#2d2d2d",         // Charcoal
   },
